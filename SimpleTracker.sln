@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.DAL", "Simple
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SimpleTracker.DB", "SimpleTracker.DB\SimpleTracker.DB.sqlproj", "{50AA4BF5-A5DF-4703-8097-DAD89468860B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.DTO", "SimpleTracker.DTO\SimpleTracker.DTO.csproj", "{8BF65EC3-2793-46FF-8DFB-EE2A143A8186}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{50AA4BF5-A5DF-4703-8097-DAD89468860B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50AA4BF5-A5DF-4703-8097-DAD89468860B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50AA4BF5-A5DF-4703-8097-DAD89468860B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{8BF65EC3-2793-46FF-8DFB-EE2A143A8186}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF65EC3-2793-46FF-8DFB-EE2A143A8186}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF65EC3-2793-46FF-8DFB-EE2A143A8186}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF65EC3-2793-46FF-8DFB-EE2A143A8186}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
