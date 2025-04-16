@@ -1,8 +1,9 @@
 ﻿namespace SimpleTracker.DTO
 {
-    public class Item
+    public class Activity
     {
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public int UnitId { get; set; }
     }
 }

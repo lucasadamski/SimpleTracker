@@ -1,6 +1,6 @@
 ﻿namespace SimpleTracker.DTO
 {
-    public class CreateNewItemResult : Result
+    public class NewEntryResult : Result
     {
     }
 }

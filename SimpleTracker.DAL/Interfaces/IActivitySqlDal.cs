@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SimpleTracker.DAL.Interfaces
 {
-    internal interface IItemSqlDal
+    internal interface IActivitySqlDal
     {
-        public CreateNewItemResult CreateNewItem(Item item);
+        public NewActivityResult CreateNewItem(Activity item);
     }
 }

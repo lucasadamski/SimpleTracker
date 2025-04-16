@@ -59,9 +59,13 @@
     <Folder Include="Stored Procedures" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Item.sql" />
-    <Build Include="Repetitions.sql" />
-    <Build Include="Stored Procedures\spItem_Insert.sql" />
-    <Build Include="Stored Procedures\spRepetitions_Insert.sql" />
+    <Build Include="Activity.sql" />
+    <Build Include="Entry.sql" />
+    <Build Include="Stored Procedures\spActivity_Insert.sql" />
+    <Build Include="Stored Procedures\spEntry_Insert.sql" />
+    <Build Include="Unit.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="SimpleTracker.DB.refactorlog" />
   </ItemGroup>
 </Project>
