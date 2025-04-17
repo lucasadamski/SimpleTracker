@@ -5,7 +5,7 @@ namespace SimpleTracker.DAL
 {
     public class EntrySqlDal : IEntrySqlDal
     {
-        public NewEntryResult CreateNewRepetitions(Entry repetitions)
+        public NewEntryResult CreateNewEntry(Entry entry)
         {
             return new NewEntryResult();
         }

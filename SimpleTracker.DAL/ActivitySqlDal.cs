@@ -5,7 +5,7 @@ namespace SimpleTracker.DAL
 {
     public class ActivitySqlDal : IActivitySqlDal
     {
-        public NewActivityResult CreateNewItem(Activity item)
+        public NewActivityResult CreateNewActivity(Activity activity)
         {
             return new NewActivityResult();
         }

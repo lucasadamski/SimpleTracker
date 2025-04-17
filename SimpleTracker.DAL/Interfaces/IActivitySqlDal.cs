@@ -9,6 +9,6 @@ namespace SimpleTracker.DAL.Interfaces
 {
     internal interface IActivitySqlDal
     {
-        public NewActivityResult CreateNewItem(Activity item);
+        public NewActivityResult CreateNewActivity(Activity item);
     }
 }
