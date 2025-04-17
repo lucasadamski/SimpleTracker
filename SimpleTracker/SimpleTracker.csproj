@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleTracker.DTO\SimpleTracker.DTO.csproj" />
+    <ProjectReference Include="..\SimpleTracker.Utility\SimpleTracker.Utility.csproj" />
+  </ItemGroup>
+
 </Project>
