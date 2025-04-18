@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.DTO", "Simple
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.Utility", "SimpleTracker.Utility\SimpleTracker.Utility.csproj", "{41E86834-442A-4328-9934-137AAE602438}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.UnitTests", "SimpleTracker.UnitTests\SimpleTracker.UnitTests.csproj", "{2CBD44A5-360B-409B-B885-D2C327735695}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{41E86834-442A-4328-9934-137AAE602438}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41E86834-442A-4328-9934-137AAE602438}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41E86834-442A-4328-9934-137AAE602438}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CBD44A5-360B-409B-B885-D2C327735695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CBD44A5-360B-409B-B885-D2C327735695}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CBD44A5-360B-409B-B885-D2C327735695}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CBD44A5-360B-409B-B885-D2C327735695}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
