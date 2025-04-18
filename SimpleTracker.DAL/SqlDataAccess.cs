@@ -2,6 +2,7 @@
 using Dapper;
 using System.Data;
 using SimpleTracker.DAL.Interfaces;
+using SimpleTracker.DTO;
 
 namespace SimpleTracker.DAL
 {
@@ -14,22 +15,39 @@ namespace SimpleTracker.DAL
             _connectionString = connectionString;
         }
 
-        public async Task<IEnumerable<T>> LoadData<T, U>(string storedProcedure,
-                                                         U parameters,
-                                                         string connectionId = "Default")
+        public IEnumerable<T> LoadData<T, U>(string storedProcedure, U parameters, string connectionId = "Default")
         {
-            using IDbConnection connection = new SqlConnection(_connectionString);
+            IEnumerable<T> result;
+            try
+            {
+                using IDbConnection connection = new SqlConnection(_connectionString);
+                result = connection.Query<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                //log
+                result = new List<T>();
+            }
 
-            return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+            return result;
         }
 
-        public async Task SaveData<T>(string storedProcedure,
-                                     T parameters,
-                                     string connectionId = "Default")
+        public Result SaveData<T>(string storedProcedure, T parameters, string connectionId = "Default")
         {
-            using IDbConnection connection = new SqlConnection(_connectionString);
+            var result = new Result();
 
-            await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+            try
+            {
+                using IDbConnection connection = new SqlConnection(_connectionString);
+                connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+            }
+            catch (Exception e)
+            {
+                result.Message = e.Message;
+                result.Success = false;
+            }
+            
+            return result;
         }
     }
 
