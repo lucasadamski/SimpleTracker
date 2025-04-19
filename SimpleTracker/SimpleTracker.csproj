@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SimpleTracker.BLL\SimpleTracker.BLL.csproj" />
     <ProjectReference Include="..\SimpleTracker.DTO\SimpleTracker.DTO.csproj" />
     <ProjectReference Include="..\SimpleTracker.Utility\SimpleTracker.Utility.csproj" />
   </ItemGroup>
