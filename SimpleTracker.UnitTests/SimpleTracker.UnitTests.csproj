@@ -20,12 +20,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\SimpleTracker.BLL\SimpleTracker.BLL.csproj" />
     <ProjectReference Include="..\SimpleTracker.DAL\SimpleTracker.DAL.csproj" />
     <ProjectReference Include="..\SimpleTracker.DTO\SimpleTracker.DTO.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BLL\" />
   </ItemGroup>
 
 </Project>
