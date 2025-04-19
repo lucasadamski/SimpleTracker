@@ -1,0 +1,31 @@
+[33mcommit ce89ad1190673f120d512941ca86d3673f011e51[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m)[m
+Author: Lucas Adams <lucasadams@protonmail.com>
+Date:   Sat Apr 19 12:31:11 2025 +0100
+
+    Enum for UI <-> BLL communication
+
+[33mcommit f1a25945f2345024892802d119da1b3249c29c11[m
+Author: Lucas Adams <lucasadams@protonmail.com>
+Date:   Sat Apr 19 12:24:05 2025 +0100
+
+    New business logic layer
+
+[33mcommit 2bf00764f57b34a8ca1961e54143178070f140ac[m
+Author: Lucas Adams <lucasadams@protonmail.com>
+Date:   Fri Apr 18 17:16:24 2025 +0100
+
+    Commented test
+    Can't test generic method
+
+[33mcommit 5d3ab41c2bf93dbc6f58c6a5e1a9fbf95b84ee35[m
+Author: Lucas Adams <lucasadams@protonmail.com>
+Date:   Fri Apr 18 11:37:31 2025 +0100
+
+    minor change
+
+[33mcommit 0f5ee8cd046926bb3f3780626fb902a34b5977bc[m
+Author: Lucas Adams <lucasadams@protonmail.com>
+Date:   Fri Apr 18 11:19:35 2025 +0100
+
+    Refactored SQL access
+    Removed Async
