@@ -1,16 +1,57 @@
-﻿namespace SimpleTracker.BLL
+﻿using Microsoft.IdentityModel.Tokens;
+using SimpleTracker.BLL.DTO;
+using SimpleTracker.DTO;
+
+namespace SimpleTracker.BLL
 {
     public class Api : IApi
     {
-        public bool Write(List<string> data)
+        private RequestResult result { get; set; }
+        public List<string> Request(List<string> data)
         {
-            return true;
+            result = new RequestResult();
+
+            SanitizeData(data);
+            CheckTypeOfRequest(data);
+
+
+
+
+            return result.Messages;
         }
 
-        public List<string> Read(List<string> data)
+        private void SanitizeData(List<string> data)
         {
-            return new List<string>();
+            if (data.IsNullOrEmpty() || data.Count == 0)
+            {
+                data = new List<string>() { "empty" };
+
+                result.Messages.Add("No data received");
+                result.Success = false;
+            }
         }
+
+        private void CheckTypeOfRequest(List<string> data)
+        {
+            if (result.Success == false) 
+                return;
+            
+            if (data.ElementAt(0).ToLower() == "get")
+            {
+                result.IsGet = true;
+            }
+            else if (data.ElementAt(0).ToLower() == "post")
+            {
+                result.IsPost = true;
+            }
+            else
+            {
+                result.Success = false;
+                result.Messages.Add("Can't determine request type");
+            }
+        }
+
+       
+        
     }
-
 }
