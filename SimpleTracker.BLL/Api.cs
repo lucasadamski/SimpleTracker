@@ -14,9 +14,6 @@ namespace SimpleTracker.BLL
             SanitizeData(data);
             CheckTypeOfRequest(data);
 
-
-
-
             return result.Messages;
         }
 
@@ -29,6 +26,10 @@ namespace SimpleTracker.BLL
                 result.Messages.Add("No data received");
                 result.Success = false;
             }
+            else
+            {
+                result.Messages.Add("Data received");
+            }
         }
 
         private void CheckTypeOfRequest(List<string> data)
@@ -39,10 +40,12 @@ namespace SimpleTracker.BLL
             if (data.ElementAt(0).ToLower() == "get")
             {
                 result.IsGet = true;
+                result.Messages.Add("Request type is GET");
             }
             else if (data.ElementAt(0).ToLower() == "post")
             {
                 result.IsPost = true;
+                result.Messages.Add("Request type is POST");
             }
             else
             {
@@ -51,7 +54,5 @@ namespace SimpleTracker.BLL
             }
         }
 
-       
-        
     }
 }
