@@ -20,10 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
     <ProjectReference Include="..\SimpleTracker.BLL\SimpleTracker.BLL.csproj" />
-=======
->>>>>>> 1abf65604f099fa44afcf793f861cc14ae11afe1
     <ProjectReference Include="..\SimpleTracker.DAL\SimpleTracker.DAL.csproj" />
     <ProjectReference Include="..\SimpleTracker.DTO\SimpleTracker.DTO.csproj" />
   </ItemGroup>
@@ -32,11 +29,8 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-<<<<<<< HEAD
   <ItemGroup>
     <Folder Include="BLL\" />
   </ItemGroup>
 
-=======
->>>>>>> 1abf65604f099fa44afcf793f861cc14ae11afe1
 </Project>
