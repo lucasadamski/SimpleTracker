@@ -18,8 +18,12 @@ namespace SimpleTracker.UnitTests.DAL
 
             var sqlDataAccessMock = new Mock<ISQLDataAccess>();
 
+<<<<<<< HEAD
             sqlDataAccessMock.Setup(n => n.SaveData<It.IsAny<Activity>()>(It.IsAny<string>(), It.IsAny<It.IsAnyType>())).Returns(temp); 
                 // Don't know how to set up generic method :( 
+=======
+            sqlDataAccessMock.Setup(n => n.SaveData<It.IsAny<Activity>()>(It.IsAny<string>(), It.IsAny<It.IsAnyType>())).Returns(temp);
+>>>>>>> 1abf65604f099fa44afcf793f861cc14ae11afe1
 
             var sampleActivity = new Activity() { Id = 1, Name = "sampleActivity", UnitId = 1 };
 
