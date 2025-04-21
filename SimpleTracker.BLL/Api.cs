@@ -7,9 +7,17 @@ namespace SimpleTracker.BLL
     public class Api : IApi
     {
         private RequestResult result { get; set; }
-        public List<string> Request(List<string> data)
+        private PostRequestProcessorFactory postRequestProcessorFactory { get; set; }
+
+        public Api()
         {
             result = new RequestResult();
+            postRequestProcessorFactory = new PostRequestProcessorFactory();
+        }
+
+        public List<string> Request(List<string> data)
+        {
+            // result as a property
 
             SanitizeData(data);
             CheckTypeOfRequest(data);
@@ -24,7 +32,8 @@ namespace SimpleTracker.BLL
             if (result.IsPost == false)
                 return;
 
-
+            IPostRequestProcessor postRequestProcessor =  postRequestProcessorFactory.ReturnPostRequestProcessor(data);
+            result.Messages = postRequestProcessor.Process(data);
         }
 
         private void ProcessGetRequest(List<string> data)
