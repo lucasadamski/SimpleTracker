@@ -1,13 +1,8 @@
 ﻿using SimpleTracker.DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleTracker.DAL.Interfaces
 {
-    internal interface IActivitySqlDal
+    public interface IActivitySqlDal
     {
         public NewActivityResult CreateNewActivity(Activity item);
     }
