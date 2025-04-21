@@ -13,8 +13,24 @@ namespace SimpleTracker.BLL
 
             SanitizeData(data);
             CheckTypeOfRequest(data);
+            ProcessGetRequest(data);
+            ProcessPostRequest(data);
 
             return result.Messages;
+        }
+
+        private void ProcessPostRequest(List<string> data)
+        {
+            if (result.IsPost == false)
+                return;
+
+
+        }
+
+        private void ProcessGetRequest(List<string> data)
+        {
+            if (result.IsGet == false)
+                return;
         }
 
         private void SanitizeData(List<string> data)
