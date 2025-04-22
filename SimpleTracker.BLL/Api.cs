@@ -6,6 +6,7 @@ namespace SimpleTracker.BLL
 {
     public class Api : IApi
     {
+        private RequestInput _input;
         private RequestResult result { get; set; }
         private PostRequestProcessorFactory postRequestProcessorFactory { get; set; }
 
@@ -13,6 +14,7 @@ namespace SimpleTracker.BLL
         {
             result = new RequestResult();
             postRequestProcessorFactory = new PostRequestProcessorFactory();
+            _input = new RequestInput();
         }
 
         public List<string> Request(List<string> data)
@@ -21,6 +23,8 @@ namespace SimpleTracker.BLL
 
             SanitizeData(data);
             CheckTypeOfRequest(data);
+
+
             ProcessGetRequest(data);
             ProcessPostRequest(data);
 

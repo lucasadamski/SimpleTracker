@@ -17,7 +17,24 @@ namespace SimpleTracker.BLL
 
         public List<string> Process(List<string> data)
         {
-            throw new NotImplementedException();
+            var result = new List<string>();
+
+            var activity = new Activity();
+
+            try
+            {
+                activity.Name = data.ElementAt(2).ToLower().Trim();
+                activity.UnitId = int.Parse(data.ElementAt(3).ToLower().Trim());
+
+                result.Add(_activityDal.CreateNewActivity(activity).Message);
+            }
+            catch (Exception e)
+            {
+                
+                
+            }
+
+            return result;
         }
     }
 }

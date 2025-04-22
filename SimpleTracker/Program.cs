@@ -11,7 +11,7 @@ namespace SimpleTracker
             var message = new List<string>()
             {
                 "post",
-                "activity",
+                "entry",
                 "running",
                 "30"
             };
