@@ -11,8 +11,8 @@ namespace SimpleTracker.DAL
             _db = db;
         }
 
-        public NewActivityResult CreateNewActivity(Activity activity) =>
-            (NewActivityResult)_db.SaveData(storedProcedure: "dbo.spActivity_Insert", new { activity.Name, activity.UnitId });
+        public Result CreateNewActivity(Activity activity) =>
+            _db.SaveData(storedProcedure: "dbo.spActivity_Insert", new { activity.Name, activity.UnitId });
 
         public IEnumerable<Activity> GetAllActivities() =>
             _db.LoadData<Activity, dynamic>(storedProcedure: "dbo.Activity_GetAll", new { });

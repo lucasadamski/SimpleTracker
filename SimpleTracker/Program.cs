@@ -1,4 +1,6 @@
-﻿using SimpleTracker.BLL;
+﻿using Microsoft.Extensions.Logging;
+using SimpleTracker.BLL;
+
 
 namespace SimpleTracker
 {
@@ -6,14 +8,16 @@ namespace SimpleTracker
     {
         static void Main(string[] args)
         {
+            Utility.Logger.Log.LogInformation("Somethign");
+
             IApi api = new Api();
 
             var message = new List<string>()
             {
                 "post",
-                "entry",
-                "running",
-                "30"
+                "activity",
+                "ReadingNonFiction",
+                "1"
             };
 
             var response = api.Request(message);

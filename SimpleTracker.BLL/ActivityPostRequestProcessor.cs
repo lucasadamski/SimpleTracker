@@ -21,6 +21,8 @@ namespace SimpleTracker.BLL
 
             var activity = new Activity();
 
+            var newActivityResult = new NewActivityResult();
+
             try
             {
                 activity.Name = data.ElementAt(2).ToLower().Trim();
