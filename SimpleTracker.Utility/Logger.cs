@@ -12,10 +12,10 @@ namespace SimpleTracker.Utility
                 builder
                     .AddFilter("Microsoft", LogLevel.Warning)
                     .AddFilter("System", LogLevel.Warning)
-                    .AddFilter("LoggingConsoleApp.Program", LogLevel.Debug)
+                    .AddFilter("SimpleTracker", LogLevel.Trace)
                     .AddConsole();
             });
-            Log = loggerFactory.CreateLogger<int>();
+            Log = loggerFactory.CreateLogger("SimpleTracker");
         }
     }
 }

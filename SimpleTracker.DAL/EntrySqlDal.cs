@@ -1,4 +1,5 @@
-﻿using SimpleTracker.DAL.Interfaces;
+﻿using Microsoft.Extensions.Logging;
+using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
 using System.Collections.Generic;
 using System.Net.WebSockets;
@@ -14,8 +15,12 @@ namespace SimpleTracker.DAL
             _db = db;
         }
 
-        public NewEntryResult CreateNewEntry(Entry entry) => 
-              (NewEntryResult)_db.SaveData(storedProcedure: "dbo.spEntry_Insert", new { entry.Value, entry.ActivityId });
+        public NewEntryResult CreateNewEntry(Entry entry)
+        {
+            //Utility.Logger.Log.LogDebug("dbo.spEntry_Insert {Value}", entry.Value);
+            return (NewEntryResult)_db.SaveData(storedProcedure: "dbo.spEntry_Insert", new { entry.Value, entry.ActivityId });
+        }
+              
       
         public IEnumerable<Entry> GetAllEntries() => 
             _db.LoadData<Entry, dynamic>(storedProcedure: "dbo.Entry_GetAll", new { });
