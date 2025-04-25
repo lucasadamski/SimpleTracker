@@ -8,7 +8,7 @@ namespace SimpleTracker
     {
         static void Main(string[] args)
         {
-            Utility.Logger.Log.LogInformation("Somethign");
+            Utility.Logger.Log.LogInformation("Simple Tracker UI started");
 
             IApi api = new Api();
 
@@ -26,6 +26,8 @@ namespace SimpleTracker
             {
                 Console.WriteLine(responseMessage);
             }
+
+            Utility.Logger.Log.LogInformation("Simple Tracker UI stopped");
         }
     }
 }

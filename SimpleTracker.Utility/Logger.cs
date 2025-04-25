@@ -17,9 +17,5 @@ namespace SimpleTracker.Utility
             });
             Log = loggerFactory.CreateLogger<int>();
         }
-        static void Method()
-        {
-            Log.LogInformation("Example log message");
-        }
     }
 }
