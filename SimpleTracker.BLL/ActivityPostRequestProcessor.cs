@@ -1,4 +1,5 @@
 ﻿
+using SimpleTracker.BLL.Interface;
 using SimpleTracker.DAL;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
@@ -12,7 +13,7 @@ namespace SimpleTracker.BLL
 
         public ActivityPostRequestProcessor()
         {
-            _activityDal = new ActivitySqlDal(new SQLDataAccess(DBConnectionString.ConnectionString));
+            _activityDal = new ActivitySqlDal(new SQLDataAccess(DBConnectionString.ConnectionString), Logger.Log);
         }
 
         public List<string> Process(List<string> data)

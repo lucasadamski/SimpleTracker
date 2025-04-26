@@ -1,4 +1,4 @@
-﻿namespace SimpleTracker.BLL
+﻿namespace SimpleTracker.BLL.Interface
 {
     public interface IPostRequestProcessor : IRequestProcessor
     {

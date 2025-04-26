@@ -1,4 +1,6 @@
 ﻿
+using SimpleTracker.BLL.Interface;
+
 namespace SimpleTracker.BLL
 {
     public class EntryPostRequestProcessor : IPostRequestProcessor

@@ -1,4 +1,6 @@
-﻿namespace SimpleTracker.BLL
+﻿using SimpleTracker.BLL.Interface;
+
+namespace SimpleTracker.BLL
 {
     public class PostRequestProcessorFactory
     {

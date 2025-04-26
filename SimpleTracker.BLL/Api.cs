@@ -1,5 +1,6 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using SimpleTracker.BLL.DTO;
+using SimpleTracker.BLL.Interface;
 using SimpleTracker.DTO;
 
 namespace SimpleTracker.BLL
