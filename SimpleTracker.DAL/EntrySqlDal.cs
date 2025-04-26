@@ -2,19 +2,12 @@
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
 
-
 namespace SimpleTracker.DAL
 {
-    public class EntrySqlDal : IEntrySqlDal
+    public class EntrySqlDal : SqlDalBase, IEntrySqlDal
     {
-        private readonly ISQLDataAccess _db;
-        private readonly ILogger _logger;
-
-        public EntrySqlDal(ISQLDataAccess db, ILogger logger)
-        {
-            _db = db;
-            _logger = logger;
-        }
+        public EntrySqlDal(ISQLDataAccess db, ILogger logger) : base(db, logger)
+        { }
 
         public Result CreateNewEntry(Entry entry)
         {
@@ -23,14 +16,11 @@ namespace SimpleTracker.DAL
             return result;
         }
               
-      
         public IEnumerable<Entry> GetAllEntries()
         {
             var result = _db.LoadData<Entry, dynamic>(storedProcedure: "dbo.Entry_GetAll", new { });
             _logger.LogDebug("dbo.Entry_GetAll returned {ResultCount} items", result.Count());
             return result;
         }
-
-
     }
 }

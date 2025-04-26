@@ -5,15 +5,10 @@ using Activity = SimpleTracker.DTO.Activity;
 
 namespace SimpleTracker.DAL
 {
-    public class ActivitySqlDal : IActivitySqlDal
+    public class ActivitySqlDal : SqlDalBase, IActivitySqlDal
     {
-        private readonly ISQLDataAccess _db;
-        private readonly ILogger _logger;
-        public ActivitySqlDal(ISQLDataAccess db, ILogger logger)
-        {
-            _db = db;
-            _logger = logger;
-        }
+        public ActivitySqlDal(ISQLDataAccess db, ILogger logger) : base(db, logger)  
+        { }
 
         public Result CreateNewActivity(Activity activity)
         {
