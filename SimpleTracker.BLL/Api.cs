@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using SimpleTracker.BLL.DTO;
 using SimpleTracker.BLL.Interface;
 using SimpleTracker.DTO;
@@ -10,21 +11,24 @@ namespace SimpleTracker.BLL
         private RequestInput _input;
         private RequestResult result { get; set; }
         private PostRequestProcessorFactory postRequestProcessorFactory { get; set; }
+        private readonly ILogger _logger;
 
-        public Api()
+
+        public Api(ILogger logger)
         {
             result = new RequestResult();
             postRequestProcessorFactory = new PostRequestProcessorFactory();
             _input = new RequestInput();
+            _logger = logger;
         }
 
         public List<string> Request(List<string> data)
         {
             // result as a property
+            _logger.LogInformation("Api.Request: Request received");
 
             SanitizeData(data);
             CheckTypeOfRequest(data);
-
 
             ProcessGetRequest(data);
             ProcessPostRequest(data);
@@ -37,28 +41,27 @@ namespace SimpleTracker.BLL
             if (result.IsPost == false)
                 return;
 
+            _logger.LogDebug("Api.ProcessPostRequest");
             IPostRequestProcessor postRequestProcessor =  postRequestProcessorFactory.ReturnPostRequestProcessor(data);
             result.Messages = postRequestProcessor.Process(data);
         }
 
         private void ProcessGetRequest(List<string> data)
         {
-            if (result.IsGet == false)
-                return;
+            return;
+            throw new NotImplementedException();
         }
 
         private void SanitizeData(List<string> data)
         {
             if (data.IsNullOrEmpty() || data.Count == 0)
             {
+                _logger.LogError("Api.SanitizeData: No data received");
                 data = new List<string>() { "empty" };
-
-                result.Messages.Add("No data received");
-                result.Success = false;
             }
             else
             {
-                result.Messages.Add("Data received");
+                _logger.LogDebug("Api.SanitizeData: Data sanitized successfully");
             }
         }
 
@@ -70,17 +73,17 @@ namespace SimpleTracker.BLL
             if (data.ElementAt(0).ToLower() == "get")
             {
                 result.IsGet = true;
-                result.Messages.Add("Request type is GET");
+                _logger.LogDebug("Api.CheckTypeOfRequest: Request type is GET");
             }
             else if (data.ElementAt(0).ToLower() == "post")
             {
                 result.IsPost = true;
-                result.Messages.Add("Request type is POST");
+                _logger.LogDebug("Api.CheckTypeOfRequest: Request type is POST");
             }
             else
             {
+                _logger.LogError("Api.CheckTypeOfRequest: Can't determine request type");
                 result.Success = false;
-                result.Messages.Add("Can't determine request type");
             }
         }
 

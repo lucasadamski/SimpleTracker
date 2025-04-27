@@ -11,7 +11,7 @@ namespace SimpleTracker
         {
             Utility.Logger.Log.LogInformation("Simple Tracker UI started");
 
-            IApi api = new Api();
+            IApi api = new Api(Utility.Logger.Log);
 
             var message = new List<string>()
             {
