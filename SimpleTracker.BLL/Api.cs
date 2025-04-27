@@ -42,8 +42,8 @@ namespace SimpleTracker.BLL
                 return;
 
             _logger.LogDebug("Api.ProcessPostRequest");
-            IPostRequestProcessor postRequestProcessor =  postRequestProcessorFactory.ReturnPostRequestProcessor(data);
-            result.Messages = postRequestProcessor.Process(data);
+            IPostRequestProcessor postRequestProcessor = postRequestProcessorFactory.ReturnPostRequestProcessor(data);
+            result.Messages = postRequestProcessor.Process(data); // should be return data not messages
         }
 
         private void ProcessGetRequest(List<string> data)
