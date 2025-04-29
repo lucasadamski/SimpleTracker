@@ -1,19 +1,13 @@
-﻿
+﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.Interface;
-using SimpleTracker.DAL;
-using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
-using SimpleTracker.Utility;
 
-namespace SimpleTracker.BLL
+namespace SimpleTracker.BLL.RequestProcessor
 {
-    public class ActivityPostRequestProcessor : IPostRequestProcessor
+    public class ActivityPostRequestProcessor : RequestProcessorBase, IPostRequestProcessor
     {
-        IActivitySqlDal _activityDal;
-
-        public ActivityPostRequestProcessor()
+        public ActivityPostRequestProcessor(ILogger logger) : base(logger)
         {
-            _activityDal = new ActivitySqlDal(new SQLDataAccess(DBConnectionString.ConnectionString), Logger.Log);
         }
 
         public List<string> Process(List<string> data)
@@ -33,8 +27,8 @@ namespace SimpleTracker.BLL
             }
             catch (Exception e)
             {
-                
-                
+
+
             }
 
             return result;

@@ -1,7 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.Interface;
+using SimpleTracker.BLL.RequestProcessor;
 
-namespace SimpleTracker.BLL
+namespace SimpleTracker.BLL.Factory
 {
     public class PostRequestProcessorFactory
     {
@@ -17,15 +18,15 @@ namespace SimpleTracker.BLL
 
             if (data.ElementAt(1).ToLower() == "activity")
             {
-                result = new ActivityPostRequestProcessor();
+                result = new ActivityPostRequestProcessor(_logger);
             }
             else if (data.ElementAt(1).ToLower() == "entry")
             {
-                result = new EntryPostRequestProcessor();
+                result = new EntryPostRequestProcessor(_logger);
             }
             else
             {
-                result = new UnknownPostRequestProcessor();
+                result = new UnknownPostRequestProcessor(_logger);
             }
 
             _logger.LogDebug("PostRequestProcessorFactory.ReturnPostRequestProcessor returned {Result}", result.GetType().Name);
