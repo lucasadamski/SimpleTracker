@@ -13,7 +13,6 @@ namespace SimpleTracker.BLL
         private PostRequestProcessorFactory postRequestProcessorFactory { get; set; }
         private readonly ILogger _logger;
 
-
         public Api(ILogger logger)
         {
             result = new RequestResult();
@@ -45,7 +44,6 @@ namespace SimpleTracker.BLL
             IPostRequestProcessor postRequestProcessor = postRequestProcessorFactory.ReturnPostRequestProcessor(data);
             result.Messages = postRequestProcessor.Process(data); // should be return data not messages
         }
-
         private void ProcessGetRequest(List<string> data)
         {
             return;
