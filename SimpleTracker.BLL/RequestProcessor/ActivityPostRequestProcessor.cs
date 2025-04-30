@@ -13,9 +13,7 @@ namespace SimpleTracker.BLL.RequestProcessor
         public List<string> Process(List<string> data)
         {
             var result = new List<string>();
-
             var activity = new Activity();
-
             var newActivityResult = new NewActivityResult();
 
             try
@@ -24,11 +22,11 @@ namespace SimpleTracker.BLL.RequestProcessor
                 activity.UnitId = int.Parse(data.ElementAt(3).ToLower().Trim());
 
                 result.Add(_activityDal.CreateNewActivity(activity).Message);
+                _logger.LogDebug("ActivityPostRequestProcessor.Process success");
             }
             catch (Exception e)
             {
-
-
+                _logger.LogDebug("ActivityPostRequestProcessor.Process exception: {ExceptionMessage}", e.Message);
             }
 
             return result;
