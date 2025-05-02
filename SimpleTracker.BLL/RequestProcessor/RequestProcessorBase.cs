@@ -15,6 +15,7 @@ namespace SimpleTracker.BLL.RequestProcessor
         {
             _activityDal = new ActivitySqlDal(new SQLDataAccess(DBConnectionString.ConnectionString), logger);
             _entryDal = new EntrySqlDal(new SQLDataAccess(DBConnectionString.ConnectionString), logger);
+            _logger = logger;
         }
     }
 }
