@@ -19,7 +19,7 @@ namespace SimpleTracker.DAL
 
         public IEnumerable<Activity> GetAllActivities()
         {
-            var result = _db.LoadData<Activity, dynamic>(storedProcedure: "dbo.Activity_GetAll", new { });
+            var result = _db.LoadData<Activity, dynamic>(storedProcedure: "[SimpleTrackerDev].[dbo].[spActivity_GetAll]", new { });
             _logger.LogDebug("dbo.Activity_GetAll returned {ResultCount} items", result.Count());
             return result;
         }

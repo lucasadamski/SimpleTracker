@@ -1,6 +1,6 @@
 ﻿namespace SimpleTracker.BLL.DTO
 {
-    internal class RequestResult
+    internal class Response
     {
         public List<string> Messages { get; set; } = new List<string>();
         public bool Success { get; set; } = true;

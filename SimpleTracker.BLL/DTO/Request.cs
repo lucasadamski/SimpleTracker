@@ -2,7 +2,7 @@
 
 namespace SimpleTracker.BLL.DTO
 {
-    public class RequestInput
+    public class Request
     {
         public Activity Activity { get; set; }
         public Entry Entry { get; set; }

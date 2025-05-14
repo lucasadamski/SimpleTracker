@@ -9,16 +9,15 @@ namespace SimpleTracker.BLL
 {
     public class Api : IApi
     {
-        private RequestInput _input;
-        private RequestResult result { get; set; }
-        private PostRequestProcessorFactory postRequestProcessorFactory { get; set; }
+        private Response _response { get; set; } = new Response();
+        private PostRequestProcessorFactory _postRequestProcessorFactory { get; set; }
+        private GetRequestProcessorFactory _getRequestProcessorFactory { get; set; }
         private readonly ILogger _logger;
 
         public Api(ILogger logger)
         {
-            result = new RequestResult();
-            postRequestProcessorFactory = new PostRequestProcessorFactory(logger);
-            _input = new RequestInput();
+            _postRequestProcessorFactory = new PostRequestProcessorFactory(logger);
+            _getRequestProcessorFactory = new GetRequestProcessorFactory(logger);
             _logger = logger;
         }
 
@@ -30,25 +29,28 @@ namespace SimpleTracker.BLL
             SanitizeData(data);
             CheckTypeOfRequest(data);
 
-            ProcessGetRequest(data);
+            _response.Messages.AddRange(ProcessGetRequest(data));
             ProcessPostRequest(data);
 
-            return result.Messages;
+            return _response.Messages;
         }
 
         private void ProcessPostRequest(List<string> data)
         {
-            if (result.IsPost == false)
+            if (_response.IsPost == false)
                 return;
 
             _logger.LogDebug("Api.ProcessPostRequest");
-            IPostRequestProcessor postRequestProcessor = postRequestProcessorFactory.ReturnPostRequestProcessor(data);
-            result.Messages = postRequestProcessor.Process(data); // should be return data not messages
+            IPostRequestProcessor postRequestProcessor = _postRequestProcessorFactory.ReturnPostRequestProcessor(data);
+            _response.Messages = postRequestProcessor.Process(data); // should be return data not messages
         }
-        private void ProcessGetRequest(List<string> data)
+        private List<string> ProcessGetRequest(List<string> data)
         {
-            return;
-            throw new NotImplementedException();
+            string result;
+
+            IGetRequestProcessor getRequestProcessor = _getRequestProcessorFactory.ReturnGetRequestProcessor(data);
+
+            return getRequestProcessor.Process(data);
         }
 
         private void SanitizeData(List<string> data)
@@ -66,23 +68,23 @@ namespace SimpleTracker.BLL
 
         private void CheckTypeOfRequest(List<string> data)
         {
-            if (result.Success == false) 
+            if (_response.Success == false) 
                 return;
             
             if (data.ElementAt(0).ToLower() == "get")
             {
-                result.IsGet = true;
+                _response.IsGet = true;
                 _logger.LogDebug("Api.CheckTypeOfRequest: Request type is GET");
             }
             else if (data.ElementAt(0).ToLower() == "post")
             {
-                result.IsPost = true;
+                _response.IsPost = true;
                 _logger.LogDebug("Api.CheckTypeOfRequest: Request type is POST");
             }
             else
             {
                 _logger.LogError("Api.CheckTypeOfRequest: Can't determine request type");
-                result.Success = false;
+                _response.Success = false;
             }
         }
 
