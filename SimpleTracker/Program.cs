@@ -13,13 +13,7 @@ namespace SimpleTracker
 
             IApi api = new Api(Utility.Logger.Log);
 
-            var message = new List<string>()
-            {
-                "get",
-                "entry"
-            };
-
-            var response = api.Request(message);
+            var response = api.Request(args.ToList());
 
             foreach (var responseMessage in response)
             {
@@ -28,5 +22,8 @@ namespace SimpleTracker
 
             Utility.Logger.Log.LogInformation("Simple Tracker UI stopped");
         }
+
+
+
     }
 }
