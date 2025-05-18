@@ -1,10 +1,15 @@
-﻿namespace SimpleTracker.BLL.DTO
+﻿using SimpleTracker.DTO;
+
+namespace SimpleTracker.BLL.DTO
 {
-    internal class Response
+    public record Response
     {
-        public List<string> Messages { get; set; } = new List<string>();
-        public bool Success { get; set; } = true;
-        public bool IsGet { get; set; } = false;
-        public bool IsPost { get; set; } = false;
+        public IEnumerable<string>? Arguments { get; set; }
+        public IEnumerable<string>? Output { get; set; }
+        public bool Success { get; set; }
+        public Type Type { get; set; }
+        public RequestVerb RequestVerb { get; set; }
+        public IEnumerable<Activity>? Activity { get; set; }
+        public IEnumerable<Entry>? Entry { get; set; }
     }
 }

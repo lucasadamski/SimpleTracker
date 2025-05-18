@@ -13,7 +13,10 @@ namespace SimpleTracker
 
             IApi api = new Api(Utility.Logger.Log);
 
-            var response = api.Request(args.ToList());
+            // test
+            args = ["get", "entry"];
+
+            var response = api.Request(args);
 
             foreach (var responseMessage in response)
             {

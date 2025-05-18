@@ -2,6 +2,6 @@
 {
     public interface IApi
     {
-        List<string> Request(List<string> data);
+        IEnumerable<string> Request(IEnumerable<string> data);
     }
 }

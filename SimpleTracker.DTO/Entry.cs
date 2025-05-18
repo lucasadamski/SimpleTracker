@@ -1,7 +1,6 @@
-﻿
-namespace SimpleTracker.DTO
+﻿namespace SimpleTracker.DTO
 {
-    public class Entry
+    public class Entry : EntityBase
     {
         public int Id { get; set; }
         public int Value { get; set; }

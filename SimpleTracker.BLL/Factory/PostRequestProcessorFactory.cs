@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using SimpleTracker.BLL.DTO;
 using SimpleTracker.BLL.Interface;
 using SimpleTracker.BLL.RequestProcessor;
+using SimpleTracker.DTO;
 
 namespace SimpleTracker.BLL.Factory
 {
@@ -12,15 +14,15 @@ namespace SimpleTracker.BLL.Factory
         {
             _logger = logger;
         }
-        public IPostRequestProcessor ReturnPostRequestProcessor(List<string> data)
+        public IPostRequestProcessor ReturnPostRequestProcessor(Response response)
         {
             IPostRequestProcessor result;
 
-            if (data.ElementAt(1).ToLower() == "activity")
+            if (response.Type == typeof(Activity))
             {
                 result = new ActivityPostRequestProcessor(_logger);
             }
-            else if (data.ElementAt(1).ToLower() == "entry")
+            else if (response.Type == typeof(Entry))
             {
                 result = new EntryPostRequestProcessor(_logger);
             }

@@ -21,71 +21,140 @@ namespace SimpleTracker.BLL
             _logger = logger;
         }
 
-        public List<string> Request(List<string> data)
+        public IEnumerable<string> Request(IEnumerable<string> arguments)
         {
             // result as a property
             _logger.LogInformation("Api.Request: Request received");
 
-            SanitizeData(data);
-            CheckTypeOfRequest(data);
+            var request = new Request() { Arguments = arguments };
 
-            _response.Messages.AddRange(ProcessGetRequest(data));
-            ProcessPostRequest(data);
+            request = SanitizeData(request);
+            request = CheckTypeOfRequest(request);
+            request = CheckTypeOfRequestedObject(request);
 
-            return _response.Messages;
+
+            // Shift to response from request
+
+            var response = MapRequestToResponse(request);
+
+            response = ProcessGetRequest(response);
+            response = ProcessPostRequest(response);
+
+            return response.Output;
         }
 
-        private void ProcessPostRequest(List<string> data)
+        private Request CheckTypeOfRequestedObject(Request request)
         {
-            if (_response.IsPost == false)
-                return;
+            var result = request;
+
+            if (result.Success == false)
+                return result;
+
+            try
+            {
+                result.Type = result.Arguments.ElementAt(1).ToLower().Trim() switch
+                {
+                    "activity" => typeof(Activity),
+                    "entry" => typeof(Entry),
+                    _ => null
+                };
+            }
+            catch (Exception e)
+            {
+                result.Type = null;
+            }
+
+            return result;
+        }
+
+        private Response MapRequestToResponse(Request request)
+        {
+            var result = new Response();
+
+            if (request.Success == false)
+                return result;
+
+            result.RequestVerb = request.RequestVerb;
+            result.Success = request.Success;
+            result.Arguments = request.Arguments;
+            result.Type = request.Type;
+
+            return result;
+        }
+
+        private Response ProcessPostRequest(Response response)
+        {
+            var result = response;
+            if (result.Success == false || result.RequestVerb != RequestVerb.Post)
+                return result;
 
             _logger.LogDebug("Api.ProcessPostRequest");
-            IPostRequestProcessor postRequestProcessor = _postRequestProcessorFactory.ReturnPostRequestProcessor(data);
-            _response.Messages = postRequestProcessor.Process(data); // should be return data not messages
-        }
-        private List<string> ProcessGetRequest(List<string> data)
-        {
-            string result;
 
-            IGetRequestProcessor getRequestProcessor = _getRequestProcessorFactory.ReturnGetRequestProcessor(data);
+            IPostRequestProcessor postRequestProcessor = _postRequestProcessorFactory.ReturnPostRequestProcessor(response);
+            result.Output = postRequestProcessor.Process(result.Arguments.ToList());
 
-            return getRequestProcessor.Process(data);
+            return result;
         }
 
-        private void SanitizeData(List<string> data)
+        private Response ProcessGetRequest(Response response)
         {
-            if (data.IsNullOrEmpty() || data.Count == 0)
+            var result = response;
+            if (result.Success == false || result.RequestVerb != RequestVerb.Get)
+                return result;
+
+            _logger.LogDebug("Api.ProcessGetRequest");
+
+            IGetRequestProcessor getRequestProcessor = _getRequestProcessorFactory.ReturnGetRequestProcessor(response);
+            result.Output = getRequestProcessor.Process(result.Arguments.ToList());
+
+            return result;
+        }
+
+        private Request SanitizeData(Request request)
+        {
+            var result = request;
+
+            if (result.Success == false)
+                return result;
+
+            if (request.Arguments.IsNullOrEmpty() || request.Arguments.Count() == 0)
             {
                 _logger.LogError("Api.SanitizeData: No data received");
-                data = new List<string>() { "empty" };
+                result.Arguments = new List<string>() { "empty" };
+                request.Success = false;
             }
             else
             {
                 _logger.LogDebug("Api.SanitizeData: Data sanitized successfully");
             }
+
+            return result;
         }
 
-        private void CheckTypeOfRequest(List<string> data)
+        private Request CheckTypeOfRequest(Request request)
         {
-            if (_response.Success == false) 
-                return;
+            var result = request;
+            if (result.Success == false) 
+                return result;
             
-            if (data.ElementAt(0).ToLower() == "get")
-            {
-                _response.IsGet = true;
+            if (result.Arguments.ElementAt(0).ToLower().Trim() == "get")
+            { 
+                result.RequestVerb = RequestVerb.Get;
                 _logger.LogDebug("Api.CheckTypeOfRequest: Request type is GET");
             }
-            else if (data.ElementAt(0).ToLower() == "post")
+            else if (result.Arguments.ElementAt(0).ToLower() == "post")
             {
-                _response.IsPost = true;
+                result.RequestVerb = RequestVerb.Post;
                 _logger.LogDebug("Api.CheckTypeOfRequest: Request type is POST");
             }
             else
             {
+                result.RequestVerb = RequestVerb.NotDefined;
                 _logger.LogError("Api.CheckTypeOfRequest: Can't determine request type");
-                _response.Success = false;
+                result.Success = false;
             }
+
+            return result;
         }
 
     }
