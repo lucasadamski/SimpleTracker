@@ -3,16 +3,19 @@ using Dapper;
 using System.Data;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
+using Microsoft.Extensions.Logging;
 
 namespace SimpleTracker.DAL
 {
     public class SQLDataAccess : ISQLDataAccess
     {
         private string _connectionString;
+        private ILogger _logger;
 
-        public SQLDataAccess(string connectionString)
+        public SQLDataAccess(string connectionString, ILogger logger)
         {
             _connectionString = connectionString;
+            _logger = logger;
         }
 
         public IEnumerable<T> LoadData<T, U>(string storedProcedure, U parameters, string connectionId = "Default")
@@ -25,7 +28,7 @@ namespace SimpleTracker.DAL
             }
             catch (Exception e)
             {
-                //log
+                _logger.LogError("SQLDataAccess.LoadData failed for stored procedure {0} connection string {1} error message {2}", storedProcedure, _connectionString, e.Message);
                 result = new List<T>();
             }
 
@@ -43,7 +46,7 @@ namespace SimpleTracker.DAL
             }
             catch (Exception e)
             {
-                result.Message = e.Message;
+                _logger.LogError("SQLDataAccess.SaveData failed for stored procedure {0} connection string {1} error message {2}", storedProcedure, _connectionString, e.Message);
                 result.Success = false;
             }
             
