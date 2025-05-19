@@ -2,7 +2,7 @@
 
 namespace SimpleTracker.BLL.DTO
 {
-    public class Request
+    public record Request
     {
         public RequestVerb RequestVerb { get; set; }
         public IEnumerable<string> Arguments { get; set; } = new List<string>();

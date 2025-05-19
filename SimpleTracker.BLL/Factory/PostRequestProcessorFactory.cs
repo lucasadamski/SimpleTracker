@@ -6,7 +6,7 @@ using SimpleTracker.DTO;
 
 namespace SimpleTracker.BLL.Factory
 {
-    public class PostRequestProcessorFactory
+    public class PostRequestProcessorFactory : IPostRequestProcessorFactory
     {
         private readonly ILogger _logger;
 
