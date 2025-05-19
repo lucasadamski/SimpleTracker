@@ -9,10 +9,10 @@ namespace SimpleTracker.DAL
         public EntrySqlDal(ISQLDataAccess db, ILogger logger) : base(db, logger)
         { }
 
-        public Result CreateNewEntry(Entry entry)
+        public bool CreateNewEntry(Entry entry)
         {
             var result = _db.SaveData(storedProcedure: "[SimpleTrackerDev].[dbo].[spEntry_Insert]", new { entry.Value, entry.ActivityId });
-            _logger.LogDebug("dbo.spEntry_Insert {Value} returned {Result} {Message}", entry.Value, result.Success, result.Message);
+            _logger.LogDebug("dbo.spEntry_Insert {Value} returned {Result}", entry.Value, result);
             return result;
         }
               

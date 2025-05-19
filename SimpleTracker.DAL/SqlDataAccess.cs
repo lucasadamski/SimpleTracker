@@ -28,16 +28,16 @@ namespace SimpleTracker.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("SQLDataAccess.LoadData failed for stored procedure {0} connection string {1} error message {2}", storedProcedure, _connectionString, e.Message);
+                _logger.LogError("SQLDataAccess.LoadData failed for stored procedure {StoredProcedure} connection string {ConnectionString} error message {Exception}", storedProcedure, _connectionString, e.Message);
                 result = new List<T>();
             }
 
             return result;
         }
 
-        public Result SaveData<T>(string storedProcedure, T parameters, string connectionId = "Default")
+        public bool SaveData<T>(string storedProcedure, T parameters, string connectionId = "Default")
         {
-            var result = new Result();
+            var result = true;
 
             try
             {
@@ -46,8 +46,8 @@ namespace SimpleTracker.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("SQLDataAccess.SaveData failed for stored procedure {0} connection string {1} error message {2}", storedProcedure, _connectionString, e.Message);
-                result.Success = false;
+                _logger.LogError("SQLDataAccess.SaveData failed for stored procedure {StoredProcedure} connection string {ConnectionString} error message {Exception}", storedProcedure, _connectionString, e.Message);
+                result = false;
             }
             
             return result;

@@ -14,14 +14,14 @@ namespace SimpleTracker.BLL.RequestProcessor
         {
             var result = new List<string>();
             var activity = new Activity();
-            var newActivityResult = new NewActivityResult();
+           
 
             try
             {
                 activity.Name = data.ElementAt(2).ToLower().Trim();
                 activity.UnitId = int.Parse(data.ElementAt(3).ToLower().Trim());
 
-                result.Add(_activityDal.CreateNewActivity(activity).Message);
+                _activityDal.CreateNewActivity(activity);
                 _logger.LogDebug("ActivityPostRequestProcessor.Process success");
             }
             catch (Exception e)
