@@ -9,15 +9,21 @@ namespace SimpleTracker.BLL
 {
     public class Api : IApi
     {
-        private Response _response { get; set; } = new Response();
-        private PostRequestProcessorFactory _postRequestProcessorFactory { get; set; }
-        private GetRequestProcessorFactory _getRequestProcessorFactory { get; set; }
+        private IPostRequestProcessorFactory _postRequestProcessorFactory { get; set; }
+        private IGetRequestProcessorFactory _getRequestProcessorFactory { get; set; }
         private readonly ILogger _logger;
 
         public Api(ILogger logger)
         {
             _postRequestProcessorFactory = new PostRequestProcessorFactory(logger);
             _getRequestProcessorFactory = new GetRequestProcessorFactory(logger);
+            _logger = logger;
+        }
+
+        public Api(ILogger logger, IPostRequestProcessorFactory postRequestProcessorFactory, IGetRequestProcessorFactory getRequestProcessorFactory)
+        {
+            _postRequestProcessorFactory = postRequestProcessorFactory;
+            _getRequestProcessorFactory = getRequestProcessorFactory;
             _logger = logger;
         }
 
@@ -31,7 +37,6 @@ namespace SimpleTracker.BLL
             request = SanitizeData(request);
             request = CheckTypeOfRequest(request);
             request = CheckTypeOfRequestedObject(request);
-
 
             // Shift to response from request
 

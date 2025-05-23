@@ -7,5 +7,7 @@ namespace SimpleTracker.DAL.Interfaces
         public bool CreateNewEntry(Entry repetitions);
 
         public IEnumerable<Entry> GetAllEntries();
+
+        public IEnumerable<string> GetSummaryAllTime();
     }
 }

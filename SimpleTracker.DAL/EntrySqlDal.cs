@@ -22,5 +22,25 @@ namespace SimpleTracker.DAL
             _logger.LogDebug("dbo.Entry_GetAll returned {ResultCount} items", result.Count());
             return result;
         }
+
+        public IEnumerable<string> GetSummaryAllTime()
+        {
+            IEnumerable<string> result;
+
+            try
+            {
+                var spResult = _db.LoadData<EntrySummaryAllTime, dynamic>(storedProcedure: "[SimpleTrackerDev].[dbo].[spEntry_GetSummaryAllTime]", new { });
+                result = spResult.Select(n => n.Name + " " + n.Value.ToString() + " " + n.Reps).ToList();
+
+                _logger.LogDebug("[dbo].[spEntry_GetSummaryAllTime] returned {ResultCount} items", result.Count());
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("[dbo].[spEntry_GetSummaryAllTime] returned exception {Exception}", e);
+                result = new List<string>();
+            }
+            
+            return result;
+        }
     }
 }

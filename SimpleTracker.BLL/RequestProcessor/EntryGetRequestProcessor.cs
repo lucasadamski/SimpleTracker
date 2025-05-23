@@ -10,14 +10,25 @@ namespace SimpleTracker.BLL.RequestProcessor
         {
         }
 
+        // what type I have to return here? 
         public List<string> Process(List<string> data)
         {
-            IEnumerable<Entry> result;
-            
-            result = _entryDal.GetAllEntries();
-            _logger.LogDebug("EntryGetRequestProcessor.Process success");
+            IEnumerable<string> result;
 
-            return result.Select(x => x.ActivityId.ToString() + " " + x.Value.ToString()).ToList();
+            switch(data.ElementAt(1))
+            {
+                case "entry":
+                    result = _entryDal.GetAllEntries().Select(x => x.ActivityId.ToString() + " " + x.Value.ToString()).ToList();
+                    break;
+                case "summaryAllTime":
+                    result = _entryDal.GetSummaryAllTime();
+                    break;
+                default:
+                    result = new List<string>();
+                    break;
+            }
+            
+            return result.ToList();
         }
     }
 }

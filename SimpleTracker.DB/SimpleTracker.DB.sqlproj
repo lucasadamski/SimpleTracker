@@ -69,6 +69,7 @@
     <Build Include="Stored Procedures\spActivity_GetAll.sql" />
     <Build Include="Stored Procedures\spEntry_GetAll.sql" />
     <Build Include="Views\EntrySummaryAllTime.sql" />
+    <Build Include="Stored Procedures\spEntry_GetSummaryAllTime.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SimpleTracker.DB.refactorlog" />
