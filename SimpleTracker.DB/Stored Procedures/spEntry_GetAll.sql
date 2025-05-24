@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[spEntry_GetAll]
+﻿ CREATE PROCEDURE [dbo].[spEntry_GetAll]
 AS
 	SELECT 
 		[Id]
