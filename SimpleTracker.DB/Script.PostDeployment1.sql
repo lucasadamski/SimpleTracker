@@ -13,16 +13,19 @@ Post-Deployment Script Template
 if not exists (select 1 from [dbo].[Unit])
 begin
     insert into [dbo].[Unit] (Name)
-    values ('Reps'), 
-        ('Minutes'),
-        ('Hours')
+    values ('times'), 
+        ('minutes'),
+        ('hours'),
+        ('days'),
+        ('weeks'),
+        ('years')
 end
 
 
 if not exists (select 1 from [dbo].[Activity])
 begin
     insert into [dbo].[Activity] (Name, UnitId)
-    values ('Push-ups', 1), 
-        ('Running', 2),
-        ('Reading', 2)
+    values ('push-ups', 1), 
+        ('running', 1),
+        ('reading', 1)
 end

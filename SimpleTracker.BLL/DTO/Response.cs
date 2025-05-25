@@ -6,6 +6,7 @@ namespace SimpleTracker.BLL.DTO
     {
         public IEnumerable<string>? Arguments { get; set; }
         public IEnumerable<string>? Output { get; set; }
+        public int Value { get; set; }
         public bool Success { get; set; }
         public Type Type { get; set; }
         public RequestVerb RequestVerb { get; set; }

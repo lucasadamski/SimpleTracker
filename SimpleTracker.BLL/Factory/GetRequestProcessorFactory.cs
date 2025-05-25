@@ -2,6 +2,7 @@
 using SimpleTracker.BLL.DTO;
 using SimpleTracker.BLL.Interface;
 using SimpleTracker.BLL.RequestProcessor.Get;
+using SimpleTracker.DAL;
 using SimpleTracker.DTO;
 
 namespace SimpleTracker.BLL.Factory

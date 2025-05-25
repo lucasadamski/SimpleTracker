@@ -28,7 +28,7 @@ namespace SimpleTracker.BLL.RequestProcessor.Post
             }
             catch (Exception e)
             {
-                _logger.LogDebug("ActivityPostRequestProcessor.Process exception: {ExceptionMessage}", e.Message);
+                _logger.LogError("ActivityPostRequestProcessor.Process exception: {ExceptionMessage}", e.Message);
             }
 
             result.Add("Entry created with success");

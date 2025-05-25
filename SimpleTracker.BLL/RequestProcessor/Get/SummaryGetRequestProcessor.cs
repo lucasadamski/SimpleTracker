@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.Interface;
+using SimpleTracker.DAL.Interfaces;
 
 namespace SimpleTracker.BLL.RequestProcessor.Get
 {
@@ -9,7 +10,14 @@ namespace SimpleTracker.BLL.RequestProcessor.Get
 
         public List<string> Process(List<string> data)
         {
-            throw new NotImplementedException();
+            var result = new List<string>();
+
+            if(data.Contains("all-time"))
+            {
+                result = _summarySqlDal.GetSummary().ToList();
+            }
+
+            return result;
         }
     }
 }

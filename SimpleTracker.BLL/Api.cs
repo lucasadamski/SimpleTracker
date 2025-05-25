@@ -4,6 +4,7 @@ using SimpleTracker.BLL.DTO;
 using SimpleTracker.BLL.Factory;
 using SimpleTracker.BLL.Interface;
 using SimpleTracker.DTO;
+using System.Data;
 
 namespace SimpleTracker.BLL
 {
@@ -37,6 +38,7 @@ namespace SimpleTracker.BLL
             request = SanitizeData(request);
             request = CheckTypeOfRequest(request);
             request = CheckTypeOfRequestedObject(request);
+            request = GetValue(request);
 
             // Shift to response from request
 
@@ -46,6 +48,15 @@ namespace SimpleTracker.BLL
             response = ProcessPostRequest(response);
 
             return response.Output;
+        }
+
+        private Request GetValue(Request request)
+        {
+            var result = request;
+
+
+
+            return result;
         }
 
         private Request CheckTypeOfRequestedObject(Request request)
@@ -61,6 +72,7 @@ namespace SimpleTracker.BLL
                 {
                     "activity" => typeof(Activity),
                     "entry" => typeof(Entry),
+                    "summary" => typeof(Summary),
                     _ => null
                 };
             }
