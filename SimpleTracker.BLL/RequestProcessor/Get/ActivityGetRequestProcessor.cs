@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using SimpleTracker.DTO;
 
-namespace SimpleTracker.BLL.RequestProcessor
+namespace SimpleTracker.BLL.RequestProcessor.Get
 {
     public class ActivityGetRequestProcessor : RequestProcessorBase, IGetRequestProcessor
     {

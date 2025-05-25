@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.Interface;
 
-namespace SimpleTracker.BLL.RequestProcessor
+namespace SimpleTracker.BLL.RequestProcessor.Get
 {
     public class UnknownGetRequestProcessor : RequestProcessorBase, IGetRequestProcessor
     {

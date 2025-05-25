@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.Interface;
 
-namespace SimpleTracker.BLL.RequestProcessor
+namespace SimpleTracker.BLL.RequestProcessor.Post
 {
     public class UnknownPostRequestProcessor : RequestProcessorBase, IPostRequestProcessor
     {

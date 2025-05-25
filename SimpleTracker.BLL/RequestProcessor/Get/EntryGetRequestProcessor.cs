@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.Interface;
-using SimpleTracker.DTO;
 
-namespace SimpleTracker.BLL.RequestProcessor
+namespace SimpleTracker.BLL.RequestProcessor.Get
 {
     public class EntryGetRequestProcessor : RequestProcessorBase, IGetRequestProcessor
     {
@@ -15,19 +14,16 @@ namespace SimpleTracker.BLL.RequestProcessor
         {
             IEnumerable<string> result;
 
-            switch(data.ElementAt(1))
+            switch (data.ElementAt(1))
             {
                 case "entry":
                     result = _entryDal.GetAllEntries().Select(x => x.ActivityId.ToString() + " " + x.Value.ToString()).ToList();
-                    break;
-                case "summaryAllTime":
-                    result = _entryDal.GetSummaryAllTime();
                     break;
                 default:
                     result = new List<string>();
                     break;
             }
-            
+
             return result.ToList();
         }
     }

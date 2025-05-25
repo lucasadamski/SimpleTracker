@@ -1,33 +1,37 @@
-﻿using Microsoft.Extensions.Logging;
+﻿
+using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.Interface;
 using SimpleTracker.DTO;
 
-namespace SimpleTracker.BLL.RequestProcessor
+namespace SimpleTracker.BLL.RequestProcessor.Post
 {
-    public class ActivityPostRequestProcessor : RequestProcessorBase, IPostRequestProcessor
+    public class EntryPostRequestProcessor : RequestProcessorBase, IPostRequestProcessor
     {
-        public ActivityPostRequestProcessor(ILogger logger) : base(logger)
+        public EntryPostRequestProcessor(ILogger logger) : base(logger)
         {
         }
 
         public List<string> Process(List<string> data)
         {
             var result = new List<string>();
-            var activity = new Activity();
-           
+
+            var entry = new Entry();
+
 
             try
             {
-                activity.Name = data.ElementAt(2).ToLower().Trim();
-                activity.UnitId = int.Parse(data.ElementAt(3).ToLower().Trim());
+                entry.Value = int.Parse(data.ElementAt(2));
+                entry.ActivityId = int.Parse(data.ElementAt(3).ToLower().Trim());
 
-                _activityDal.CreateNewActivity(activity);
+                _entryDal.CreateNewEntry(entry);
                 _logger.LogDebug("ActivityPostRequestProcessor.Process success");
             }
             catch (Exception e)
             {
                 _logger.LogDebug("ActivityPostRequestProcessor.Process exception: {ExceptionMessage}", e.Message);
             }
+
+            result.Add("Entry created with success");
 
             return result;
         }

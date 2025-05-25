@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.DTO;
 using SimpleTracker.BLL.Interface;
-using SimpleTracker.BLL.RequestProcessor;
+using SimpleTracker.BLL.RequestProcessor.Post;
 using SimpleTracker.DTO;
 
 namespace SimpleTracker.BLL.Factory
