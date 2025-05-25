@@ -1,4 +1,4 @@
-﻿CREATE OR ALTER PROCEDURE [dbo].[spSummary_Get]
+﻿CREATE PROCEDURE [dbo].[spSummary_Get]
 @From DateTime2,
 @To DateTime2
 AS

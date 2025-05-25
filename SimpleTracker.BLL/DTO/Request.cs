@@ -1,6 +1,4 @@
-﻿using SimpleTracker.DTO;
-
-namespace SimpleTracker.BLL.DTO
+﻿namespace SimpleTracker.BLL.DTO
 {
     public record Request
     {
