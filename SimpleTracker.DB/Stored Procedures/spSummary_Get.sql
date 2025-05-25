@@ -4,7 +4,7 @@
 AS
 	IF (@From is null AND @To is null) 
 	Begin 
-		SELECT a.Name, sum(e.Value) as Value, 'Reps' as Unit -- to fix
+		SELECT a.Name as [Activity], sum(e.Value) as [Value], 'Reps' as [Unit] -- to fix
 		FROM Entry e
 		join Activity a on a.Id = e.ActivityId
 		join Unit u on u.Id = a.UnitId
@@ -12,7 +12,7 @@ AS
 	End
 	ELSE
 	BEGIN
-		SELECT a.Name, sum(e.Value) as Value, 'Reps' as Unit -- to fix
+		SELECT a.Name as [Activity], sum(e.Value) as [Value], 'Reps' as [Unit] -- to fix
 		FROM Entry e
 		join Activity a on a.Id = e.ActivityId
 		join Unit u on u.Id = a.UnitId

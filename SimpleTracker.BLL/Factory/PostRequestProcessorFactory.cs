@@ -29,6 +29,7 @@ namespace SimpleTracker.BLL.Factory
             else
             {
                 result = new UnknownPostRequestProcessor(_logger);
+                _logger.LogWarning("GetRequestProcessorFactory.ReturnGetRequestProcessor returned {Result}", result.GetType().Name);
             }
 
             _logger.LogDebug("PostRequestProcessorFactory.ReturnPostRequestProcessor returned {Result}", result.GetType().Name);

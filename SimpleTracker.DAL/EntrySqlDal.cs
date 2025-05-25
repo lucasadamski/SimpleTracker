@@ -29,8 +29,8 @@ namespace SimpleTracker.DAL
 
             try
             {
-                var spResult = _db.LoadData<EntrySummaryAllTime, dynamic>(storedProcedure: "[dbo].[spSummary_Get]", new { });
-                result = spResult.Select(n => n.Name + " " + n.Value.ToString() + " " + n.Reps).ToList();
+                var spResult = _db.LoadData<Summary, dynamic>(storedProcedure: "[dbo].[spSummary_Get]", new { });
+                result = spResult.Select(n => n.Activity + " " + n.Value.ToString() + " " + n.Unit).ToList();
 
                 _logger.LogDebug("[dbo].[spEntry_GetSummaryAllTime] returned {ResultCount} items", result.Count());
             }

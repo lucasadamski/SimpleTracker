@@ -27,9 +27,14 @@ namespace SimpleTracker.BLL.Factory
             {
                 result = new EntryGetRequestProcessor(_logger);
             }
+            else if(response.Type == typeof(Summary))
+            {
+                result = new SummaryGetRequestProcessor(_logger);
+            }
             else
             {
                 result = new UnknownGetRequestProcessor(_logger);
+                _logger.LogWarning("GetRequestProcessorFactory.ReturnGetRequestProcessor returned {Result}", result.GetType().Name);
             }
 
             _logger.LogDebug("GetRequestProcessorFactory.ReturnGetRequestProcessor returned {Result}", result.GetType().Name);
