@@ -4,7 +4,6 @@ using SimpleTracker.BLL.DTO;
 using SimpleTracker.BLL.Factory;
 using SimpleTracker.BLL.Interface;
 using SimpleTracker.DTO;
-using System.Data;
 
 namespace SimpleTracker.BLL
 {
@@ -38,7 +37,7 @@ namespace SimpleTracker.BLL
             request = SanitizeData(request);
             request = CheckTypeOfRequest(request);
             request = CheckTypeOfRequestedObject(request);
-            request = GetValue(request);
+            request = TryAssignValue(request);
 
             // Shift to response from request
 
@@ -50,11 +49,17 @@ namespace SimpleTracker.BLL
             return response.Output;
         }
 
-        private Request GetValue(Request request)
+        private Request TryAssignValue(Request request)
         {
             var result = request;
 
-
+            foreach (var argument in result.Arguments)
+            {
+                if (argument.All(char.IsDigit))
+                {
+                    result.Value = int.Parse(argument);
+                }
+            }
 
             return result;
         }
@@ -95,6 +100,7 @@ namespace SimpleTracker.BLL
             result.Success = request.Success;
             result.Arguments = request.Arguments;
             result.Type = request.Type;
+            result.Value = request.Value;
 
             return result;
         }

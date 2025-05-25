@@ -23,5 +23,21 @@ namespace SimpleTracker.DAL
             _logger.LogDebug("dbo.Activity_GetAll returned {ResultCount} items", result.Count());
             return result;
         }
+
+        public int? GetActivityId(string name)
+        {
+            int? result = 0;
+            try
+            {
+                 result = _db.LoadData<int, dynamic>(storedProcedure: "[dbo].[spActivity_GetId]", new { name }).First();
+                _logger.LogDebug("[dbo].[spActivity_GetId] returned Id {ActivityId}", result);
+            }
+            catch (Exception e)
+            {
+                _logger.LogError("[dbo].[spActivity_GetId] can't find activity name {ActivityName}", name);
+                result = null;
+            }
+            return result;
+        }
     }
 }

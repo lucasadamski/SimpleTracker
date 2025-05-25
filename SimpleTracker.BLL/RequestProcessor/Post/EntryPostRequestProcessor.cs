@@ -1,5 +1,4 @@
-﻿
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.Interface;
 using SimpleTracker.DTO;
 
@@ -20,8 +19,20 @@ namespace SimpleTracker.BLL.RequestProcessor.Post
 
             try
             {
-                entry.Value = int.Parse(data.ElementAt(2));
-                entry.ActivityId = int.Parse(data.ElementAt(3).ToLower().Trim());
+                entry.Value = TryAssignValue(data);
+                if (entry.Value == -1)
+                {
+                    throw new Exception("Can't find value in post entry arguments");
+                }
+
+
+                int? activityId = _activityDal.GetActivityId(data.ElementAt(2).ToLower().Trim());
+                if (activityId == null)
+                {
+                    throw new Exception("Can't process agruments");
+                }
+
+                entry.ActivityId = (int)activityId;
 
                 _entryDal.CreateNewEntry(entry);
                 _logger.LogDebug("ActivityPostRequestProcessor.Process success");
@@ -32,6 +43,21 @@ namespace SimpleTracker.BLL.RequestProcessor.Post
             }
 
             result.Add("Entry created with success");
+
+            return result;
+        }
+
+        private int TryAssignValue(IEnumerable<string> data)
+        {
+            var result = -1;
+
+            foreach (var argument in data)
+            {
+                if (argument.All(char.IsDigit))
+                {
+                    result = int.Parse(argument);
+                }
+            }
 
             return result;
         }

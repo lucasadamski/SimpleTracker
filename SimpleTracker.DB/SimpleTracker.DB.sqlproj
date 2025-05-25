@@ -75,6 +75,7 @@
     <Build Include="Tables\Entry.sql" />
     <Build Include="Tables\Activity.sql" />
     <Build Include="Stored Procedures\Unit\spUnit_GetId.sql" />
+    <Build Include="Stored Procedures\Activity\spActivity_GetId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SimpleTracker.DB.refactorlog" />
