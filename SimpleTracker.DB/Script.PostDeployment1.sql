@@ -29,3 +29,8 @@ begin
         ('running', 1),
         ('reading', 1)
 end
+GO
+
+
+:r ".\Stored Procedures\Activity\spActivity_GetAll.sql"
+GO

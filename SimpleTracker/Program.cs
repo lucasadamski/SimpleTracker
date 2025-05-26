@@ -19,8 +19,8 @@ namespace SimpleTracker
 
             IApi api = new Api(Utility.Logger.Log);
 
-            args = ["post", "entry", "running", "1"];
-
+            args = ["get", "summary", "all-time"];
+             
             var response = api.Request(args);
 
             foreach (var responseMessage in response)
