@@ -22,6 +22,7 @@ namespace SimpleTracker
                 ReadCommandFromUser();
                 apiFormattedRequest = userCommand.Split(' ');
                 apiResponse = api.Request(apiFormattedRequest);
+                if (apiResponse == null) continue;
                 WriteResponse(apiResponse);
             }
         }

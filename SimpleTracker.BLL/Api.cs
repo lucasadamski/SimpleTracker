@@ -35,6 +35,8 @@ namespace SimpleTracker.BLL
             var request = new Request() { Arguments = arguments };
 
             request = SanitizeData(request);
+            if (!request.Success) return null;
+
             request = CheckTypeOfRequest(request);
             request = CheckTypeOfRequestedObject(request);
             request = TryAssignValue(request);
@@ -144,6 +146,11 @@ namespace SimpleTracker.BLL
             {
                 _logger.LogError("Api.SanitizeData: No data received");
                 result.Arguments = new List<string>() { "empty" };
+                request.Success = false;
+            }
+            if (request.Arguments.Contains(string.Empty) || request.Arguments.Contains(null))
+            {
+                _logger.LogError("Api.SanitizeData: One argument is empty or null");
                 request.Success = false;
             }
             else
