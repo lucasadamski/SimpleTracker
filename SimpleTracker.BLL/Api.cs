@@ -18,7 +18,7 @@ namespace SimpleTracker.BLL
             _postRequestProcessorFactory = new PostRequestProcessorFactory(logger);
             _getRequestProcessorFactory = new GetRequestProcessorFactory(logger);
             _logger = logger;
-        }
+        } 
 
         public Api(ILogger logger, IPostRequestProcessorFactory postRequestProcessorFactory, IGetRequestProcessorFactory getRequestProcessorFactory)
         {
