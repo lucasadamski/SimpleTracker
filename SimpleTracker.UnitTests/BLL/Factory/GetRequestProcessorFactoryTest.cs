@@ -12,23 +12,27 @@ namespace SimpleTracker.UnitTests.BLL.Factory
     {
         private Mock<ILogger> loggerMock = new Mock<ILogger>();
 
-        [Fact]
-        public void ReturnGetRequestProcessor_GetsValidInput_ReturnsCorrectFactory()
+        [Theory]
+        [InlineData(typeof(Entry), typeof(EntryGetRequestProcessor))]
+        [InlineData(typeof(Activity), typeof(ActivityGetRequestProcessor))]
+        [InlineData(typeof(Summary), typeof(SummaryGetRequestProcessor))]
+        [InlineData(typeof(int), typeof(UnknownGetRequestProcessor))]
+        [InlineData(null, typeof(UnknownGetRequestProcessor))]
+        public void ReturnGetRequestProcessor_GetsValidRequestType_ReturnsCorrectFactoryType(Type inputType, Type expectedResult)
         {
             // Arrange
             var response = new Response()
             {
                 RequestVerb = RequestVerb.Get,
-                Type = typeof(Entry)
+                Type = inputType
             };
             var getRequestProcessor = new GetRequestProcessorFactory(loggerMock.Object);
-            var expectedResult = typeof(Entry);
 
             // Act
             var actualResult = getRequestProcessor.ReturnGetRequestProcessor(response);
 
             // Assert
-            actualResult.Should().BeOfType<EntryGetRequestProcessor>();
+            actualResult.GetType().Should().Be(expectedResult);
         }
     }
 }
