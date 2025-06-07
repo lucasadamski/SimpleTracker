@@ -53,7 +53,6 @@ namespace SimpleTracker.BLL.RequestProcessor.Get
                         dalResult = _entryDal.GetAllEntries();
                         break;
                     default:
-                        result = new List<string>();
                         break;
                 }
             }
