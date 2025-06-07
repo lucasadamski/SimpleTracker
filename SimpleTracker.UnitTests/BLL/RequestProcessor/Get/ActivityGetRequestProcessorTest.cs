@@ -1,13 +1,10 @@
 ﻿using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
-using SimpleTracker.BLL.DTO;
-using SimpleTracker.BLL.Factory;
 using SimpleTracker.BLL.RequestProcessor.Get;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
 using SimpleTracker.UnitTests.Helper;
-using System.Runtime.CompilerServices;
 
 namespace SimpleTracker.UnitTests.BLL.RequestProcessor.Get
 {
