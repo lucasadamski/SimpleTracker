@@ -30,7 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="BLL\" />
+    <Folder Include="BLL\RequestProcessor\Post\" />
   </ItemGroup>
 
 </Project>

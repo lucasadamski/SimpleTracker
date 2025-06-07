@@ -34,5 +34,20 @@ namespace SimpleTracker.UnitTests.BLL.Factory
             // Assert
             actualResult.GetType().Should().Be(expectedResult);
         }
+
+        [Fact]
+        public void ReturnGetRequestProcessor_GetsCorruptedRequest_ReturnUnknownFactory()
+        {
+            // Arrange
+            var getRequestProcessor = new GetRequestProcessorFactory(loggerMock.Object);
+            var expectedResult = typeof(UnknownGetRequestProcessor);
+
+            // Act
+            var actualResult = getRequestProcessor.ReturnGetRequestProcessor(null);
+
+            // Assert
+            actualResult.GetType().Should().Be(expectedResult);
+        }
+
     }
 }

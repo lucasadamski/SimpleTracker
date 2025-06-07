@@ -20,7 +20,12 @@ namespace SimpleTracker.BLL.Factory
         {
             IGetRequestProcessor result;
 
-            if (response.Type == typeof(Activity))
+            if (response == null)
+            {
+                result = new UnknownGetRequestProcessor(_logger);
+                _logger.LogWarning("GetRequestProcessorFactory.ReturnGetRequestProcessor returned {Result}", result.GetType().Name);
+            }
+            else if (response.Type == typeof(Activity))
             {
                 result = new ActivityGetRequestProcessor(_logger);
             }

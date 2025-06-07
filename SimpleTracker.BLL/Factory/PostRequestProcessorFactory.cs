@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.DTO;
 using SimpleTracker.BLL.Interface;
+using SimpleTracker.BLL.RequestProcessor.Get;
 using SimpleTracker.BLL.RequestProcessor.Post;
 using SimpleTracker.DTO;
 
@@ -18,7 +19,12 @@ namespace SimpleTracker.BLL.Factory
         {
             IPostRequestProcessor result;
 
-            if (response.Type == typeof(Activity))
+            if (response == null)
+            {
+                result = new UnknownPostRequestProcessor(_logger);
+                _logger.LogWarning("GetRequestProcessorFactory.ReturnGetRequestProcessor returned {Result}", result.GetType().Name);
+            }
+            else if (response.Type == typeof(Activity))
             {
                 result = new ActivityPostRequestProcessor(_logger);
             }
