@@ -11,6 +11,7 @@ namespace SimpleTracker.BLL.RequestProcessor.Get
 
         public List<string> Process(List<string> data)
         {
+            _logger.LogError("UnknownGetRequestProcessor.Process called");
             return new List<string>() { "Item type unknown. Must be activity or entry" };
         }
     }
