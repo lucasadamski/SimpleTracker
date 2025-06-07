@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.Interface;
+using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
 
 namespace SimpleTracker.BLL.RequestProcessor.Post
@@ -8,6 +9,11 @@ namespace SimpleTracker.BLL.RequestProcessor.Post
     {
         public EntryPostRequestProcessor(ILogger logger) : base(logger)
         {
+        }
+
+        public EntryPostRequestProcessor(ILogger logger, IActivitySqlDal activitySqlDal) : base(logger)
+        {
+            _activityDal = activitySqlDal;
         }
 
         public List<string> Process(List<string> data)
