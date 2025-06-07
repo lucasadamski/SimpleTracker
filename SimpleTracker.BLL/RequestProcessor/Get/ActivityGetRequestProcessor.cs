@@ -1,8 +1,8 @@
-﻿using SimpleTracker.BLL.Interface;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.DTO;
 using SimpleTracker.DAL.Interfaces;
 using Microsoft.IdentityModel.Tokens;
+using SimpleTracker.BLL.RequestProcessor.Interface;
 
 namespace SimpleTracker.BLL.RequestProcessor.Get
 {

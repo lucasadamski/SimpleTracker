@@ -1,11 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using SimpleTracker.BLL.Api.Interface;
 using SimpleTracker.BLL.DTO;
 using SimpleTracker.BLL.Factory;
-using SimpleTracker.BLL.Interface;
+using SimpleTracker.BLL.RequestProcessor.Interface;
 using SimpleTracker.DTO;
 
-namespace SimpleTracker.BLL
+namespace SimpleTracker.BLL.Api
 {
     public class Api : IApi
     {

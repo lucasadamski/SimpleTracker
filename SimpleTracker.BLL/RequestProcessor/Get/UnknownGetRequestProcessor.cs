@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using SimpleTracker.BLL.Interface;
+using SimpleTracker.BLL.RequestProcessor.Interface;
 
 namespace SimpleTracker.BLL.RequestProcessor.Get
 {

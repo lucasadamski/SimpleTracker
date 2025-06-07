@@ -1,5 +1,5 @@
 ﻿using SimpleTracker.BLL.DTO;
-using SimpleTracker.BLL.Interface;
+using SimpleTracker.BLL.RequestProcessor.Interface;
 
 namespace SimpleTracker.BLL.Factory
 {

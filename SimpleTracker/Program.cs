@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
-using SimpleTracker.BLL;
-using SimpleTracker.BLL.Interface;
+using SimpleTracker.BLL.Api;
+using SimpleTracker.BLL.Api.Interface;
 
 namespace SimpleTracker
 {

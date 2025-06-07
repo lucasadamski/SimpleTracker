@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SimpleTracker.BLL.DTO;
-using SimpleTracker.BLL.Interface;
 using SimpleTracker.BLL.RequestProcessor.Get;
+using SimpleTracker.BLL.RequestProcessor.Interface;
 using SimpleTracker.DAL;
 using SimpleTracker.DTO;
 

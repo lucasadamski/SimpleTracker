@@ -1,4 +1,4 @@
-﻿namespace SimpleTracker.BLL.Interface
+﻿namespace SimpleTracker.BLL.Api.Interface
 {
     public interface IApi
     {

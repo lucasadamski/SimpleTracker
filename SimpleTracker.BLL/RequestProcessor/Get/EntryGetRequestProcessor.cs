@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using SimpleTracker.BLL.Interface;
+using SimpleTracker.BLL.RequestProcessor.Interface;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
 
