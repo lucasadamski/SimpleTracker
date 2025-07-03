@@ -22,7 +22,7 @@ namespace SimpleTracker.BLL.RequestProcessor.Get
             {
                 if (data.Contains("all-time"))
                 {
-                    dalResult = _summarySqlDal.GetSummary();
+                    dalResult = _summarySqlDal.GetSummary("testUser");
                 }
             }
             else

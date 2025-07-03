@@ -2,6 +2,6 @@
 {
     public interface ISummarySqlDal
     {
-        IEnumerable<string> GetSummary();
+        IEnumerable<string> GetSummary(string userId);
     }
 }

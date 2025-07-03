@@ -3,6 +3,7 @@ AS
 	SELECT 
 		[Id], 
 		[Name], 
-		[UnitId] 
+		[UnitId] ,
+		[UserId]
 	FROM 
 		[dbo].[Activity]

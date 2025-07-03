@@ -24,13 +24,12 @@ end
 
 if not exists (select 1 from [dbo].[Activity])
 begin
-    insert into [dbo].[Activity] (Name, UnitId)
-    values ('push-ups', 1), 
-        ('running', 1),
-        ('reading', 1)
+    insert into [dbo].[Activity] (Name, UnitId, UserId)
+    values ('push-ups', 1, 'testUser'), 
+        ('running', 1, 'testUser'),
+        ('reading', 1, 'testUser')
 end
 GO
 
 
-:r ".\Stored Procedures\Activity\spActivity_GetAll.sql"
 GO

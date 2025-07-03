@@ -8,13 +8,13 @@ namespace SimpleTracker.DAL
     {
         public SummarySqlDal(ISQLDataAccess db, ILogger logger) : base(db, logger) { }
 
-        public IEnumerable<string> GetSummary()
+        public IEnumerable<string> GetSummary(string userId)
         {
             IEnumerable<string> result;
 
             try
             {
-                var spResult = _db.LoadData<Summary, dynamic>(storedProcedure: "[dbo].[spSummary_Get]", new { });
+                var spResult = _db.LoadData<Summary, dynamic>(storedProcedure: "[dbo].[spSummary_Get]", new { userId });
                 result = spResult.Select(n => n.Activity + " " + n.Value.ToString() + " " + n.Unit).ToList();
 
                 _logger.LogDebug("[dbo].[spEntry_GetSummaryAllTime] returned {ResultCount} items", result.Count());

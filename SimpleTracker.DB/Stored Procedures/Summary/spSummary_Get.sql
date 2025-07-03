@@ -1,4 +1,5 @@
-﻿create procedure [dbo].[spSummary_Get]
+﻿create procedure [dbo].[spSummary_Get] 
+@userId nchar(100),
 @from datetime = null,
 @to datetime = null
 AS	
@@ -9,6 +10,7 @@ begin
 	from Entry e
 	right outer join Activity a on a.Id = e.ActivityId
 	join Unit u on u.Id = a.UnitId
+	where a.UserId = @userId
 	group by a.Name, u.Name
 end
 else 
@@ -18,5 +20,6 @@ begin
 	right outer join Activity a on a.Id = e.ActivityId
 	join Unit u on u.Id = a.UnitId
 	where e.DateAdded <= @from AND e.DateAdded >= @to
+		and a.UserId = @userId 
 	group by a.Name, u.Name
 end
