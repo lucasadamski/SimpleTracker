@@ -19,6 +19,7 @@ namespace SimpleTracker.BLL.RequestProcessor.Post
             {
                 activity.Name = data.ElementAt(2).ToLower().Trim();
                 activity.UnitId = GetUnitId(data);
+                activity.UserId = "testUser";
 
                 _activityDal.CreateNewActivity(activity);
 

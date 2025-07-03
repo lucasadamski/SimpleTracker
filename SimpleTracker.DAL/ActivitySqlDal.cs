@@ -12,7 +12,7 @@ namespace SimpleTracker.DAL
 
         public bool CreateNewActivity(Activity activity)
         {
-            var result = _db.SaveData(storedProcedure: "[dbo].[spActivity_Insert]", new { activity.Name, activity.UnitId });
+            var result = _db.SaveData(storedProcedure: "[dbo].[spActivity_Insert]", new { activity.Name, activity.UnitId, activity.UserId });
             _logger.LogDebug("dbo.spActivity_Insert {Name} {UnitId} returned {Result}", activity.Name, activity.UnitId, result);
             return result;
         }

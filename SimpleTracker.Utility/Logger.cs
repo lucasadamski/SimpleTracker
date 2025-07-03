@@ -13,7 +13,11 @@ namespace SimpleTracker.Utility
                     .AddFilter("Microsoft", LogLevel.Warning)
                     .AddFilter("System", LogLevel.Warning)
                     .AddFilter("SimpleTracker", LogLevel.Trace)
-                    .AddConsole();
+                    .AddSimpleConsole(options =>
+                    {
+                        options.SingleLine = true;
+                        options.TimestampFormat = "dd-MM-yy hh:mm:ss.fff ";
+                    });
             });
             Log = loggerFactory.CreateLogger("SimpleTracker");
         }
