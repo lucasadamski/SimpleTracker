@@ -16,9 +16,9 @@ namespace SimpleTracker.DAL
             return result;
         }
               
-        public IEnumerable<Entry> GetAllEntries()
+        public IEnumerable<Entry> GetAllEntries(string userId)
         {
-            var result = _db.LoadData<Entry, dynamic>(storedProcedure: "[dbo].[spEntry_GetAll]", new { });
+            var result = _db.LoadData<Entry, dynamic>(storedProcedure: "[dbo].[spEntry_GetAll]", new { userId });
             _logger.LogDebug("dbo.Entry_GetAll returned {ResultCount} items", result.Count());
             return result;
         }

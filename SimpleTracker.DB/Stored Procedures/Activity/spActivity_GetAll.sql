@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[spActivity_GetAll]
+@userId nchar(100)
 AS
 	SELECT 
 		[Id], 
@@ -7,3 +8,5 @@ AS
 		[UserId]
 	FROM 
 		[dbo].[Activity]
+	WHERE
+		UserId = userId

@@ -23,7 +23,7 @@ namespace SimpleTracker.UnitTests.BLL.RequestProcessor.Get
             // Arrange
             data = null;
             var dalReturn = new List<Entry>();
-            entrySqlDalMock.Setup(n => n.GetAllEntries()).Returns(dalReturn);
+            entrySqlDalMock.Setup(n => n.GetAllEntries(It.IsAny<string>())).Returns(dalReturn);
 
             var sut = new EntryGetRequestProcessor(loggerMock.Object, entrySqlDalMock.Object);
 
@@ -40,7 +40,7 @@ namespace SimpleTracker.UnitTests.BLL.RequestProcessor.Get
         {
             // Arrange
             List<Entry> dalReturn = null;
-            entrySqlDalMock.Setup(n => n.GetAllEntries()).Returns(dalReturn);
+            entrySqlDalMock.Setup(n => n.GetAllEntries(It.IsAny<string>())).Returns(dalReturn);
 
             var sut = new EntryGetRequestProcessor(loggerMock.Object, entrySqlDalMock.Object);
 
@@ -57,7 +57,7 @@ namespace SimpleTracker.UnitTests.BLL.RequestProcessor.Get
         {
             // Arrange
             var dalReturn = ListGenerator.Generate<Entry>(5); ;
-            entrySqlDalMock.Setup(n => n.GetAllEntries()).Returns(dalReturn);
+            entrySqlDalMock.Setup(n => n.GetAllEntries(It.IsAny<string>())).Returns(dalReturn);
 
             var sut = new EntryGetRequestProcessor(loggerMock.Object, entrySqlDalMock.Object);
 

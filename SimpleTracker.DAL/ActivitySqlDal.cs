@@ -24,12 +24,12 @@ namespace SimpleTracker.DAL
             return result;
         }
 
-        public int? GetActivityId(string name)
+        public int? GetActivityId(string name, string userId)
         {
             int? result = 0;
             try
             {
-                 result = _db.LoadData<int, dynamic>(storedProcedure: "[dbo].[spActivity_GetId]", new { name }).First();
+                 result = _db.LoadData<int, dynamic>(storedProcedure: "[dbo].[spActivity_GetId]", new { name, userId }).First();
                 _logger.LogDebug("[dbo].[spActivity_GetId] returned Id {ActivityId}", result);
             }
             catch (Exception e)

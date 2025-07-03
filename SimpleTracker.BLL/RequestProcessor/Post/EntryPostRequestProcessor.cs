@@ -32,7 +32,7 @@ namespace SimpleTracker.BLL.RequestProcessor.Post
                 }
 
 
-                int? activityId = _activityDal.GetActivityId(data.ElementAt(2).ToLower().Trim());
+                int? activityId = _activityDal.GetActivityId(data.ElementAt(2).ToLower().Trim(), "testUser");
                 if (activityId == null)
                 {
                     throw new Exception("Can't process agruments");

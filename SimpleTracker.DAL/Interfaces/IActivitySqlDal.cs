@@ -6,6 +6,6 @@ namespace SimpleTracker.DAL.Interfaces
     {
         public bool CreateNewActivity(Activity item);
         public IEnumerable<Activity> GetAllActivities();
-        public int? GetActivityId(string name);
+        public int? GetActivityId(string name, string userId);
     }
 }

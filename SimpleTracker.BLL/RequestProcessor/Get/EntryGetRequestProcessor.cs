@@ -50,7 +50,7 @@ namespace SimpleTracker.BLL.RequestProcessor.Get
                 switch (data.ElementAt(1))
                 {
                     case "entry":
-                        dalResult = _entryDal.GetAllEntries();
+                        dalResult = _entryDal.GetAllEntries("testUser");
                         break;
                     default:
                         break;
