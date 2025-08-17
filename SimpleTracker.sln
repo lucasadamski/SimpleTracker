@@ -3,19 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker", "SimpleTracker\SimpleTracker.csproj", "{A7DA3C1A-2FA7-46A8-9E5F-CED6BF635221}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.DAL", "SimpleTracker.DAL\SimpleTracker.DAL.csproj", "{C828E5CB-286D-45F5-BFDA-CACC9C5856B6}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "SimpleTracker.DB", "SimpleTracker.DB\SimpleTracker.DB.sqlproj", "{50AA4BF5-A5DF-4703-8097-DAD89468860B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.DTO", "SimpleTracker.DTO\SimpleTracker.DTO.csproj", "{8BF65EC3-2793-46FF-8DFB-EE2A143A8186}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.Utility", "SimpleTracker.Utility\SimpleTracker.Utility.csproj", "{41E86834-442A-4328-9934-137AAE602438}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.UnitTests", "SimpleTracker.UnitTests\SimpleTracker.UnitTests.csproj", "{2CBD44A5-360B-409B-B885-D2C327735695}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.BLL", "SimpleTracker.BLL\SimpleTracker.BLL.csproj", "{C885EFF8-C22C-4BA5-A915-FF513D1681E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A7DA3C1A-2FA7-46A8-9E5F-CED6BF635221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A7DA3C1A-2FA7-46A8-9E5F-CED6BF635221}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A7DA3C1A-2FA7-46A8-9E5F-CED6BF635221}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A7DA3C1A-2FA7-46A8-9E5F-CED6BF635221}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C828E5CB-286D-45F5-BFDA-CACC9C5856B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C828E5CB-286D-45F5-BFDA-CACC9C5856B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C828E5CB-286D-45F5-BFDA-CACC9C5856B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C828E5CB-286D-45F5-BFDA-CACC9C5856B6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{50AA4BF5-A5DF-4703-8097-DAD89468860B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{50AA4BF5-A5DF-4703-8097-DAD89468860B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50AA4BF5-A5DF-4703-8097-DAD89468860B}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -45,16 +29,11 @@ Global
 		{41E86834-442A-4328-9934-137AAE602438}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41E86834-442A-4328-9934-137AAE602438}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41E86834-442A-4328-9934-137AAE602438}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CBD44A5-360B-409B-B885-D2C327735695}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CBD44A5-360B-409B-B885-D2C327735695}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CBD44A5-360B-409B-B885-D2C327735695}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CBD44A5-360B-409B-B885-D2C327735695}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C885EFF8-C22C-4BA5-A915-FF513D1681E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C885EFF8-C22C-4BA5-A915-FF513D1681E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C885EFF8-C22C-4BA5-A915-FF513D1681E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C885EFF8-C22C-4BA5-A915-FF513D1681E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5FA8B39B-49F6-4805-A980-1890103925AE}
 	EndGlobalSection
 EndGlobal
