@@ -9,4 +9,4 @@ AS
 	FROM 
 		[dbo].[Activity]
 	WHERE
-		UserId = userId
+		[UserId] = @userId
