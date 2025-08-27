@@ -5,11 +5,11 @@ using Microsoft.Data.SqlClient;
 
 namespace SimpleTracker.DAL;
 
-public class SQLDataAccess : ISQLDataAccess
+public class SqlDataAccess : ISqlDataAccess
 {
     private IConfiguration _config;
 
-    public SQLDataAccess(IConfiguration config)
+    public SqlDataAccess(IConfiguration config)
     {
         _config = config;
     }
