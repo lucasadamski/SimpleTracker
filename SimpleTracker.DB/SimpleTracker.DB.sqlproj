@@ -56,36 +56,38 @@
   <Import Condition="'$(NetCoreBuild)' != 'true' AND '$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
-    <Folder Include="Stored Procedures" />
+    <Folder Include="StoredProcedures" />
+    <Folder Include="StoredProcedures\Activity" />
+    <Folder Include="StoredProcedures\Entry" />
+    <Folder Include="StoredProcedures\Unit" />
     <Folder Include="Views" />
-    <Folder Include="Stored Procedures\Activity" />
-    <Folder Include="Stored Procedures\Entry" />
-    <Folder Include="Stored Procedures\Unit" />
     <Folder Include="Tables" />
   </ItemGroup>
   <ItemGroup>
+    <Build Include="StoredProcedures\Activity\spActivity_Delete.sql" />
+    <Build Include="StoredProcedures\Activity\spActivity_GetAll.sql" />
+    <Build Include="StoredProcedures\Activity\spActivity_GetId.sql" />
+    <Build Include="StoredProcedures\Activity\spActivity_GetSummary.sql" />
+    <Build Include="StoredProcedures\Activity\spActivity_Insert.sql" />
+    <Build Include="StoredProcedures\Activity\spActivity_Update.sql" />
+    <Build Include="StoredProcedures\Entry\spEntry_Insert.sql" />
+    <Build Include="StoredProcedures\Entry\spEntry_Delete.sql" />
+    <Build Include="StoredProcedures\Entry\spEntry_GetAll.sql" />
+    <Build Include="StoredProcedures\Entry\spEntry_Update.sql" />
+    <Build Include="StoredProcedures\Unit\spUnit_Update.sql" />
+    <Build Include="StoredProcedures\Unit\spUnit_Insert.sql" />
+    <Build Include="StoredProcedures\Unit\spUnit_Delete.sql" />
+    <Build Include="StoredProcedures\Unit\spUnit_GetId.sql" />
+    <Build Include="StoredProcedures\Unit\spUnit_GetName.sql" />
     <Build Include="Views\View_Summary.sql" />
-    <Build Include="Stored Procedures\Activity\spActivity_GetAll.sql" />
-    <Build Include="Stored Procedures\Activity\spActivity_Insert.sql" />
-    <Build Include="Stored Procedures\Entry\spEntry_GetAll.sql" />
-    <Build Include="Stored Procedures\Entry\spEntry_Insert.sql" />
-    <Build Include="Stored Procedures\Unit\spUnit_Insert.sql" />
     <Build Include="Tables\Entry.sql" />
     <Build Include="Tables\Activity.sql" />
-    <Build Include="Stored Procedures\Unit\spUnit_GetId.sql" />
-    <Build Include="Stored Procedures\Activity\spActivity_GetId.sql" />
-    <Build Include="Stored Procedures\Unit\spUnit_GetName.sql" />
-    <Build Include="Stored Procedures\Activity\spActivity_GetSummary.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SimpleTracker.DB.refactorlog" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment1.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="SimpleTracker.DB.publish.xml" />
-    <None Include="SimpleTrackerNew.DB.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Unit.sql" />
@@ -95,6 +97,9 @@
       <Version>1.0.0</Version>
       <PrivateAssets>All</PrivateAssets>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SimpleTracker.DB_1.publish.xml" />
   </ItemGroup>
   <Import Project="$(NETCoreTargetsPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" Condition="'$(NetCoreBuild)' == 'true'" />
   <Target Name="BeforeBuild">

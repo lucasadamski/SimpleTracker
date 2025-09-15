@@ -1,8 +1,8 @@
 create procedure [dbo].[spEntry_Update] 
     @id int,
-    @name char(50)
+    @value char(50)
 as
     update [dbo].[Entry]
-    set [Name] = @name
+    set [Value] = @value
     where [Id] = @id
 return 0
