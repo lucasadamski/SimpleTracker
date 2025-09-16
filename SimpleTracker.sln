@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.Utility", "Si
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.DAL", "SimpleTracker.DAL\SimpleTracker.DAL.csproj", "{FAE91A52-8E32-46BA-A040-74E321BE015E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.DbIntegrationTest", "SimpleTracker.DbIntegrationTest\SimpleTracker.DbIntegrationTest.csproj", "{450BE259-53DA-416A-8139-56E2D8A2C57A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,18 @@ Global
 		{FAE91A52-8E32-46BA-A040-74E321BE015E}.Release|x64.Build.0 = Release|Any CPU
 		{FAE91A52-8E32-46BA-A040-74E321BE015E}.Release|x86.ActiveCfg = Release|Any CPU
 		{FAE91A52-8E32-46BA-A040-74E321BE015E}.Release|x86.Build.0 = Release|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Debug|x64.Build.0 = Debug|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Debug|x86.Build.0 = Debug|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Release|x64.ActiveCfg = Release|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Release|x64.Build.0 = Release|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Release|x86.ActiveCfg = Release|Any CPU
+		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
