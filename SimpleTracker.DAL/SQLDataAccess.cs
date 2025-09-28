@@ -7,18 +7,18 @@ namespace SimpleTracker.DAL;
 
 public class SqlDataAccess : ISqlDataAccess
 {
-    private IConfiguration _config;
+    private string _connectionString { get; set; }
 
-    public SqlDataAccess(IConfiguration config)
+    public SqlDataAccess(string connectionString)
     {
-        _config = config;
+        _connectionString = connectionString;
     }
 
     public async Task<IEnumerable<T>> LoadData<T, U>(string storedProcedure,
                                                      U parameters,
                                                      string connectionId = "Default")
     {
-        using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
+        using IDbConnection connection = new SqlConnection(_connectionString);
 
         return await connection.QueryAsync<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
     }
@@ -27,7 +27,7 @@ public class SqlDataAccess : ISqlDataAccess
                                  T parameters,
                                  string connectionId = "Default")
     {
-        using IDbConnection connection = new SqlConnection(_config.GetConnectionString(connectionId));
+        using IDbConnection connection = new SqlConnection(_connectionString);
 
         await connection.ExecuteAsync(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
     }

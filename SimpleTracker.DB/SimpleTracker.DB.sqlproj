@@ -82,6 +82,8 @@
     <Build Include="Views\View_Summary.sql" />
     <Build Include="Tables\Entry.sql" />
     <Build Include="Tables\Activity.sql" />
+    <Build Include="StoredProcedures\spPurgeDb.sql" />
+    <Build Include="StoredProcedures\spPopulateWithTestData.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SimpleTracker.DB.refactorlog" />
@@ -99,7 +101,8 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="SimpleTracker.DB_1.publish.xml" />
+    <None Include="SimpleTrackerDev.publish.xml" />
+    <None Include="SimpleTrackerTest.publish.xml" />
   </ItemGroup>
   <Import Project="$(NETCoreTargetsPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" Condition="'$(NetCoreBuild)' == 'true'" />
   <Target Name="BeforeBuild">

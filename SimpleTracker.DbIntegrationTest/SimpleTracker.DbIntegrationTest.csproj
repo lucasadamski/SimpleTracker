@@ -14,4 +14,7 @@
   <ItemGroup>
     <Using Include="Xunit" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleTracker.DAL\SimpleTracker.DAL.csproj" />
+  </ItemGroup>
 </Project>
