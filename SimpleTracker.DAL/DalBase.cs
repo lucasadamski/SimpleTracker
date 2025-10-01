@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Logging;
+using SimpleTracker.DAL.Interfaces;
 
 namespace SimpleTracker.DAL;
 

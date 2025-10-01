@@ -1,5 +1,6 @@
-using Dapper;
-using System.Diagnostics;
+using Microsoft.Extensions.Logging;
+using SimpleTracker.DAL.Interfaces;
+using SimpleTracker.DTO;
 
 namespace SimpleTracker.DAL;
 
@@ -7,9 +8,8 @@ public class ActivityDal : DalBase
 {
     private ISqlDataAccess SqlDataAccess { get; set; }
 
-    public ActivityDal(ISqlDataAccess sqlDataAccess)
+    public ActivityDal(ISqlDataAccess db, ILogger logger) : base(db, logger)
     {
-        SqlDataAccess = sqlDataAccess;
     }
 
     public void GetActivity(int id)
