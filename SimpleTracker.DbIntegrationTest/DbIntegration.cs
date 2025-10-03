@@ -8,17 +8,18 @@ namespace SimpleTracker.DbIntegrationTest;
 
 public class DbIntegration
 {
-    ILogger logger = A.Fake<ILogger<SqlDataAccess>>();
-    [Fact]
-    public void Test1()
+    private ILogger logger;
+    private SqlDataAccess sqlDataAccess;
+    private TestDal testDal;
+
+    public DbIntegration()
     {
-        ISqlDataAccess sqlDataAccess;
+        logger = A.Fake<ILogger<SqlDataAccess>>();
         sqlDataAccess = new SqlDataAccess(@"Data Source=DESKTOP-1KHRBVS\SQLEXPRESS;Initial Catalog=SimpleTrackerTest;Integrated Security=True;Connect Timeout=60;Encrypt=False;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False", logger);
-        // purge data base
-
-        // populate with test data 
-
-        // perform test on separate test
-
+        testDal = new TestDal(sqlDataAccess, logger);
     }
+
+    private void PurgeDatabase() => testDal.PurgeDatabase();
+    
+    private void PopulateDatabase() => testDal.PopulateDatabase();
 }

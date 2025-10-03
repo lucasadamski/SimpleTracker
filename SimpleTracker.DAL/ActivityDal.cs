@@ -6,8 +6,6 @@ namespace SimpleTracker.DAL;
 
 public class ActivityDal : DalBase
 {
-    private ISqlDataAccess SqlDataAccess { get; set; }
-
     public ActivityDal(ISqlDataAccess db, ILogger logger) : base(db, logger)
     {
     }

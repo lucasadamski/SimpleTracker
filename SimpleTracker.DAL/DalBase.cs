@@ -13,6 +13,4 @@ public class DalBase
         _db = db;
         _logger = logger;
     }
-
-
 } 
