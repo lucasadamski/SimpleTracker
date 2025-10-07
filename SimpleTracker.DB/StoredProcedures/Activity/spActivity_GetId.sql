@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[spActivity_GetId]
-	@name nchar(30),
-	@userId nchar(100)
+	@name nvarchar(30),
+	@userId varchar(100)
 AS
 	SELECT top 1 Id 
 	from Activity 

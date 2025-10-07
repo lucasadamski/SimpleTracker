@@ -9,12 +9,15 @@ using SimpleTracker.DTO;
 
 namespace SimpleTracker.DbIntegrationTest;
 
-public class DbIntegration
+public class DbIntegration // todo divide by domains, activity, entry etc 
 {
     private ILogger logger;
     private SqlDataAccess sqlDataAccess;
     private TestDal testDal;
     private IActivityDal activityDal;
+
+    private string name = "test";
+    private string userId = "testUser";
 
     public DbIntegration()
     {
@@ -36,16 +39,36 @@ public class DbIntegration
         PopulateDatabase();
         var activity = new Activity()
         {
-            Name = "test",
+            Name = name,
             UnitId = 1,
-            UserId = "test" // TODO make userid same as populated data
+            UserId = userId
         };
 
         // Act
         activityDal.CreateNewActivity(activity);
-        var actualResult = activityDal.GetAllActivities().ToList();
+        var actualResult = activityDal.GetAllActivities("testUser").ToList();
 
         // Assert
-        actualResult.Should().Contain(activity);
+        actualResult.Count.Should().Be(4);
+        actualResult.Reverse();
+        actualResult.First().Name.Should().Be(name);
+        actualResult.First().UserId.Should().Be(userId);
+        actualResult.First().UnitId.Should().Be(1);
+    }
+
+    [Fact]
+    public void WhenDeletesActivity_Then_DoesntReturnDeletedActivity()
+    {
+        // Arrange
+        PurgeDatabase();
+        PopulateDatabase();
+
+        // Act
+        activityDal.DeleteActivity(1);
+        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+
+        // Assert
+        actualResult.Count.Should().Be(2);
+        actualResult.Reverse();
     }
 }

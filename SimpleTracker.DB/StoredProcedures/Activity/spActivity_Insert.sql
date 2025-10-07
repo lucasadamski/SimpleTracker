@@ -1,8 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[spActivity_Insert]
-	@name char(30),
+	@name nvarchar(30),
 	@unitId int = 1,
-	@userId nchar(100)
+	@userId varchar(100)
 AS
-	insert into [dbo].[Activity] (Name, UnitId, UserId)
+	insert into [dbo].[Activity] ([Name], [UnitId], [UserId])
 	values (@name, @unitId, @userId)
 RETURN 0

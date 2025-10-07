@@ -1,6 +1,6 @@
 create procedure [dbo].[spActivity_Update]
     @id int,
-    @name char(30)
+    @name nvarchar(30)
 as
     update [dbo].[Activity]
     set [Name] = @name

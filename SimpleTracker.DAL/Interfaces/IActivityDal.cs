@@ -6,6 +6,7 @@ namespace SimpleTracker.DAL.Interfaces
     {
         bool CreateNewActivity(Activity activity);
         void GetActivity(int id);
+        bool DeleteActivity(int id);
         IEnumerable<Activity> GetAllActivities(string userId);
     }
 }

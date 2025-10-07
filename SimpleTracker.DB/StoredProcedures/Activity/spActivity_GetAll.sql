@@ -2,9 +2,9 @@
 @userId nchar(100)
 AS
 	SELECT 
-		[Id], 
-		[Name], 
-		[UnitId] ,
+		[Id],
+		[Name],
+		[UnitId],
 		[UserId]
 	FROM 
 		[dbo].[Activity]
