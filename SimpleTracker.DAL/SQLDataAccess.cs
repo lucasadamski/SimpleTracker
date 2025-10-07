@@ -37,11 +37,13 @@ namespace SimpleTracker.DAL
         public bool SaveData<T>(string storedProcedure, T parameters, string connectionId = "Default")
         {
             var result = true;
+            var rowsAffected = 0;
 
             try
             {
                 using IDbConnection connection = new SqlConnection(_connectionString);
-                connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                rowsAffected = connection.Execute(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                if (rowsAffected == 0) result = false;
             }
             catch (Exception e)
             {
