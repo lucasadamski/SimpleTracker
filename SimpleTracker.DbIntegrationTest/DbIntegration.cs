@@ -197,6 +197,64 @@ public class DbIntegration // todo divide by domains, activity, entry etc
     }
 
     // Update -------------------------------------------------
+    [Fact]
+    public void WhenUpdatedActivity_Then_ReturnsUpdatedActivity()
+    {
+        // Arrange
+        PurgeDatabase();
+        PopulateDatabase();
+        var updatedName = "updatedName";
+        var updatedUnitId = 2;
+        var activity = new Activity()
+        {
+            Id = 3,
+            Name = updatedName,
+            UnitId = updatedUnitId,
+            UserId = userId
+        };
+
+        // Act
+        var updateResult = activityDal.UpdateActivity(activity);
+        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+
+        // Assert
+        updateResult.Should().BeTrue();
+        actualResult.Count.Should().Be(3);
+        actualResult.Reverse();
+        actualResult.First().Name.Should().Be(updatedName);
+        actualResult.First().UserId.Should().Be(userId);
+        actualResult.First().UnitId.Should().Be(updatedUnitId);
+    }
+
+    [Fact]
+    public void WhenUpdatedActivityWithNullNameAndUserIdAndNegativeUnitId_Then_ReturnsFalse()
+    {
+        // Arrange
+        PurgeDatabase();
+        PopulateDatabase();
+        var updatedName = "updatedName";
+        var updatedUnitId = 2;
+        var activity = new Activity()
+        {
+            Id = 3,
+            Name = null,
+            UnitId = -1,
+            UserId = null
+        };
+
+        // Act
+        var updateResult = activityDal.UpdateActivity(activity);
+        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+
+        // Assert
+        updateResult.Should().BeFalse();
+        actualResult.Count.Should().Be(3);
+        actualResult.Reverse();
+        actualResult.First().Name.Should().Be("reading");       // not modified, as in PopulateDatabase data
+        actualResult.First().UserId.Should().Be(userId);
+        actualResult.First().UnitId.Should().Be(1);
+    }
+
 
     // Delete -------------------------------------------------
     [Fact]

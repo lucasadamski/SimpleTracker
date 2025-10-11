@@ -37,6 +37,16 @@ public class ActivityDal : DalBase, IActivityDal
         return result;
     }
 
+    public bool UpdateActivity(Activity activity)
+    {
+        var result = false;
+        if (activity != null && activity?.Name != null && activity?.UserId != null && activity.UnitId > 0)
+        {
+            result = _db.SaveData("[dbo].[spActivity_Update]", new { id = activity.Id, name = activity.Name, unitId = activity.UnitId, userId = activity.UserId });
+        }
+        return result;
+    }
+
     public IEnumerable<Activity> GetAllActivities(string userId)
     {
         IEnumerable<Activity> result;
