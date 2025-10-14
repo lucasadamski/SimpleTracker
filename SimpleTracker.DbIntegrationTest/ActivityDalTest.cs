@@ -9,7 +9,7 @@ using SimpleTracker.DTO;
 
 namespace SimpleTracker.DbIntegrationTest;
 
-public class DbIntegration // todo divide by domains, activity, entry etc 
+public class ActivityDalTest
 {
     private ILogger logger;
     private SqlDataAccess sqlDataAccess;
@@ -19,7 +19,7 @@ public class DbIntegration // todo divide by domains, activity, entry etc
     private string name = "test";
     private string userId = "testUser";
 
-    public DbIntegration()
+    public ActivityDalTest()
     {
         logger = A.Fake<ILogger<SqlDataAccess>>();
         sqlDataAccess = new SqlDataAccess(@"Data Source=localhost;Initial Catalog=SimpleTrackerTest;Integrated Security=True;Connect Timeout=60;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False", logger);
@@ -252,7 +252,7 @@ public class DbIntegration // todo divide by domains, activity, entry etc
         actualResult.Reverse();
         actualResult.First().Name.Should().Be("reading");       // not modified, as in PopulateDatabase data
         actualResult.First().UserId.Should().Be(userId);
-        actualResult.First().UnitId.Should().Be(1);
+        actualResult.First().UnitId.Should().Be(3);
     }
 
 
