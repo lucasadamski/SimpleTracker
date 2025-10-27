@@ -18,6 +18,13 @@
         public static DateTime EntryDateAdded2 = new DateTime(2025, 5, 9, 14, 0, 0);
         public static DateTime EntryDateAdded3 = new DateTime(2025, 5, 10, 15, 0, 0);
 
+        public static readonly int EntryValue1 = 1;
+        public static readonly int EntryValue2 = 5;
+        public static readonly int EntryValue3 = 10;
+
+        public static readonly int EntryActivityId1 = 1;
+        public static readonly int EntryActivityId2 = 2;
+        public static readonly int EntryActivityId3 = 3;
         // todo put values into tests
 
     }

@@ -23,7 +23,7 @@ AS
     begin
         insert into [dbo].[Entry] (Value, ActivityId, DateAdded)
         values (1 , 1, cast('2025-05-08 13:00:00' as datetime2)),
-            (1, 2, cast('2025-05-09 14:00:00' as datetime2)),
-            (1, 3, cast('2025-05-10 15:00:00' as datetime2))
+            (5, 2, cast('2025-05-09 14:00:00' as datetime2)),
+            (10, 3, cast('2025-05-10 15:00:00' as datetime2))
     end
 RETURN 0
