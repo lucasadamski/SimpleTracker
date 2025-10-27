@@ -36,6 +36,6 @@
         public static readonly int EntryActivityId1 = 1;
         public static readonly int EntryActivityId2 = 2;
         public static readonly int EntryActivityId3 = 3;
-
+        
     }
 }

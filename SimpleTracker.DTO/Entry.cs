@@ -5,5 +5,6 @@
         public int Id { get; set; }
         public int Value { get; set; }
         public int ActivityId { get; set; }
+        public DateTime DateAdded { get; set; }
     }
 }
