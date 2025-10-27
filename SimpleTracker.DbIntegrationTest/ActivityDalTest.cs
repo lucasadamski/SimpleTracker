@@ -5,6 +5,7 @@ using SimpleTracker.DAL;
 using SimpleTracker.DAL.Interfaces;
 using FluentAssertions;
 using SimpleTracker.DTO;
+using static SimpleTracker.DbIntegrationTest.Configuration;
 
 
 namespace SimpleTracker.DbIntegrationTest;
@@ -17,12 +18,11 @@ public class ActivityDalTest
     private IActivityDal activityDal;
 
     private string name = "test";
-    private string userId = "testUser";
 
     public ActivityDalTest()
     {
         logger = A.Fake<ILogger<SqlDataAccess>>();
-        sqlDataAccess = new SqlDataAccess(@"Data Source=localhost;Initial Catalog=SimpleTrackerTest;Integrated Security=True;Connect Timeout=60;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False", logger);
+        sqlDataAccess = new SqlDataAccess(TestDbConnectionString, logger);
         testDal = new TestDal(sqlDataAccess, logger);
         activityDal = new ActivityDal(sqlDataAccess, logger);
     }
@@ -43,18 +43,18 @@ public class ActivityDalTest
         {
             Name = name,
             UnitId = 1,
-            UserId = userId
+            UserId = UserId
         };
 
         // Act
         activityDal.CreateNewActivity(activity);
-        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+        var actualResult = activityDal.GetAllActivities(UserId).ToList();
 
         // Assert
         actualResult.Count.Should().Be(4);
         actualResult.Reverse();
         actualResult.First().Name.Should().Be(name);
-        actualResult.First().UserId.Should().Be(userId);
+        actualResult.First().UserId.Should().Be(UserId);
         actualResult.First().UnitId.Should().Be(1);
     }
 
@@ -68,13 +68,13 @@ public class ActivityDalTest
         {
             Name = name,
             UnitId = 1,
-            UserId = userId
+            UserId = UserId
         };
         activity = null;
 
         // Act
         activityDal.CreateNewActivity(activity);
-        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+        var actualResult = activityDal.GetAllActivities(UserId).ToList();
 
         // Assert
         actualResult.Count.Should().Be(3);
@@ -90,12 +90,12 @@ public class ActivityDalTest
         {
             Name = null,
             UnitId = 1,
-            UserId = userId
+            UserId = UserId
         };
       
         // Act
         activityDal.CreateNewActivity(activity);
-        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+        var actualResult = activityDal.GetAllActivities(UserId).ToList();
 
         // Assert
         actualResult.Count.Should().Be(3);
@@ -116,7 +116,7 @@ public class ActivityDalTest
 
         // Act
         activityDal.CreateNewActivity(activity);
-        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+        var actualResult = activityDal.GetAllActivities(UserId).ToList();
 
         // Assert
         actualResult.Count.Should().Be(3);
@@ -132,12 +132,12 @@ public class ActivityDalTest
         {
             Name = name,
             UnitId = -1,
-            UserId = userId
+            UserId = UserId
         };
 
         // Act
         activityDal.CreateNewActivity(activity);
-        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+        var actualResult = activityDal.GetAllActivities(UserId).ToList();
 
         // Assert
         actualResult.Count.Should().Be(3);
@@ -153,12 +153,12 @@ public class ActivityDalTest
         PopulateDatabase();
 
         // Act
-        var actualResult = activityDal.ReadActivity(1, userId);
+        var actualResult = activityDal.ReadActivity(1, UserId);
 
         // Assert
         actualResult.Should().NotBeNull();
-        actualResult.Name.Should().Be("push-ups");
-        actualResult.UserId.Should().Be("testUser");
+        actualResult.Name.Should().Be(ActivityName1);
+        actualResult.UserId.Should().Be(UserId);
         actualResult.UnitId.Should().Be(1);
     }
 
@@ -170,7 +170,7 @@ public class ActivityDalTest
         PopulateDatabase();
 
         // Act
-        var actualResult = activityDal.ReadActivity(8, userId);
+        var actualResult = activityDal.ReadActivity(8, UserId);
 
         // Assert
         actualResult.Should().NotBeNull();
@@ -210,19 +210,19 @@ public class ActivityDalTest
             Id = 3,
             Name = updatedName,
             UnitId = updatedUnitId,
-            UserId = userId
+            UserId = UserId
         };
 
         // Act
         var updateResult = activityDal.UpdateActivity(activity);
-        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+        var actualResult = activityDal.GetAllActivities(UserId).ToList();
 
         // Assert
         updateResult.Should().BeTrue();
         actualResult.Count.Should().Be(3);
         actualResult.Reverse();
         actualResult.First().Name.Should().Be(updatedName);
-        actualResult.First().UserId.Should().Be(userId);
+        actualResult.First().UserId.Should().Be(UserId);
         actualResult.First().UnitId.Should().Be(updatedUnitId);
     }
 
@@ -244,14 +244,14 @@ public class ActivityDalTest
 
         // Act
         var updateResult = activityDal.UpdateActivity(activity);
-        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+        var actualResult = activityDal.GetAllActivities(UserId).ToList();
 
         // Assert
         updateResult.Should().BeFalse();
         actualResult.Count.Should().Be(3);
         actualResult.Reverse();
-        actualResult.First().Name.Should().Be("reading");       // not modified, as in PopulateDatabase data
-        actualResult.First().UserId.Should().Be(userId);
+        actualResult.First().Name.Should().Be(ActivityName3);       // not modified, as in PopulateDatabase data
+        actualResult.First().UserId.Should().Be(UserId);
         actualResult.First().UnitId.Should().Be(3);
     }
 
@@ -266,7 +266,7 @@ public class ActivityDalTest
 
         // Act
         activityDal.DeleteActivity(1);
-        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+        var actualResult = activityDal.GetAllActivities(UserId).ToList();
 
         // Assert
         actualResult.Count.Should().Be(2);
@@ -280,7 +280,7 @@ public class ActivityDalTest
 
         // Act
         var boolResult = activityDal.DeleteActivity(5);
-        var actualResult = activityDal.GetAllActivities("testUser").ToList();
+        var actualResult = activityDal.GetAllActivities(UserId).ToList();
 
         // Assert
         actualResult.Count.Should().Be(3);
