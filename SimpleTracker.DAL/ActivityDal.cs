@@ -26,7 +26,7 @@ public class ActivityDal : DalBase, IActivityDal
         if(activity != null && activity?.Name != null && activity?.UserId != null && activity.UnitId > 0)
         {
             result = _db.SaveData(storedProcedure: "[dbo].[spActivity_Insert]", new { activity.Name, activity.UnitId, activity.UserId });
-            _logger.LogDebug("[dbo].[spActivity_Insert] {Name} {UnitId} returned {Result}", activity.Name, activity.UnitId, result); //todo move loggers to layer down
+            _logger.LogDebug("[dbo].[spActivity_Insert] {Name} {UnitId} returned {Result}", activity.Name, activity.UnitId, result);
         }
         return result;
     }
