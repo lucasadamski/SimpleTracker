@@ -185,7 +185,7 @@ public class EntryDalTest
         var to = new DateTime(2025, 5, 8, 14, 0, 0);
 
         // Act
-        var actualResult = entryDal.ReadEntries(from, to, "NonExistingUserId");
+        var actualResult = entryDal.ReadEntries("NonExistingUserId", from, to);
 
         // Assert
         actualResult.Should().NotBeNull();
@@ -203,7 +203,7 @@ public class EntryDalTest
         var to = new DateTime(2025, 5, 8, 14, 0, 0);
 
         // Act
-        var actualResult = entryDal.ReadEntries(from, to, null);
+        var actualResult = entryDal.ReadEntries(null, from, to);
 
         // Assert
         actualResult.Should().NotBeNull();
@@ -220,7 +220,7 @@ public class EntryDalTest
         var from = new DateTime(2025, 5, 8, 12, 0, 0);
 
         // Act
-        var actualResult = entryDal.ReadEntries(from, null, UserId);
+        var actualResult = entryDal.ReadEntries(UserId, from, null);
 
         // Assert
         actualResult.Should().NotBeNull();
@@ -237,7 +237,7 @@ public class EntryDalTest
         var to = new DateTime(2025, 5, 8, 14, 0, 0);
 
         // Act
-        var actualResult = entryDal.ReadEntries(from, to, UserId);
+        var actualResult = entryDal.ReadEntries(UserId, from, to);
 
         // Assert
         actualResult.Should().NotBeNull();
@@ -254,7 +254,7 @@ public class EntryDalTest
         var to = new DateTime(2025, 5, 8, 14, 0, 0);
 
         // Act
-        var actualResult = entryDal.ReadEntries(null, to, UserId);
+        var actualResult = entryDal.ReadEntries(UserId, null, to);
 
         // Assert
         actualResult.Should().NotBeNull();
@@ -271,26 +271,42 @@ public class EntryDalTest
         var from = new DateTime(2027, 5, 8, 12, 0, 0);
 
         // Act
-        var actualResult = entryDal.ReadEntries(from, null, UserId);
+        var actualResult = entryDal.ReadEntries(UserId, from, null);
 
         // Assert
         actualResult.Should().NotBeNull();
         actualResult.Data.Count.Should().Be(1);
         actualResult.Data.ElementAt(0).Should().BeOfType(EntryEmpty);
     }
-    // todo do deletes
+
+    // Update
+    [Fact]
+    public void WhenUpdatesEntry_Then_ReturnsUpdatedEntry()
+    {
+        // Arrange
+        PurgeDatabase(); 
+        PopulateDatabase();
+
+        // Act
+        entryDal.UpdateEntry(1, 58);
+        var actualResult = entryDal.ReadEntries(UserId);
+
+        // Assert
+        actualResult.Count.Should().Be(2);
+    }
+
 
     // Delete -------------------------------------------------
     [Fact]
-    public void WhenDeletesActivity_Then_DoesntReturnDeletedActivity()
+    public void WhenDeletesEntry_Then_DoesntReturnDeletedEntry()
     {
         // Arrange
         PurgeDatabase();
         PopulateDatabase();
 
         // Act
-        activityDal.DeleteActivity(1);
-        var actualResult = activityDal.GetAllActivities(UserId).ToList();
+        entryDal.DeleteEntry(1);
+        var actualResult = entryDal.ReadEntries(UserId).ToList();
 
         // Assert
         actualResult.Count.Should().Be(2);
@@ -303,8 +319,8 @@ public class EntryDalTest
         PopulateDatabase();
 
         // Act
-        var boolResult = activityDal.DeleteActivity(5);
-        var actualResult = activityDal.GetAllActivities(UserId).ToList();
+        var boolResult = entryDal.DeleteEntry(89);
+        var actualResult = entryDal.ReadEntries(UserId).ToList();
 
         // Assert
         actualResult.Count.Should().Be(3);
