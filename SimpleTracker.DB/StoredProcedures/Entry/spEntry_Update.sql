@@ -5,4 +5,4 @@ as
     update [dbo].[Entry]
     set [Value] = @value
     where [Id] = @id
-return 0
+return 1
