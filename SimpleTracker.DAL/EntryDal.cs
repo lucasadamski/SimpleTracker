@@ -37,7 +37,7 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.LoadData<Entry, dynamic>(storedProcedure: "[dbo].[spEntry_Read]", new { id, userId }).FirstOrDefault(); // sql signature return: Entry
-                _logger.LogDebug("[dbo].[spEntry_ReadEntry] Value: {Value} ActivityId: {ActivityId} returned {Result}", result.Value, result.ActivityId, result);
+                _logger.LogDebug("[dbo].[spEntry_Read] Value: {Value} ActivityId: {ActivityId} returned {Result}", result.Value, result.ActivityId, result);
             }
             catch (Exception e)
             {
@@ -51,7 +51,7 @@ namespace SimpleTracker.DAL
             var result = new Entries();
             try
             {
-                result.Data = _db.LoadData<Entry, dynamic>(storedProcedure: "[dbo].[spEntries_Read]", new { userId, from, to }); // sql signature return: collection of Entry
+                result.Data = _db.LoadData<Entry, dynamic>(storedProcedure: "[dbo].[]", new { userId, from, to }); // sql signature return: collection of Entry
                 _logger.LogDebug("[dbo].[spEntries_Read] Count: {Count} ActivityId: {ActivityId} returned {Result}", result.Data.Count());
             }
             catch (Exception e)

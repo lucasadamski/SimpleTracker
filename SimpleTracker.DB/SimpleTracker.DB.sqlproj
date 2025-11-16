@@ -85,6 +85,7 @@
     <Build Include="StoredProcedures\spPurgeDb.sql" />
     <Build Include="StoredProcedures\spPopulateWithTestData.sql" />
     <Build Include="StoredProcedures\Activity\spActivity_Get.sql" />
+    <Build Include="StoredProcedures\Entry\spEntries_Read.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SimpleTracker.DB.refactorlog" />
