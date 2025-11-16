@@ -72,7 +72,7 @@
     <Build Include="StoredProcedures\Activity\spActivity_Update.sql" />
     <Build Include="StoredProcedures\Entry\spEntry_Insert.sql" />
     <Build Include="StoredProcedures\Entry\spEntry_Delete.sql" />
-    <Build Include="StoredProcedures\Entry\spEntry_GetAll.sql" />
+    <Build Include="StoredProcedures\Entry\spEntry_Read.sql" />
     <Build Include="StoredProcedures\Entry\spEntry_Update.sql" />
     <Build Include="StoredProcedures\Unit\spUnit_Update.sql" />
     <Build Include="StoredProcedures\Unit\spUnit_Insert.sql" />
