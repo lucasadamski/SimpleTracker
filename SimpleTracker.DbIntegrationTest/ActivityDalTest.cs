@@ -27,18 +27,16 @@ public class ActivityDalTest
         activityDal = new ActivityDal(sqlDataAccess, logger);
     }
 
-    private void PurgeDatabase() => testDal.PurgeDatabase();
+    private void PurgeAndPopulateDatabase() => testDal.PurgeAndPopulateDatabase();
     
-    private void PopulateDatabase() => testDal.PopulateDatabase();
-
     // Create -------------------------------------------------
 
     [Fact]
     public void WhenCreatedActivity_Then_ReturnsAddedActivity()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var activity = new Activity()
         {
             Name = name,
@@ -62,8 +60,8 @@ public class ActivityDalTest
     public void WhenCreatedNullActivity_Then_ReturnsSameCollection()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var activity = new Activity()
         {
             Name = name,
@@ -84,8 +82,8 @@ public class ActivityDalTest
     public void WhenCreatedActivityWithNullName_Then_ReturnsSameCollection()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var activity = new Activity()
         {
             Name = null,
@@ -105,8 +103,8 @@ public class ActivityDalTest
     public void WhenCreatedActivityWithNullUserId_Then_ReturnsSameCollection()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var activity = new Activity()
         {
             Name = name,
@@ -126,8 +124,8 @@ public class ActivityDalTest
     public void WhenCreatedActivityWithNegativeUnitId_Then_ReturnsSameCollection()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var activity = new Activity()
         {
             Name = name,
@@ -149,8 +147,8 @@ public class ActivityDalTest
     public void WhenReadsActivityById_Then_ReturnsActivity()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         var actualResult = activityDal.ReadActivity(1, UserId);
@@ -166,8 +164,8 @@ public class ActivityDalTest
     public void WhenReadsActivityByNonExistingId_Then_ReturnsEmptyActivity()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         var actualResult = activityDal.ReadActivity(8, UserId);
@@ -183,8 +181,8 @@ public class ActivityDalTest
     public void WhenReadsActivityByIdWithNullUserId_Then_ReturnsEmptyActivity()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         var actualResult = activityDal.ReadActivity(1, null);
@@ -201,8 +199,8 @@ public class ActivityDalTest
     public void WhenUpdatedActivity_Then_ReturnsUpdatedActivity()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var updatedName = "updatedName";
         var updatedUnitId = 2;
         var activity = new Activity()
@@ -230,8 +228,8 @@ public class ActivityDalTest
     public void WhenUpdatedActivityWithNullNameAndUserIdAndNegativeUnitId_Then_ReturnsFalse()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var updatedName = "updatedName";
         var updatedUnitId = 2;
         var activity = new Activity()
@@ -261,8 +259,8 @@ public class ActivityDalTest
     public void WhenDeletesActivity_Then_DoesntReturnDeletedActivity()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         activityDal.DeleteActivity(1);
@@ -275,8 +273,8 @@ public class ActivityDalTest
     public void WhenDeletesNonExistingIdActivity_Then_ReturnFalse()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         var boolResult = activityDal.DeleteActivity(5);

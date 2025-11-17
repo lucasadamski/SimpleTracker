@@ -21,7 +21,8 @@ namespace SimpleTracker.DAL
             var result = false;
             try
             {
-                result = _db.SaveData(storedProcedure: "[dbo].[spEntry_Insert]", new { entry.Value, entry.ActivityId, entry.DateAdded }); // sql signature return: bit
+                if (entry.Value < 1) throw new Exception("Invalid entry properties");
+                result = _db.SaveData(storedProcedure: "[dbo].[spEntry_Insert]", new { value = entry.Value, activityId = entry.ActivityId, dateAdded = entry.DateAdded }); // sql signature return: bit
                 _logger.LogDebug("[dbo].[spEntry_Insert] Value: {Value} ActivityId: {ActivityId} returned {Result}", entry.Value, entry.ActivityId, result);
             }
             catch (Exception e)
@@ -42,8 +43,9 @@ namespace SimpleTracker.DAL
             catch (Exception e)
             {
                 _logger.LogError(e.Message);
+                result = new EntryEmpty();
             }
-            return new Entry();
+            return result;
         }
 
         public Entries ReadEntries(string userId, [Optional] DateTime? from, [Optional] DateTime? to)
@@ -51,7 +53,7 @@ namespace SimpleTracker.DAL
             var result = new Entries();
             try
             {
-                result.Data = _db.LoadData<Entry, dynamic>(storedProcedure: "[dbo].[]", new { userId, from, to }); // sql signature return: collection of Entry
+                result.Data = _db.LoadData<Entry, dynamic>(storedProcedure: "[dbo].[spEntries_Read]", new { userId, from, to }); // sql signature return: collection of Entry
                 _logger.LogDebug("[dbo].[spEntries_Read] Count: {Count} ActivityId: {ActivityId} returned {Result}", result.Data.Count());
             }
             catch (Exception e)

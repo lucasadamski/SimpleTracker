@@ -9,18 +9,13 @@ namespace SimpleTracker.DAL
         {
         }
 
-        public bool PurgeDatabase()
+        public bool PurgeAndPopulateDatabase()
         {
-            var result = _db.SaveData(storedProcedure: "[dbo].[spPurgeDb]", new { });
+            var result = _db.SaveData(storedProcedure: "[dbo].[spPurgeAndPopulateDb]", new { });
             _logger.LogDebug("[dbo].[spPurgeDb] called");
             return result;
         }
 
-        public bool PopulateDatabase()
-        {
-            var result = _db.SaveData(storedProcedure: "[dbo].[spPopulateWithTestData]", new { });
-            _logger.LogDebug("[dbo].[spPopulateWithTestData] called");
-            return result;
-        }
+        
     }
 }

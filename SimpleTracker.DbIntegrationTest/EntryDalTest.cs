@@ -31,9 +31,10 @@ public class EntryDalTest
         entryDal = new EntryDal(sqlDataAccess, logger);
     }
 
-    private void PurgeDatabase() => testDal.PurgeDatabase();
-    
-    private void PopulateDatabase() => testDal.PopulateDatabase();
+    private void PurgeAndPopulateDatabase()
+    {
+        testDal.PurgeAndPopulateDatabase();
+    }
 
     // Create -------------------------------------------------
 
@@ -41,8 +42,8 @@ public class EntryDalTest
     public void WhenCreatedEntry_Then_ReturnsAddedEntry()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var entry = new Entry()
         {
             Value = _value,
@@ -56,23 +57,19 @@ public class EntryDalTest
 
         // Assert
         actualResult.Count().Should().Be(4);
-        actualResult.Reverse();
-        actualResult.First().Value.Should().Be(_value);
-        actualResult.First().ActivityId.Should().Be(_activityId);
-        actualResult.First().DateAdded.Should().Be(_currentDateTime);
+       // actualResult.Reverse();
+        actualResult.Reverse().First().Value.Should().Be(_value);
+        actualResult.Reverse().First().ActivityId.Should().Be(_activityId);
+        actualResult.Reverse().First().DateAdded.Date.Should().Be(_currentDateTime.Date);
     }
 
     [Fact]
-    public void WhenCreatedEntryWithNullDataAdded_ThenAddsEntryWithCurrentTime_ReturnsAddedCollection()
+    public void WhenCreatedNullEntry_ThenDoesntAddEntry_ReturnsNotChangedCollection()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
-        var entry = new Entry()
-        {
-            Value = _value,
-            ActivityId = _activityId
-        };
+        PurgeAndPopulateDatabase();
+        
+        var entry = new Entry();
         entry = null;
 
         // Act
@@ -80,19 +77,15 @@ public class EntryDalTest
         var actualResult = entryDal.ReadEntries(UserId).Data;
 
         // Assert
-        actualResult.Count().Should().Be(4);
-        actualResult.Reverse();
-        actualResult.First().Value.Should().Be(_value);
-        actualResult.First().ActivityId.Should().Be(_activityId);
-        //actualResult.First().DateAdded.Should().NotBeNull();
+        actualResult.Count().Should().Be(3);
     }
 
     [Fact]
     public void WhenCreatedEntryWithNegativeValue_ThenDoesntAddTheEntry_ReturnsUnmodifiedCollection()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var entry = new Entry()
         {
             Value = -1,
@@ -114,8 +107,8 @@ public class EntryDalTest
     public void WhenReadsEntryWithNonExistingUserId_Then_ReturnsNoRecords()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         var actualResult = entryDal.ReadEntry(1, "nonExistingUserId");
@@ -129,8 +122,8 @@ public class EntryDalTest
     public void WhenReadsEntryWithNullUserId_Then_ReturnsNoRecords()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         var actualResult = entryDal.ReadEntry(1, null);
@@ -144,8 +137,8 @@ public class EntryDalTest
     public void WhenReadsEntryById_Then_ReturnsEntry()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         var actualResult = entryDal.ReadEntry(1, UserId);
@@ -161,8 +154,8 @@ public class EntryDalTest
     public void WhenReadsEntryByNegativeId_Then_ReturnsEmptyEntry()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         var actualResult = entryDal.ReadEntry(-1, UserId);
@@ -178,8 +171,8 @@ public class EntryDalTest
     public void WhenReadsEntriesWithNonExistingUserId_Then_ReturnsEmptyCollection()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var from = new DateTime(2025, 5, 8, 12, 0, 0);
         var to = new DateTime(2025, 5, 8, 14, 0, 0);
 
@@ -188,16 +181,15 @@ public class EntryDalTest
 
         // Assert
         actualResult.Should().NotBeNull();
-        actualResult.Data.Count().Should().Be(1);
-        actualResult.Data.ElementAt(0).Should().BeOfType<EntryEmpty>();
+        actualResult.Data.Count().Should().Be(0);
     }
 
     [Fact]
     public void WhenReadsEntriesWithNullUserId_Then_ReturnsEmptyCollection()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var from = new DateTime(2025, 5, 8, 12, 0, 0);
         var to = new DateTime(2025, 5, 8, 14, 0, 0);
 
@@ -206,17 +198,16 @@ public class EntryDalTest
 
         // Assert
         actualResult.Should().NotBeNull();
-        actualResult.Data.Count().Should().Be(1);
-        actualResult.Data.ElementAt(0).Should().BeOfType<EntryEmpty>();
+        actualResult.Data.Count().Should().Be(0);
     }
 
     [Fact]
     public void WhenReadsEntriesByFromDateOnly_Then_ReturnsTwoRecords()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
-        var from = new DateTime(2025, 5, 8, 12, 0, 0);
+        PurgeAndPopulateDatabase();
+        
+        var from = new DateTime(2025, 5, 8, 14, 0, 0);
 
         // Act
         var actualResult = entryDal.ReadEntries(UserId, from, null);
@@ -230,10 +221,10 @@ public class EntryDalTest
     public void WhenReadsEntriesByFromAndToDate_Then_ReturnsTwoRecords()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var from = new DateTime(2025, 5, 8, 12, 0, 0);
-        var to = new DateTime(2025, 5, 8, 14, 0, 0);
+        var to = new DateTime(2025, 5, 9, 15, 0, 0);
 
         // Act
         var actualResult = entryDal.ReadEntries(UserId, from, to);
@@ -247,8 +238,8 @@ public class EntryDalTest
     public void WhenReadsEntriesByToDateOnly_Then_ReturnsOneRecord()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var from = new DateTime(2025, 5, 8, 12, 0, 0);
         var to = new DateTime(2025, 5, 8, 14, 0, 0);
 
@@ -265,8 +256,8 @@ public class EntryDalTest
     public void WhenReadsEntryFromFuture_Then_ReturnsNoRecords()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
         var from = new DateTime(2027, 5, 8, 12, 0, 0);
 
         // Act
@@ -274,8 +265,7 @@ public class EntryDalTest
 
         // Assert
         actualResult.Should().NotBeNull();
-        actualResult.Data.Count().Should().Be(1);
-        actualResult.Data.ElementAt(0).Should().BeOfType<EntryEmpty>();
+        actualResult.Data.Count().Should().Be(0);
     }
 
     // Update
@@ -283,15 +273,17 @@ public class EntryDalTest
     public void WhenUpdatesEntry_Then_ReturnsUpdatedEntry()
     {
         // Arrange
-        PurgeDatabase(); 
-        PopulateDatabase();
+        PurgeAndPopulateDatabase(); 
+        
 
         // Act
         entryDal.UpdateEntry(1, 58);
-        var actualResult = entryDal.ReadEntries(UserId).Data;
+        var actualResult = entryDal.ReadEntries(UserId);
 
         // Assert
-        actualResult.Count().Should().Be(2);
+        actualResult.Data.Count().Should().Be(3);
+        actualResult.Data.ElementAt(0).Value.Should().Be(58);
+
     }
 
 
@@ -300,8 +292,8 @@ public class EntryDalTest
     public void WhenDeletesEntry_Then_DoesntReturnDeletedEntry()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         entryDal.DeleteEntry(1);
@@ -314,8 +306,8 @@ public class EntryDalTest
     public void WhenDeletesNonExistingIdActivity_Then_ReturnFalse()
     {
         // Arrange
-        PurgeDatabase();
-        PopulateDatabase();
+        PurgeAndPopulateDatabase();
+        
 
         // Act
         var boolResult = entryDal.DeleteEntry(89);

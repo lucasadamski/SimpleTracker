@@ -2,7 +2,6 @@
 {
     public interface ITestDal
     {
-        bool PopulateDatabase();
-        bool PurgeDatabase();
+        bool PurgeAndPopulateDatabase();
     }
 }

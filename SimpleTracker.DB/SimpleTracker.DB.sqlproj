@@ -82,8 +82,7 @@
     <Build Include="Views\View_Summary.sql" />
     <Build Include="Tables\Entry.sql" />
     <Build Include="Tables\Activity.sql" />
-    <Build Include="StoredProcedures\spPurgeDb.sql" />
-    <Build Include="StoredProcedures\spPopulateWithTestData.sql" />
+    <Build Include="StoredProcedures\spPurgeAndPopulateDb.sql" />
     <Build Include="StoredProcedures\Activity\spActivity_Get.sql" />
     <Build Include="StoredProcedures\Entry\spEntries_Read.sql" />
   </ItemGroup>
