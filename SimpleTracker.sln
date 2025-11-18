@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.DAL", "Simple
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.DbIntegrationTest", "SimpleTracker.DbIntegrationTest\SimpleTracker.DbIntegrationTest.csproj", "{450BE259-53DA-416A-8139-56E2D8A2C57A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTracker.Api", "SimpleTracker.Api\SimpleTracker.Api.csproj", "{32A5C105-1B27-49FE-9D4C-A0003AD71566}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,18 @@ Global
 		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Release|x64.Build.0 = Release|Any CPU
 		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Release|x86.ActiveCfg = Release|Any CPU
 		{450BE259-53DA-416A-8139-56E2D8A2C57A}.Release|x86.Build.0 = Release|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Debug|x64.Build.0 = Debug|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Debug|x86.Build.0 = Debug|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Release|x64.ActiveCfg = Release|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Release|x64.Build.0 = Release|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Release|x86.ActiveCfg = Release|Any CPU
+		{32A5C105-1B27-49FE-9D4C-A0003AD71566}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

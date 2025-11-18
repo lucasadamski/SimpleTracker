@@ -1,0 +1,6 @@
+@SimpleTracker.Api_HostAddress = http://localhost:5101
+
+GET {{SimpleTracker.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
