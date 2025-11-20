@@ -10,4 +10,10 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SimpleTracker.DAL\SimpleTracker.DAL.csproj" />
+    <ProjectReference Include="..\SimpleTracker.DTO\SimpleTracker.DTO.csproj" />
+    <ProjectReference Include="..\SimpleTracker.Utility\SimpleTracker.Utility.csproj" />
+  </ItemGroup>
+
 </Project>
