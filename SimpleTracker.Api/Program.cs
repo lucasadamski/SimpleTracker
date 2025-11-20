@@ -1,4 +1,7 @@
 
+using SimpleTracker.DAL;
+using SimpleTracker.DAL.Interfaces;
+
 namespace SimpleTracker.Api
 {
     public class Program
@@ -13,6 +16,14 @@ namespace SimpleTracker.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddScoped<IEntryDal, EntryDal>();
+            builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
+
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+            builder.Logging.AddDebug();
+
+
 
             var app = builder.Build();
 
