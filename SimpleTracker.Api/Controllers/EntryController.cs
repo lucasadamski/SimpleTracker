@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SimpleTracker.DAL.Interfaces;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,7 +7,7 @@ namespace SimpleTracker.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EntryController : ControllerBase
+    public class EntryController(IEntryDal entryDal) : ControllerBase
     {
         // GET: api/<EntryController>
         [HttpGet]

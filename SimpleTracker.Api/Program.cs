@@ -1,4 +1,5 @@
 
+using Microsoft.Extensions.DependencyInjection;
 using SimpleTracker.DAL;
 using SimpleTracker.DAL.Interfaces;
 
@@ -16,14 +17,13 @@ namespace SimpleTracker.Api
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            var connectionString = builder.Configuration.GetConnectionString("Test");
+            ISqlDataAccess sqlDataAccess = new SqlDataAccess(connectionString, Utility.Logger.Log);
+
+            builder.Services.AddSingleton<ILogger>(Utility.Logger.Log);
+            builder.Services.AddSingleton<ISqlDataAccess>(sqlDataAccess);
             builder.Services.AddScoped<IEntryDal, EntryDal>();
-            builder.Services.AddScoped<ISqlDataAccess, SqlDataAccess>();
-
-            builder.Logging.ClearProviders();
-            builder.Logging.AddConsole();
-            builder.Logging.AddDebug();
-
-
 
             var app = builder.Build();
 
