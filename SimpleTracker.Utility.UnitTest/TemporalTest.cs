@@ -9,8 +9,8 @@ namespace SimpleTracker.Utility.UnitTest
         public void ParseToDateTimeFrom_WhenTakesValidString_ThenReturnsDtObject()
         {
             // Arrange 
-            var expectedResult = new DateTime(1, 1, 1, 12, 12, 12);
-            var date = "01-01-0001 12:12:12";
+            var expectedResult = new DateTime(1, 1, 1, 0, 0, 0);
+            var date = "01-01-0001";
 
             // Act
             var actualResult = Temporal.ParseToDateTime(date);

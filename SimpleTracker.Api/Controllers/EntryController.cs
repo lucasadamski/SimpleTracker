@@ -33,7 +33,7 @@ namespace SimpleTracker.Api.Controllers
         public Entries Get(string userId, string from, string to)
         {
             var fromDt = Temporal.ParseToDateTime(from);
-            var toDt = Temporal.ParseToDateTime(from);
+            var toDt = Temporal.ParseToDateTime(to);
 
             var result = entryDal.ReadEntries(userId, fromDt, toDt);
             return result;
