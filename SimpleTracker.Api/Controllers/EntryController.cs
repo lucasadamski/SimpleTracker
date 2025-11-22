@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
+using SimpleTracker.Utility;
 using System.Globalization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -28,20 +29,14 @@ namespace SimpleTracker.Api.Controllers
         }
 
         [HttpGet("{userId}/{from}/{to}")]
+        // https://localhost:7168/api/Entry/testUser/09-05-2025/10-05-2025
         public Entries Get(string userId, string from, string to)
         {
-            var fromDt = ParseToDateTime(from);
-            var toDt = ParseToDateTime(from);
+            var fromDt = Temporal.ParseToDateTime(from);
+            var toDt = Temporal.ParseToDateTime(from);
 
             var result = entryDal.ReadEntries(userId, fromDt, toDt);
             return result;
-        }
-
-        private static DateTime? ParseToDateTime(string date)
-        {
-            var result = new DateTime();
-            var isParseSuccess = DateTime.TryParseExact(date, "dd/MM/YYYY", CultureInfo.InvariantCulture, DateTimeStyles.None, out result);
-            return (isParseSuccess ? result : null);
         }
 
         // POST api/<EntryController>
