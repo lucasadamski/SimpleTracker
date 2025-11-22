@@ -12,13 +12,6 @@ namespace SimpleTracker.Api.Controllers
     [ApiController]
     public class EntryController(IEntryDal entryDal) : ControllerBase
     {
-        // GET: api/<EntryController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/<EntryController>/5
         //https://localhost:7168/api/entry/1
         [HttpGet("{id}/{userId}")]
@@ -32,17 +25,25 @@ namespace SimpleTracker.Api.Controllers
         // https://localhost:7168/api/Entry/testUser/09-05-2025/10-05-2025
         public Entries Get(string userId, string from, string to)
         {
-            var fromDt = Temporal.ParseToDateTime(from);
-            var toDt = Temporal.ParseToDateTime(to);
+            var result = new Entries();
+            var parsedFrom = Temporal.ParseToDateTime(from);
+            var parsedTo = Temporal.ParseToDateTime(to);
 
-            var result = entryDal.ReadEntries(userId, fromDt, toDt);
+            result = entryDal.ReadEntries(userId, parsedFrom, parsedTo);
             return result;
         }
 
         // POST api/<EntryController>
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("{value}/{activityId}")]
+        public void Post(int value, int activityId, string dateAdded)
         {
+            var entry = new Entry()
+            {
+                Value = value,
+                ActivityId = activityId,
+                DateAdded = DateTime.Now,
+            };
+            entryDal.CreateNewEntry(entry);
         }
 
         // PUT api/<EntryController>/5
