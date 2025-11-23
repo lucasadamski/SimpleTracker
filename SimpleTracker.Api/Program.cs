@@ -24,6 +24,7 @@ namespace SimpleTracker.Api
             builder.Services.AddSingleton<ILogger>(Utility.Logger.Log);
             builder.Services.AddSingleton<ISqlDataAccess>(sqlDataAccess);
             builder.Services.AddScoped<IEntryDal, EntryDal>();
+            builder.Services.AddScoped<IActivityDal, ActivityDal>();
 
             var app = builder.Build();
 
