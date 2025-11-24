@@ -26,6 +26,14 @@ namespace SimpleTracker.Api
             builder.Services.AddScoped<IEntryDal, EntryDal>();
             builder.Services.AddScoped<IActivityDal, ActivityDal>();
 
+            var allowedOrigins = builder.Configuration.GetValue<string>("allowedOrigins")!.Split(',');
+
+            builder.Services.AddCors(options => 
+                options.AddDefaultPolicy(policy => 
+                    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod()
+                )
+            );
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
