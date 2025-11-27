@@ -23,19 +23,19 @@ namespace SimpleTracker.Api.Controllers
 
         [HttpGet("{userId}/{from}/{to}")]
         // https://localhost:7168/api/Entry/testUser/09-05-2025/10-05-2025
-        public Entries Get(string userId, string from, string to)
+        public IEnumerable<Entry> Get(string userId, string from, string to)
         {
             var result = new Entries();
             var parsedFrom = Temporal.ParseToDateTime(from);
             var parsedTo = Temporal.ParseToDateTime(to);
 
             result = entryDal.ReadEntries(userId, parsedFrom, parsedTo);
-            return result;
+            return result.Data;
         }
 
         // POST api/<EntryController>
         [HttpPost("{value}/{activityId}")]
-        public void Post(int value, int activityId, string dateAdded)
+        public void Post(int value, int activityId)
         {
             var entry = new Entry()
             {
