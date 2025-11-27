@@ -26,13 +26,15 @@ namespace SimpleTracker.Api
             builder.Services.AddScoped<IEntryDal, EntryDal>();
             builder.Services.AddScoped<IActivityDal, ActivityDal>();
 
-            var allowedOrigins = builder.Configuration.GetValue<string>("allowedOrigins")!.Split(',');
+            var allowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins")!.Split(',');
 
-            builder.Services.AddCors(options => 
-                options.AddDefaultPolicy(policy => 
-                    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod()
-                )
-            );
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(policy =>
+                {
+                    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod();
+                });
+            });
 
             var app = builder.Build();
 
@@ -44,6 +46,8 @@ namespace SimpleTracker.Api
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors();
 
             app.UseAuthorization();
 
