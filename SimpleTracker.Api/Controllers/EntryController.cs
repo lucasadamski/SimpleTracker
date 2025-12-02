@@ -33,6 +33,18 @@ namespace SimpleTracker.Api.Controllers
             return result.Data;
         }
 
+        [HttpGet("dto/{userId}/{from}/{to}")]
+        // https://localhost:7168/api/Entry/dto/testUser/01-01-2024/01-01-2034
+        public IEnumerable<EntryDto> GetDto(string userId, string from, string to)
+        {
+            IEnumerable<EntryDto> result;
+            var parsedFrom = Temporal.ParseToDateTime(from);
+            var parsedTo = Temporal.ParseToDateTime(to);
+
+            result = entryDal.ReadEntriesDto(userId, parsedFrom, parsedTo);
+            return result;
+        }
+
         // POST api/<EntryController>
         [HttpPost("{value}/{activityId}")]
         public void Post(int value, int activityId)

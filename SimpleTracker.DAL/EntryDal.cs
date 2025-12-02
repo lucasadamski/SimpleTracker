@@ -48,6 +48,22 @@ namespace SimpleTracker.DAL
             return result;
         }
 
+        public IEnumerable<EntryDto> ReadEntriesDto(string userId, [Optional] DateTime? from, [Optional] DateTime? to)
+        {
+            IEnumerable<EntryDto> result;
+            try
+            {
+                result = _db.LoadData<EntryDto, dynamic>(storedProcedure: "[dbo].[spEntriesDto_Read]", new { userId, from, to }); // sql signature return: collection of Entry
+                _logger.LogDebug("[dbo].[spEntriesDto_Read] Count: {Count}", result.Count());
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+                result = new List<EntryDto>();
+            }
+            return result;
+        }
+
         public Entries ReadEntries(string userId, [Optional] DateTime? from, [Optional] DateTime? to)
         {
             var result = new Entries();
