@@ -62,6 +62,7 @@
     <Folder Include="StoredProcedures\Unit" />
     <Folder Include="Views" />
     <Folder Include="Tables" />
+    <Folder Include="StoredProcedures\User" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="StoredProcedures\Activity\spActivity_Delete.sql" />
@@ -87,6 +88,9 @@
     <Build Include="StoredProcedures\Entry\spEntries_Read.sql" />
     <Build Include="StoredProcedures\Entry\spEntriesDto_Read.sql" />
     <Build Include="Tables\User.sql" />
+    <Build Include="StoredProcedures\User\spUser_ReadById.sql" />
+    <Build Include="StoredProcedures\User\spUser_ReadByLogin.sql" />
+    <Build Include="StoredProcedures\User\spUser_Insert.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SimpleTracker.DB.refactorlog" />

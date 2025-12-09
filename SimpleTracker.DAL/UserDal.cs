@@ -36,7 +36,7 @@ namespace SimpleTracker.DAL
             var result = new User();
             try
             {
-                result = _db.LoadData<User, dynamic>(storedProcedure: "[dbo].[spUser_Read]", new { id }).FirstOrDefault();
+                result = _db.LoadData<User, dynamic>(storedProcedure: "[dbo].[spUser_ReadById]", new { id }).FirstOrDefault();
                 _logger.LogDebug("[dbo].[spUser_Read] success");
             }
             catch (Exception e)
@@ -45,6 +45,21 @@ namespace SimpleTracker.DAL
             }
             return result;
         }
-    
+
+        public User ReadUser(string login)
+        {
+            var result = new User();
+            try
+            {
+                result = _db.LoadData<User, dynamic>(storedProcedure: "[dbo].[spUser_ReadByLogin]", new { login }).FirstOrDefault();
+                _logger.LogDebug("[dbo].[spUser_Read] success");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return result;
+        }
+
     }
 }
