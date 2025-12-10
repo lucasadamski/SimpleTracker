@@ -91,6 +91,8 @@
     <Build Include="StoredProcedures\User\spUser_ReadById.sql" />
     <Build Include="StoredProcedures\User\spUser_ReadByLogin.sql" />
     <Build Include="StoredProcedures\User\spUser_Insert.sql" />
+    <Build Include="StoredProcedures\User\spUser_ReadByCredentials.sql" />
+    <Build Include="StoredProcedures\User\spUser_Update.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SimpleTracker.DB.refactorlog" />
