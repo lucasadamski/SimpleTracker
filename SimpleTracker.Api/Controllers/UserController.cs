@@ -16,40 +16,38 @@ namespace SimpleTracker.Api.Controllers
     public class UserController(IUserDal userDal) : ControllerBase
     {
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody] User incomingUser)
+        public IActionResult Authenticate([FromBody] User user)
         {
-            if (incomingUser == null)
+            if (user == null)
                 return BadRequest();
 
-            var user = userDal.ReadUser(incomingUser.Login, incomingUser.Password); //read user 
+            var existingUser = userDal.ReadUser(user.Login, user.Password); //read user 
 
-            if (user == null)
-                return NotFound(new { Message = "Incorrect login or password" });
+           
+           return NotFound(new { Message = "Incorrect login or password" }); // to do not finished
 
-            user.Token = CreateJwt(user); // create token
-            var newAccessToken = user.Token;
-            var newRefreshToken = CreateRefreshToken();
-            user.RefreshToken = newRefreshToken;
-            user.RefreshTokenExpiryDate = DateTime.Now.AddDays(5);
-
-            userDal.Update(user);       // update user
-
-            return Ok(new               // return token
-            {
-                newAccessToken,
-                newRefreshToken
-            });
+            
         }
 
 
         [HttpPost("Login")]
         public IActionResult Login(User user)
         {
-            var userId = 1;
-            if (user.Login == "a" && user.Password == "a")
-                return StatusCode(200, userId);
+            if (user == null)
+                return BadRequest();
 
-            return StatusCode(500, 0);
+            var existingUser = userDal.ReadUser(user.Login, user.Password); //read user 
+
+            if (user == null || existingUser.Login != user.Login || existingUser.Password != user.Password)
+                return NotFound(new { Message = "Incorrect login or password" });
+
+            existingUser.Token = CreateJwt(user); // create token
+            userDal.Update(existingUser);       // update user
+
+            return Ok(new               // return token
+            {
+                newAccessToken = existingUser.Token
+            });
         }
 
 

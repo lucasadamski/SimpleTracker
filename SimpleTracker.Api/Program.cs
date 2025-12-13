@@ -1,5 +1,4 @@
 
-using Microsoft.Extensions.DependencyInjection;
 using Scalar.AspNetCore;
 using SimpleTracker.DAL;
 using SimpleTracker.DAL.Interfaces;
@@ -25,7 +24,9 @@ namespace SimpleTracker.Api
             builder.Services.AddSingleton<ILogger>(Utility.Logger.Log);
             builder.Services.AddSingleton<ISqlDataAccess>(sqlDataAccess);
             builder.Services.AddScoped<IEntryDal, EntryDal>();
-            builder.Services.AddScoped<IActivityDal, ActivityDal>();
+            builder.Services.AddScoped<IActivityDal, ActivityDal>(); 
+            builder.Services.AddScoped<IUserDal, UserDal>();
+
 
             var allowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins")!.Split(',');
 

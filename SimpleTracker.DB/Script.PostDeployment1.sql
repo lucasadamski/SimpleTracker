@@ -37,3 +37,10 @@ insert into [dbo].[Entry] (Value, ActivityId, DateAdded)
             (5, 2, cast('2025-05-09 14:00:00' as datetime2)),
             (10, 3, cast('2025-05-10 15:00:00' as datetime2))
 go
+
+if not exists (select 1 from [dbo].[User])
+insert into [dbo].[User] (Login, Password, Token, RefreshToken, RefreshTokenExpiryDate)
+        values ('test' , 'test', '', '', cast('2025-12-30 13:00:00' as datetime2))
+go
+
+

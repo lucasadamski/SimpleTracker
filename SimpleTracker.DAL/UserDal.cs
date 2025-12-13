@@ -77,6 +77,21 @@ namespace SimpleTracker.DAL
             return result;
         }
 
+        public User ReadUserByToken(string token)
+        {
+            var result = new User();
+            try
+            {
+                result = _db.LoadData<User, dynamic>(storedProcedure: "[dbo].[spUser_ReadByToken]", new { token }).FirstOrDefault();
+                _logger.LogDebug("[dbo].[spUser_ReadByToken] success");
+            }
+            catch (Exception e)
+            {
+                _logger.LogError(e.Message);
+            }
+            return result;
+        }
+
         public void Update(User user)
         {            
             try

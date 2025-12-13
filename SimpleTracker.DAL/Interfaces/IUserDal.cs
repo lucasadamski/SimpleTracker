@@ -8,6 +8,7 @@ namespace SimpleTracker.DAL.Interfaces
         User ReadUser(int id);
         User ReadUser(string login);
         User ReadUser(string login, string password);
+        User ReadUserByToken(string token);
         void Update(User user);
     }
 }
