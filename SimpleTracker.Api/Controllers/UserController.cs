@@ -43,14 +43,14 @@ namespace SimpleTracker.Api.Controllers
 
             return Ok(new               // return token
             {
-                newAccessToken = existingUser.Token
+                existingUser.Token
             });
         }
 
         private string CreateJwt(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("veryverysceret.....");
+            var key = Encoding.UTF8.GetBytes("!@#%%efsadf@#$2fasdfSDAFS_1234+=asdf34fASDFsdfa@#$jocpojo2$#@#$dasfglkjasdf!@#!Fdasfased43=-=-sadfq32a>?<Z?>XCVasdf");
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Name,$"{user.Login}")
