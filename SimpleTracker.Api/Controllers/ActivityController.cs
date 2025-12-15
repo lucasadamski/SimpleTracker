@@ -1,28 +1,30 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace SimpleTracker.Api.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
     public class ActivityController(IActivityDal activityDal) : ControllerBase
     {
+        [Authorize]
         [HttpGet("{id}/{userId}")]
         public Activity Get(int id, string userId)
         {
             return activityDal.ReadActivity(id, userId);
         }
 
+        [Authorize]
         [HttpGet("{userId}")]
         public IEnumerable<Activity> Get(string userId)
         {
             return activityDal.GetAllActivities(userId);
         }
 
-
+        [Authorize]
         [HttpPost("{name}/{unitId}/{userId}")]
         public void Post(string name, int unitId, string userId)
         {
@@ -30,6 +32,7 @@ namespace SimpleTracker.Api.Controllers
             activityDal.CreateNewActivity(activity);
         }
 
+        [Authorize]
         [HttpPut("{id}/{name}/{unitId}/{userId}")]
         public void Put(int id, string name, int unitId, string userId)
         {
@@ -37,6 +40,7 @@ namespace SimpleTracker.Api.Controllers
             activityDal.UpdateActivity(activity);
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
