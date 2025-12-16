@@ -50,7 +50,7 @@ namespace SimpleTracker.Api.Controllers
 
         private string CreateJwt(User user)
         {
-            var jwtTokenHandler = new JwtSecurityTokenHandler();
+            var jwtTokenHandler = new JwtSecurityTokenHandler(); 
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Name,$"{user.Login}")
