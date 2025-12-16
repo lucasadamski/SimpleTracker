@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Scalar.AspNetCore;
 using SimpleTracker.DAL;
 using SimpleTracker.DAL.Interfaces;
+using SimpleTracker.Utility;
 
 namespace SimpleTracker.Api
 {
@@ -27,9 +28,9 @@ namespace SimpleTracker.Api
                 {
                     x.TokenValidationParameters = new TokenValidationParameters
                     {
-                        IssuerSigningKey = new SymmetricSecurityKey("!@#%%efsadf@#$2fasdfSDAFS_1234+=asdf34fASDFsdfa@#$jocpojo2$#@#$dasfglkjasdf!@#!Fdasfased43=-=-sadfq32a>?<Z?>XCVasdf"u8.ToArray()),
+                        IssuerSigningKey = new SymmetricSecurityKey(TokenKey.Key),
                         ValidateIssuerSigningKey = true,
-                        ValidateLifetime = true,
+                        ValidateLifetime = false,
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };

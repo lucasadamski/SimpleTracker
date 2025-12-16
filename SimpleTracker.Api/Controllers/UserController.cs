@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
+using SimpleTracker.Utility;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -50,13 +51,12 @@ namespace SimpleTracker.Api.Controllers
         private string CreateJwt(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes("!@#%%efsadf@#$2fasdfSDAFS_1234+=asdf34fASDFsdfa@#$jocpojo2$#@#$dasfglkjasdf!@#!Fdasfased43=-=-sadfq32a>?<Z?>XCVasdf");
             var identity = new ClaimsIdentity(new Claim[]
             {
                 new Claim(ClaimTypes.Name,$"{user.Login}")
             });
 
-            var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
+            var credentials = new SigningCredentials(new SymmetricSecurityKey(TokenKey.Key), SecurityAlgorithms.HmacSha256);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
