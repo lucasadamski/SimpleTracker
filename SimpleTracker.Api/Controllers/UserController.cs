@@ -18,7 +18,7 @@ namespace SimpleTracker.Api.Controllers
         {
             if (user == null)
                 return BadRequest();
-
+                
             var existingUser = userDal.ReadUserByToken(user.Token); //read user 
 
             if (existingUser == null)
@@ -37,7 +37,7 @@ namespace SimpleTracker.Api.Controllers
             var existingUser = userDal.ReadUser(user.Login, user.Password); //read user 
 
             if (user == null || existingUser.Login != user.Login || existingUser.Password != user.Password)
-                return NotFound(new { Message = "Incorrect login or password" });
+                return NotFound(new { Message = "Incorrect login or password" }); //small change
 
             existingUser.Token = CreateJwt(user); // create token
             userDal.Update(existingUser);       // update user
