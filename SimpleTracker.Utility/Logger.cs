@@ -10,8 +10,8 @@ namespace SimpleTracker.Utility
             using var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder
-                    .AddFilter("Microsoft", LogLevel.Warning)
-                    .AddFilter("System", LogLevel.Warning)
+                    .AddFilter("Microsoft", LogLevel.Trace)
+                    .AddFilter("System", LogLevel.Trace)
                     .AddFilter("SimpleTracker", LogLevel.Trace)
                     .AddSimpleConsole(options =>
                     {

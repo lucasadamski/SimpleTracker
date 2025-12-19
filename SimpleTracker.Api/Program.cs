@@ -35,6 +35,7 @@ namespace SimpleTracker.Api
                         ValidateAudience = false
                     };
                 });
+            builder.Services.AddAuthorization();
             var allowedOrigins = builder.Configuration.GetValue<string>("AllowedOrigins")!.Split(',');
             builder.Services.AddCors(options =>
             {

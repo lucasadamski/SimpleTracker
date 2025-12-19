@@ -5,7 +5,6 @@ using SimpleTracker.DTO;
 using SimpleTracker.Utility;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace SimpleTracker.Api.Controllers
 {
