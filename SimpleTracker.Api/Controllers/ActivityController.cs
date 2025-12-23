@@ -8,7 +8,7 @@ namespace SimpleTracker.Api.Controllers
     [Route("api/[controller]")]
     [Authorize]
     [ApiController]
-    public class ActivityController(IActivityDal activityDal) : ControllerBase
+    public class ActivityController(IActivityDal activityDal, IUserDal userDal) : ControllerBase
     {
         [Authorize]
         [HttpGet("{id}/{userId}")]
@@ -18,9 +18,10 @@ namespace SimpleTracker.Api.Controllers
         }
 
         [Authorize]
-        [HttpGet("{userId}")]
-        public IEnumerable<Activity> Get(string userId)
+        [HttpGet("GetAll")]
+        public IEnumerable<Activity> GetAll([FromBody]string token)
         {
+            var userId = userDal.ReadUserIdFromToken(token);
             return activityDal.GetAllActivities(userId);
         }
 

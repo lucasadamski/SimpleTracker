@@ -9,7 +9,7 @@ namespace SimpleTracker.Api.Controllers
     [Route("api/[controller]")]
     [Authorize]
     [ApiController]
-    public class EntryController(IEntryDal entryDal) : ControllerBase
+    public class EntryController(IEntryDal entryDal, ILogger logger) : ControllerBase
     {
         [Authorize]
         [HttpGet("{id}/{userId}")]
@@ -44,15 +44,10 @@ namespace SimpleTracker.Api.Controllers
         }
 
         [Authorize]
-        [HttpPost("{value}/{activityId}")]
-        public void Post(int value, int activityId)
+        [HttpPost("Create")]
+        public void Create([FromBody]Entry entry)
         {
-            var entry = new Entry()
-            {
-                Value = value,
-                ActivityId = activityId,
-                DateAdded = DateTime.Now,
-            };
+            logger.LogTrace("EntryController.Create: entry.Value {entryValue} entry.ActivityId {entryActivityId}", entry.Value, entry.ActivityId);
             entryDal.CreateNewEntry(entry);
         }
 
