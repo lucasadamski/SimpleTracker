@@ -19,8 +19,9 @@ namespace SimpleTracker.Api.Controllers
 
         [Authorize]
         [HttpGet("GetAll")]
-        public IEnumerable<Activity> GetAll([FromBody]string token)
+        public IEnumerable<Activity> GetAll()
         {
+            var token = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
             var userId = userDal.ReadUserIdFromToken(token);
             return activityDal.GetAllActivities(userId);
         }
