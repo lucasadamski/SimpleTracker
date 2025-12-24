@@ -1,6 +1,6 @@
 ﻿create procedure [dbo].[spActivity_Get]
 	@id int,
-	@userId varchar(100)
+	@userId int
 as
 	select [Id],
 	[Name], 

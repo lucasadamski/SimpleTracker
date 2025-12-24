@@ -32,7 +32,7 @@ namespace SimpleTracker.DAL
             
             return result;
         }
-        public Entry ReadEntry(int id, string userId)
+        public Entry ReadEntry(int id, int userId)
         {
             var result = new Entry();
             try
@@ -48,7 +48,7 @@ namespace SimpleTracker.DAL
             return result;
         }
 
-        public IEnumerable<EntryDto> ReadEntriesDto(string userId, [Optional] DateTime? from, [Optional] DateTime? to)
+        public IEnumerable<EntryDto> ReadEntriesDto(int userId, [Optional] DateTime? from, [Optional] DateTime? to)
         {
             IEnumerable<EntryDto> result;
             try
@@ -64,7 +64,7 @@ namespace SimpleTracker.DAL
             return result;
         }
 
-        public Entries ReadEntries(string userId, [Optional] DateTime? from, [Optional] DateTime? to)
+        public Entries ReadEntries(int userId, [Optional] DateTime? from, [Optional] DateTime? to)
         {
             var result = new Entries();
             try

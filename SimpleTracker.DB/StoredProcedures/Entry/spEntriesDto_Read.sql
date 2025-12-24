@@ -1,5 +1,5 @@
 ﻿ create procedure [dbo].[spEntriesDto_Read]
-	 @userId varchar(100),
+	 @userId int,
 	 @from datetime = null,
 	 @to datetime = null
 as

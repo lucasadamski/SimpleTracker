@@ -109,7 +109,7 @@ public class ActivityDalTest
         {
             Name = name,
             UnitId = 1,
-            UserId = null
+            UserId = -1
         };
 
         // Act
@@ -173,7 +173,7 @@ public class ActivityDalTest
         // Assert
         actualResult.Should().NotBeNull();
         actualResult.Name.Should().Be("");
-        actualResult.UserId.Should().Be("");
+        actualResult.UserId.Should().Be(0);
         actualResult.UnitId.Should().Be(0);
     }
 
@@ -185,12 +185,12 @@ public class ActivityDalTest
         
 
         // Act
-        var actualResult = activityDal.ReadActivity(1, null);
+        var actualResult = activityDal.ReadActivity(1, -1);
 
         // Assert
         actualResult.Should().NotBeNull();
         actualResult.Name.Should().Be("");
-        actualResult.UserId.Should().Be("");
+        actualResult.UserId.Should().Be(0);
         actualResult.UnitId.Should().Be(0);
     }
 
@@ -237,7 +237,7 @@ public class ActivityDalTest
             Id = 3,
             Name = null,
             UnitId = -1,
-            UserId = null
+            UserId = -1
         };
 
         // Act

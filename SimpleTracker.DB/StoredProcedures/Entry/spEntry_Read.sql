@@ -1,6 +1,6 @@
 ﻿ create procedure [dbo].[spEntry_Read]
 	 @id int,
-	 @userId varchar(100)
+	 @userId int
 as
 	select 
 		e.[Id]

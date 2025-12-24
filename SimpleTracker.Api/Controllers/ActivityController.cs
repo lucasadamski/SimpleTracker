@@ -12,7 +12,7 @@ namespace SimpleTracker.Api.Controllers
     {
         [Authorize]
         [HttpGet("{id}/{userId}")]
-        public Activity Get(int id, string userId)
+        public Activity Get(int id, int userId)
         {
             return activityDal.ReadActivity(id, userId);
         }
@@ -28,7 +28,7 @@ namespace SimpleTracker.Api.Controllers
 
         [Authorize]
         [HttpPost("{name}/{unitId}/{userId}")]
-        public void Post(string name, int unitId, string userId)
+        public void Post(string name, int unitId, int userId)
         {
             var activity = new Activity() { Name = name, UnitId = unitId, UserId = userId };
             activityDal.CreateNewActivity(activity);
@@ -36,7 +36,7 @@ namespace SimpleTracker.Api.Controllers
 
         [Authorize]
         [HttpPut("{id}/{name}/{unitId}/{userId}")]
-        public void Put(int id, string name, int unitId, string userId)
+        public void Put(int id, string name, int unitId, int userId)
         {
             var activity = new Activity() { Id = id, Name = name, UnitId = unitId, UserId = userId };
             activityDal.UpdateActivity(activity);

@@ -4,7 +4,7 @@
     {
         public static string TestDbConnectionString = @"Data Source=localhost;Initial Catalog=SimpleTrackerTest;Integrated Security=True;Connect Timeout=60;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
-        public static string UserId = "testUser";
+        public static int UserId = 1;
 
 
         // Unit 

@@ -111,7 +111,7 @@ public class EntryDalTest
         
 
         // Act
-        var actualResult = entryDal.ReadEntry(1, "nonExistingUserId");
+        var actualResult = entryDal.ReadEntry(1, 13142);
 
         // Assert
         actualResult.Should().NotBeNull();
@@ -126,7 +126,7 @@ public class EntryDalTest
         
 
         // Act
-        var actualResult = entryDal.ReadEntry(1, null);
+        var actualResult = entryDal.ReadEntry(1, 0);
 
         // Assert
         actualResult.Should().NotBeNull();
@@ -177,7 +177,7 @@ public class EntryDalTest
         var to = new DateTime(2025, 5, 8, 14, 0, 0);
 
         // Act
-        var actualResult = entryDal.ReadEntries("NonExistingUserId", from, to);
+        var actualResult = entryDal.ReadEntries(12124, from, to);
 
         // Assert
         actualResult.Should().NotBeNull();
@@ -194,7 +194,7 @@ public class EntryDalTest
         var to = new DateTime(2025, 5, 8, 14, 0, 0);
 
         // Act
-        var actualResult = entryDal.ReadEntries(null, from, to);
+        var actualResult = entryDal.ReadEntries(0, from, to);
 
         // Assert
         actualResult.Should().NotBeNull();

@@ -10,10 +10,10 @@ public class ActivityDal : DalBase, IActivityDal
     {
     }
 
-    public Activity ReadActivity(int id, string userId)
+    public Activity ReadActivity(int id, int userId)
     {
         Activity result = new Activity();
-        if (id > 0 && !string.IsNullOrWhiteSpace(userId))
+        if (id > 0)
         {
             result = _db.LoadData<Activity, dynamic>(storedProcedure: "[dbo].[spActivity_Get]", parameters: new { id, userId }).FirstOrDefault();
         }
@@ -47,10 +47,10 @@ public class ActivityDal : DalBase, IActivityDal
         return result;
     }
 
-    public IEnumerable<Activity> GetAllActivities(string userId)
+    public IEnumerable<Activity> GetAllActivities(int userId)
     {
         IEnumerable<Activity> result;
-        if (!string.IsNullOrWhiteSpace(userId))
+        if (userId > 0)
         {
             result = _db.LoadData<Activity, dynamic>(storedProcedure: "[dbo].[spActivity_GetAll]", parameters: new { userId });
             _logger.LogDebug("[dbo].[spActivity_GetAll] returned {ResultCount} items", result.Count());

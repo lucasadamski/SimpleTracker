@@ -92,12 +92,12 @@ namespace SimpleTracker.DAL
             return result;
         }
 
-        public string ReadUserIdFromToken(string token)
+        public int ReadUserIdFromToken(string token)
         {
-            var result = string.Empty;
+            int result = 0;
             try
             {
-                result = _db.LoadData<string, dynamic>(storedProcedure: "[dbo].[spUser_ReadUserIdFromToken]", new { token }).FirstOrDefault();
+                result = _db.LoadData<int, dynamic>(storedProcedure: "[dbo].[spUser_ReadUserIdFromToken]", new { token }).FirstOrDefault();
                 _logger.LogDebug("[dbo].[spUser_ReadUserIdFromToken] success");
             }
             catch (Exception e)

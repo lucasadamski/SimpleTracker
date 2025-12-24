@@ -1,5 +1,5 @@
 ﻿create procedure [dbo].[spActivity_GetSummary] 
-	@userId varchar(100)
+	@userId int
 	,@from datetime = null
 	,@to datetime = null
 as

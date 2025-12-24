@@ -2,7 +2,7 @@ create procedure [dbo].[spActivity_Update]
     @id int,
     @name nvarchar(30),
     @unitId int,
-    @userId varchar(100)
+    @userId int
 as
     update [dbo].[Activity]
     set [Name] = @name,

@@ -13,7 +13,7 @@ namespace SimpleTracker.Api.Controllers
     {
         [Authorize]
         [HttpGet("{id}/{userId}")]
-        public Entry Get(int id, string userId)
+        public Entry Get(int id, int userId)
         {
             var result = entryDal.ReadEntry(id, userId);
             return result;
@@ -21,7 +21,7 @@ namespace SimpleTracker.Api.Controllers
 
         [Authorize]
         [HttpGet("{userId}/{from}/{to}")]
-        public IEnumerable<Entry> Get(string userId, string from, string to)
+        public IEnumerable<Entry> Get(int userId, string from, string to)
         {
             var result = new Entries();
             var parsedFrom = Temporal.ParseToDateTime(from);
@@ -33,7 +33,7 @@ namespace SimpleTracker.Api.Controllers
 
         [Authorize]
         [HttpGet("dto/{userId}/{from}/{to}")]
-        public IEnumerable<EntryDto> GetDto(string userId, string from, string to)
+        public IEnumerable<EntryDto> GetDto(int userId, string from, string to)
         {
             IEnumerable<EntryDto> result;
             var parsedFrom = Temporal.ParseToDateTime(from);
