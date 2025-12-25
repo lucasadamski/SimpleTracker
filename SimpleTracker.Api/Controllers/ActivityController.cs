@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
+using SimpleTracker.DTO.Summary;
 
 namespace SimpleTracker.Api.Controllers
 {
@@ -24,6 +25,15 @@ namespace SimpleTracker.Api.Controllers
             var token = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
             var userId = userDal.ReadUserIdFromToken(token);
             return activityDal.GetAllActivities(userId);
+        }
+
+        [Authorize]
+        [HttpGet("GetQuickStatsForAll")]
+        public IEnumerable<ActivityQuickStats> GetQuickStatsForAll()
+        {
+            var token = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
+            var userId = userDal.ReadUserIdFromToken(token);
+            return activityDal.GetAllActivitiesQuickStats(userId);
         }
 
         [Authorize]
