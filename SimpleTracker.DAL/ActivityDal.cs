@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Logging;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
+using SimpleTracker.DTO.Summary;
 
 namespace SimpleTracker.DAL;
 
@@ -58,6 +59,21 @@ public class ActivityDal : DalBase, IActivityDal
         else
         {
             result = new List<Activity>();
+        }
+        return result;
+    }
+
+    public IEnumerable<ActivityQuickStats> GetAllActivitiesQuickStats(int userId)
+    {
+        IEnumerable<ActivityQuickStats> result;
+        if (userId > 0)
+        {
+            result = _db.LoadData<ActivityQuickStats, dynamic>(storedProcedure: "[dbo].[spActivity_GetQuickStatsForAllActivities]", parameters: new { userId });
+            _logger.LogDebug("[dbo].[spActivity_GetQuickStatsForAllActivities] returned {ResultCount} items", result.Count());
+        }
+        else
+        {
+            result = new List<ActivityQuickStats>();
         }
         return result;
     }
