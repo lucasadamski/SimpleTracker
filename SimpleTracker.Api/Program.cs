@@ -23,6 +23,7 @@ namespace SimpleTracker.Api
             builder.Services.AddScoped<IEntryDal, EntryDal>();
             builder.Services.AddScoped<IActivityDal, ActivityDal>(); 
             builder.Services.AddScoped<IUserDal, UserDal>();
+            builder.Services.AddScoped<IUnitDal, UnitDal>();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(x =>
                 {

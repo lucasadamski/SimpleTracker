@@ -9,7 +9,7 @@ namespace SimpleTracker.Api.Controllers
     [Route("api/[controller]")]
     [Authorize]
     [ApiController]
-    public class ActivityController(IActivityDal activityDal, IUserDal userDal) : ControllerBase
+    public class ActivityController(IActivityDal activityDal, IUserDal userDal, IUnitDal unitDal) : ControllerBase
     {
         [Authorize]
         [HttpGet("{id}/{userId}")]
@@ -58,5 +58,10 @@ namespace SimpleTracker.Api.Controllers
         {
             activityDal.DeleteActivity(id);
         }
+
+        [Authorize]
+        [HttpGet("GetAllUnits")]
+        public IEnumerable<Unit> GetAllUnits() => 
+            unitDal.GetAll();
     }
 }
