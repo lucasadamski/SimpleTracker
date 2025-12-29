@@ -38,7 +38,7 @@ namespace SimpleTracker.Api.Controllers
             if (user == null || existingUser.Login != user.Login || existingUser.Password != user.Password)
                 return NotFound(new { Message = "Incorrect login or password" }); //small change
 
-            existingUser.Token = CreateJwt(user); // create token
+            existingUser.Token = CreateToken(user); // create token
             userDal.Update(existingUser);       // update user
 
             return Ok(new               // return token
@@ -47,7 +47,37 @@ namespace SimpleTracker.Api.Controllers
             });
         }
 
-        private string CreateJwt(User user)
+        private bool DoesLoginAlreadyExists(string login)
+        {
+            if(string.IsNullOrWhiteSpace(login)) return false;
+            var user = userDal.ReadUser(login);
+            if (user != null && !string.IsNullOrEmpty(user.Login))
+                return true;
+            return false;
+        }
+
+        [HttpPost("Create")]
+        public IActionResult Create(User user)
+        {
+            if (user == null)
+                return BadRequest();
+
+            if (DoesLoginAlreadyExists(user.Login)) 
+                return BadRequest();
+
+            var token = CreateToken(user);
+            var newUser = new User()
+            {
+                Login = user.Login,
+                Password = user.Password,
+                Token = token
+            };
+            userDal.CreateNewUser(newUser);
+
+            return Ok(new { token });
+        }
+
+        private string CreateToken(User user)
         {
             var jwtTokenHandler = new JwtSecurityTokenHandler(); 
             var identity = new ClaimsIdentity(new Claim[]

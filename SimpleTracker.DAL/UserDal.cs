@@ -57,6 +57,7 @@ namespace SimpleTracker.DAL
             }
             catch (Exception e)
             {
+                result = new User();
                 _logger.LogError(e.Message);
             }
             return result;

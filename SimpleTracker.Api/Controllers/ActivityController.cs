@@ -22,8 +22,7 @@ namespace SimpleTracker.Api.Controllers
         [HttpGet("GetAll")]
         public IEnumerable<Activity> GetAll()
         {
-            var token = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
-            var userId = userDal.ReadUserIdFromToken(token);
+            var userId = GetUserId();
             return activityDal.GetAllActivities(userId);
         }
 
@@ -31,18 +30,19 @@ namespace SimpleTracker.Api.Controllers
         [HttpGet("GetQuickStatsForAll")]
         public IEnumerable<ActivityQuickStats> GetQuickStatsForAll()
         {
-            var token = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
-            var userId = userDal.ReadUserIdFromToken(token);
+            var userId = GetUserId();
             return activityDal.GetAllActivitiesQuickStats(userId);
         }
 
         [Authorize]
-        [HttpPost("{name}/{unitId}/{userId}")]
-        public void Post(string name, int unitId, int userId)
+        [HttpPost("Create")]
+        public void Create([FromBody] Activity activity)
         {
-            var activity = new Activity() { Name = name, UnitId = unitId, UserId = userId };
+            activity.UserId = GetUserId();
             activityDal.CreateNewActivity(activity);
         }
+
+        
 
         [Authorize]
         [HttpPut("{id}/{name}/{unitId}/{userId}")]
@@ -63,5 +63,11 @@ namespace SimpleTracker.Api.Controllers
         [HttpGet("GetAllUnits")]
         public IEnumerable<Unit> GetAllUnits() => 
             unitDal.GetAll();
+
+        private int GetUserId()
+        {
+            var token = Request.Headers.Authorization.ToString().Replace("Bearer ", "");
+            return userDal.ReadUserIdFromToken(token);
+        }
     }
 }
