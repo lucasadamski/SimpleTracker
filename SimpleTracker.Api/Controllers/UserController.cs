@@ -35,7 +35,7 @@ namespace SimpleTracker.Api.Controllers
 
             var existingUser = userDal.ReadUser(user.Login, user.Password); //read user 
 
-            if (user == null || existingUser.Login != user.Login || existingUser.Password != user.Password)
+            if (existingUser == null)
                 return NotFound(new { Message = "Incorrect login or password" }); //small change
 
             existingUser.Token = CreateToken(user); // create token
