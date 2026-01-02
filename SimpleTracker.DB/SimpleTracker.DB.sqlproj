@@ -97,6 +97,7 @@
     <Build Include="StoredProcedures\User\spUser_ReadUserIdFromToken.sql" />
     <Build Include="StoredProcedures\Activity\spActivity_GetQuickStatsForAll.sql" />
     <Build Include="StoredProcedures\Unit\spUnit_GetAll.sql" />
+    <Build Include="StoredProcedures\spPurgeEntries.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="SimpleTracker.DB.refactorlog" />

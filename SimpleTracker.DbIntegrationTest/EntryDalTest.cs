@@ -36,6 +36,7 @@ public class EntryDalTest
         testDal.PurgeAndPopulateDatabase();
     }
 
+
     // Create -------------------------------------------------
 
     [Fact]

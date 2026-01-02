@@ -16,6 +16,13 @@ namespace SimpleTracker.DAL
             return result;
         }
 
-        
+        public bool PurgeEntries()
+        {
+            var result = _db.SaveData(storedProcedure: "[dbo].[spPurgeEntries]", new { });
+            _logger.LogDebug("[dbo].[spPurgeEntries] called");
+            return result;
+        }
+
+
     }
 }
