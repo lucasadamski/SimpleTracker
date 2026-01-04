@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[spActivity_GetQuickStatsForAllActivities]
 	@userId int
 AS
-	declare @today date = cast(getdate() as date)
-	declare @weekStart date = DATEADD(WEEK, DATEDIFF(WEEK, 0, GETDATE()), 0)
-	declare @monthStart date = DATEADD(DAY, 1, EOMONTH(GETDATE(), -1)) 
+	declare @today date = cast(GETDATE() as date)
+	declare @weekStart date = DATEADD(DAY, -((DATEPART(WEEKDAY, @today) + @@DATEFIRST - 2) % 7), CAST(@today AS date))
+	declare @monthStart date = DATEADD(DAY, 1, EOMONTH(@today, -1))
 
 	select 
 		 a.Name as [ActivityName]

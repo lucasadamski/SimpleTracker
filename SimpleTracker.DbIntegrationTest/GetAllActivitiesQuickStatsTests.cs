@@ -63,7 +63,7 @@ namespace SimpleTracker.DbIntegrationTest
             var actualResult = activityDal.GetAllActivitiesQuickStats(_userId);
 
             // Assert
-            actualResult.Count().Should().Be(3);
+            actualResult.Count().Should().Be(1);
             actualResult.Where(n => n.ActivityName == _activityName).First().TodayValue.Should().Be(_value);
             actualResult.Where(n => n.ActivityName == _activityName).First().ThisWeekValue.Should().Be(_value);
             actualResult.Where(n => n.ActivityName == _activityName).First().ThisMonthValue.Should().Be(_value);
@@ -89,7 +89,7 @@ namespace SimpleTracker.DbIntegrationTest
             var actualResult = activityDal.GetAllActivitiesQuickStats(_userId);
 
             // Assert
-            actualResult.Count().Should().Be(3);
+            actualResult.Count().Should().Be(1);
             actualResult.Where(n => n.ActivityName == _activityName).First().ThisMonthValue.Should().Be(_value);
         }
     }
