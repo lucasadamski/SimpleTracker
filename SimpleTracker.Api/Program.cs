@@ -15,7 +15,6 @@ namespace SimpleTracker.Api
             var builder = WebApplication.CreateBuilder(args);
             // Add services to the container.
             builder.Services.AddControllers();
-            builder.Services.AddOpenApi();
             var connectionString = builder.Configuration.GetConnectionString("Test");
             ISqlDataAccess sqlDataAccess = new SqlDataAccess(connectionString, Utility.Logger.Log);
             builder.Services.AddSingleton<ILogger>(Utility.Logger.Log);
@@ -45,21 +44,11 @@ namespace SimpleTracker.Api
                     policy.WithOrigins(allowedOrigins).AllowCredentials().AllowAnyHeader().AllowAnyMethod();
                 });
             });
-            builder.Services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new() { Title = "SimpleTracker API", Version = "v1" });
-            });
+            
 
             var app = builder.Build();
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.MapOpenApi();
-                app.MapScalarApiReference(options =>
-                {
-                    options.EndpointPathPrefix = "swagger";
-                });
-            }
+           
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseAuthentication();

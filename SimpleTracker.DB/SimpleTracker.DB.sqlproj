@@ -117,6 +117,7 @@
   <ItemGroup>
     <None Include="SimpleTrackerDev.publish.xml" />
     <None Include="SimpleTrackerTest.publish.xml" />
+    <None Include="Production.publish.xml" />
   </ItemGroup>
   <Import Project="$(NETCoreTargetsPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" Condition="'$(NetCoreBuild)' == 'true'" />
   <Target Name="BeforeBuild">
