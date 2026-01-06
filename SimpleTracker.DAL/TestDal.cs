@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Serilog;
 using SimpleTracker.DAL.Interfaces;
 
 namespace SimpleTracker.DAL
@@ -12,14 +12,14 @@ namespace SimpleTracker.DAL
         public bool PurgeAndPopulateDatabase()
         {
             var result = _db.SaveData(storedProcedure: "[dbo].[spPurgeAndPopulateDb]", new { });
-            _logger.LogDebug("[dbo].[spPurgeDb] called");
+            _logger.Debug("[dbo].[spPurgeDb] called");
             return result;
         }
 
         public bool PurgeEntries()
         {
             var result = _db.SaveData(storedProcedure: "[dbo].[spPurgeEntries]", new { });
-            _logger.LogDebug("[dbo].[spPurgeEntries] called");
+            _logger.Debug("[dbo].[spPurgeEntries] called");
             return result;
         }
 

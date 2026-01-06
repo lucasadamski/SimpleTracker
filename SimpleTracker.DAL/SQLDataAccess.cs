@@ -2,7 +2,7 @@ using Microsoft.Data.SqlClient;
 using Dapper;
 using System.Data;
 using SimpleTracker.DAL.Interfaces;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace SimpleTracker.DAL
 {
@@ -27,7 +27,7 @@ namespace SimpleTracker.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("SQLDataAccess.LoadData failed for stored procedure {StoredProcedure} connection string {ConnectionString} error message {Exception}", storedProcedure, _connectionString, e.Message);
+                _logger.Error("SQLDataAccess.LoadData failed for stored procedure {StoredProcedure} connection string {ConnectionString} error message {Exception}", storedProcedure, _connectionString, e.Message);
                 result = new List<T>();
             }
 
@@ -47,7 +47,7 @@ namespace SimpleTracker.DAL
             }
             catch (Exception e)
             {
-                _logger.LogError("SQLDataAccess.SaveData failed for stored procedure {StoredProcedure} connection string {ConnectionString} error message {Exception}", storedProcedure, _connectionString, e.Message);
+                _logger.Error("SQLDataAccess.SaveData failed for stored procedure {StoredProcedure} connection string {ConnectionString} error message {Exception}", storedProcedure, _connectionString, e.Message);
                 result = false;
             }
 

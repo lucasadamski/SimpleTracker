@@ -1,8 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Identity.Client;
+﻿using Serilog;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace SimpleTracker.DAL
@@ -23,11 +21,11 @@ namespace SimpleTracker.DAL
             {
                 if (entry.Value < 1) throw new Exception("Invalid entry properties");
                 result = _db.SaveData(storedProcedure: "[dbo].[spEntry_Insert]", new { value = entry.Value, activityId = entry.ActivityId, dateAdded = entry.DateAdded }); // sql signature return: bit
-                _logger.LogDebug("[dbo].[spEntry_Insert] Value: {Value} ActivityId: {ActivityId} returned {Result}", entry.Value, entry.ActivityId, result);
+                _logger.Debug("[dbo].[spEntry_Insert] Value: {Value} ActivityId: {ActivityId} returned {Result}", entry.Value, entry.ActivityId, result);
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
             
             return result;
@@ -38,11 +36,11 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.LoadData<Entry, dynamic>(storedProcedure: "[dbo].[spEntry_Read]", new { id, userId }).FirstOrDefault(); // sql signature return: Entry
-                _logger.LogDebug("[dbo].[spEntry_Read] Value: {Value} ActivityId: {ActivityId} returned {Result}", result.Value, result.ActivityId, result);
+                _logger.Debug("[dbo].[spEntry_Read] Value: {Value} ActivityId: {ActivityId} returned {Result}", result.Value, result.ActivityId, result);
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
                 result = new EntryEmpty();
             }
             return result;
@@ -54,11 +52,11 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.LoadData<EntryDto, dynamic>(storedProcedure: "[dbo].[spEntriesDto_Read]", new { userId, from, to }); // sql signature return: collection of Entry
-                _logger.LogDebug("[dbo].[spEntriesDto_Read] Count: {Count}", result.Count());
+                _logger.Debug("[dbo].[spEntriesDto_Read] Count: {Count}", result.Count());
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
                 result = new List<EntryDto>();
             }
             return result;
@@ -70,11 +68,11 @@ namespace SimpleTracker.DAL
             try
             {
                 result.Data = _db.LoadData<Entry, dynamic>(storedProcedure: "[dbo].[spEntries_Read]", new { userId, from, to }); // sql signature return: collection of Entry
-                _logger.LogDebug("[dbo].[spEntries_Read] Count: {Count} ActivityId: {ActivityId} returned {Result}", result.Data.Count());
+                _logger.Debug("[dbo].[spEntries_Read] Count: {Count} ActivityId: {ActivityId} returned {Result}", result.Data.Count());
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
             return result;
         }
@@ -84,11 +82,11 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.SaveData(storedProcedure: "[dbo].[spEntry_Update]", new { id, value }); // sql signature return: bit
-                _logger.LogDebug("[dbo].[spEntry_Update] returned {Result}", result);
+                _logger.Debug("[dbo].[spEntry_Update] returned {Result}", result);
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
             return result;
         }
@@ -98,11 +96,11 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.SaveData(storedProcedure: "[dbo].[spEntry_Delete]", new { id }); // sql signature return: bit
-                _logger.LogDebug("[dbo].[spEntry_Delete] returned {Result}", result);
+                _logger.Debug("[dbo].[spEntry_Delete] returned {Result}", result);
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
             return result;
         }

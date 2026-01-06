@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Logging;
+using Serilog;
 using SimpleTracker.DAL.Interfaces;
 
 namespace SimpleTracker.DAL;

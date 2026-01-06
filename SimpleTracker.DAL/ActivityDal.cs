@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Logging;
+using Serilog;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
 using SimpleTracker.DTO.Summary;
@@ -27,7 +27,7 @@ public class ActivityDal : DalBase, IActivityDal
         if(activity != null && activity?.Name != null && activity?.UserId != null && activity.UnitId > 0)
         {
             result = _db.SaveData(storedProcedure: "[dbo].[spActivity_Insert]", new { activity.Name, activity.UnitId, activity.UserId });
-            _logger.LogDebug("[dbo].[spActivity_Insert] {Name} {UnitId} returned {Result}", activity.Name, activity.UnitId, result);
+            _logger.Debug("[dbo].[spActivity_Insert] {Name} {UnitId} returned {Result}", activity.Name, activity.UnitId, result);
         }
         return result;
     }
@@ -54,7 +54,7 @@ public class ActivityDal : DalBase, IActivityDal
         if (userId > 0)
         {
             result = _db.LoadData<Activity, dynamic>(storedProcedure: "[dbo].[spActivity_GetAll]", parameters: new { userId });
-            _logger.LogDebug("[dbo].[spActivity_GetAll] returned {ResultCount} items", result.Count());
+            _logger.Debug("[dbo].[spActivity_GetAll] returned {ResultCount} items", result.Count());
         }
         else
         {
@@ -69,7 +69,7 @@ public class ActivityDal : DalBase, IActivityDal
         if (userId > 0)
         {
             result = _db.LoadData<ActivityQuickStats, dynamic>(storedProcedure: "[dbo].[spActivity_GetQuickStatsForAllActivities]", parameters: new { userId });
-            _logger.LogDebug("[dbo].[spActivity_GetQuickStatsForAllActivities] returned {ResultCount} items", result.Count());
+            _logger.Debug("[dbo].[spActivity_GetQuickStatsForAllActivities] returned {ResultCount} items", result.Count());
         }
         else
         {

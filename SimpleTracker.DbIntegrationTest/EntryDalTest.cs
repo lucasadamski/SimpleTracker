@@ -1,5 +1,5 @@
 ﻿using FakeItEasy;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using Moq;
 using SimpleTracker.DAL;
 using SimpleTracker.DAL.Interfaces;
@@ -25,7 +25,7 @@ public class EntryDalTest
 
     public EntryDalTest()
     {
-        logger = A.Fake<ILogger<SqlDataAccess>>();
+        logger = A.Fake<ILogger>();
         sqlDataAccess = new SqlDataAccess(TestDbConnectionString, logger);
         testDal = new TestDal(sqlDataAccess, logger);
         entryDal = new EntryDal(sqlDataAccess, logger);

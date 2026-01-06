@@ -1,5 +1,5 @@
 ﻿using FakeItEasy;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using SimpleTracker.DAL;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
@@ -28,7 +28,7 @@ namespace SimpleTracker.DbIntegrationTest
 
         public GetAllActivitiesQuickStatsTests()
         {
-            logger = A.Fake<ILogger<SqlDataAccess>>();
+            logger = A.Fake<ILogger>();
             sqlDataAccess = new SqlDataAccess(TestDbConnectionString, logger);
             testDal = new TestDal(sqlDataAccess, logger);
             entryDal = new EntryDal(sqlDataAccess, logger);

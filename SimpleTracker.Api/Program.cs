@@ -1,10 +1,10 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using Scalar.AspNetCore;
 using SimpleTracker.DAL;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.Utility;
+using Serilog;
 
 namespace SimpleTracker.Api
 {
@@ -17,7 +17,7 @@ namespace SimpleTracker.Api
             builder.Services.AddControllers();
             var connectionString = builder.Configuration.GetConnectionString("Test");
             ISqlDataAccess sqlDataAccess = new SqlDataAccess(connectionString, Utility.Logger.Log);
-            builder.Services.AddSingleton<ILogger>(Utility.Logger.Log);
+            builder.Services.AddSingleton<Serilog.ILogger>(Utility.Logger.Log);
             builder.Services.AddSingleton<ISqlDataAccess>(sqlDataAccess);
             builder.Services.AddScoped<IEntryDal, EntryDal>();
             builder.Services.AddScoped<IActivityDal, ActivityDal>(); 
@@ -41,7 +41,7 @@ namespace SimpleTracker.Api
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.WithOrigins(allowedOrigins).AllowCredentials().AllowAnyHeader().AllowAnyMethod();
+                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                 });
             });
             

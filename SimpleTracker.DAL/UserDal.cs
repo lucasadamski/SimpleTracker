@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Serilog;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
 
@@ -23,11 +23,11 @@ namespace SimpleTracker.DAL
                     refreshToken = user.RefreshToken,
                     refreshTokenExpiryDate = user.RefreshTokenExpiryDate
                 });
-                _logger.LogDebug("[dbo].[spUser_Insert] success");
+                _logger.Debug("[dbo].[spUser_Insert] success");
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
 
             return result;
@@ -38,11 +38,11 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.LoadData<User, dynamic>(storedProcedure: "[dbo].[spUser_ReadById]", new { id }).FirstOrDefault();
-                _logger.LogDebug("[dbo].[spUser_ReadById] success");
+                _logger.Debug("[dbo].[spUser_ReadById] success");
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
             return result;
         }
@@ -53,12 +53,12 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.LoadData<User, dynamic>(storedProcedure: "[dbo].[spUser_ReadByLogin]", new { login }).FirstOrDefault();
-                _logger.LogDebug("[dbo].[spUser_ReadByLogin] success");
+                _logger.Debug("[dbo].[spUser_ReadByLogin] success");
             }
             catch (Exception e)
             {
                 result = new User();
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
             return result;
         }
@@ -69,11 +69,11 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.LoadData<User, dynamic>(storedProcedure: "[dbo].[spUser_ReadByCredentials]", new { login, password }).FirstOrDefault();
-                _logger.LogDebug("[dbo].[spUser_ReadByCredentials] success");
+                _logger.Debug("[dbo].[spUser_ReadByCredentials] success");
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
             return result;
         }
@@ -84,11 +84,11 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.LoadData<User, dynamic>(storedProcedure: "[dbo].[spUser_ReadByToken]", new { token }).FirstOrDefault();
-                _logger.LogDebug("[dbo].[spUser_ReadByToken] success");
+                _logger.Debug("[dbo].[spUser_ReadByToken] success");
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
             return result;
         }
@@ -99,11 +99,11 @@ namespace SimpleTracker.DAL
             try
             {
                 result = _db.LoadData<int, dynamic>(storedProcedure: "[dbo].[spUser_ReadUserIdFromToken]", new { token }).FirstOrDefault();
-                _logger.LogDebug("[dbo].[spUser_ReadUserIdFromToken] success");
+                _logger.Debug("[dbo].[spUser_ReadUserIdFromToken] success");
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
             return result;
         }
@@ -120,11 +120,11 @@ namespace SimpleTracker.DAL
                     user.RefreshToken,
                     user.RefreshTokenExpiryDate
                     }).FirstOrDefault();
-                _logger.LogDebug("[dbo].[spUser_ReadByCredentials] success");
+                _logger.Debug("[dbo].[spUser_ReadByCredentials] success");
             }
             catch (Exception e)
             {
-                _logger.LogError(e.Message);
+                _logger.Error(e.Message);
             }
         }
 
