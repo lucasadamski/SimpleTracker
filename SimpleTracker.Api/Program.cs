@@ -1,10 +1,12 @@
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
+using Serilog.Core;
+using Serilog.Events;
 using SimpleTracker.DAL;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.Utility;
-using Serilog;
 
 namespace SimpleTracker.Api
 {
@@ -12,15 +14,19 @@ namespace SimpleTracker.Api
     {
         public static void Main(string[] args)
         {
+            var logger = ConfigureSerilog();
+
             var builder = WebApplication.CreateBuilder(args);
             // Add services to the container.
             builder.Services.AddControllers();
+            builder.Host.UseSerilog(logger);
+
             var connectionString = builder.Configuration.GetConnectionString("Test");
-            ISqlDataAccess sqlDataAccess = new SqlDataAccess(connectionString, Utility.Logger.Log);
-            builder.Services.AddSingleton<Serilog.ILogger>(Utility.Logger.Log);
+            ISqlDataAccess sqlDataAccess = new SqlDataAccess(connectionString, logger);
+            builder.Services.AddSingleton<Serilog.ILogger>(logger);
             builder.Services.AddSingleton<ISqlDataAccess>(sqlDataAccess);
             builder.Services.AddScoped<IEntryDal, EntryDal>();
-            builder.Services.AddScoped<IActivityDal, ActivityDal>(); 
+            builder.Services.AddScoped<IActivityDal, ActivityDal>();
             builder.Services.AddScoped<IUserDal, UserDal>();
             builder.Services.AddScoped<IUnitDal, UnitDal>();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -41,14 +47,15 @@ namespace SimpleTracker.Api
             {
                 options.AddDefaultPolicy(policy =>
                 {
-                    policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    policy.WithOrigins(allowedOrigins).AllowAnyHeader().AllowAnyMethod();
                 });
             });
-            
+
+
 
             var app = builder.Build();
             // Configure the HTTP request pipeline.
-           
+
             app.UseHttpsRedirection();
             app.UseCors();
             app.UseAuthentication();
@@ -56,6 +63,22 @@ namespace SimpleTracker.Api
             app.MapControllers();
 
             app.Run();
+        }
+
+        private static Logger ConfigureSerilog()
+        {
+           var result = new LoggerConfiguration()
+               .MinimumLevel.Verbose()
+               .MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
+               .MinimumLevel.Override("System", LogEventLevel.Verbose)
+               .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Verbose)
+               .WriteTo.Console(outputTemplate: "{Timestamp:dd-MM-yy HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}")
+               .WriteTo.File("logs/log.txt",
+                             rollingInterval: RollingInterval.Day,
+                             outputTemplate: "{Timestamp:dd-MM-yy HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}")
+               .CreateLogger();
+
+            return result;
         }
     }
 }

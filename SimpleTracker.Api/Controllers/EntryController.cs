@@ -3,13 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using SimpleTracker.DAL.Interfaces;
 using SimpleTracker.DTO;
 using SimpleTracker.Utility;
+using Serilog;
 
 namespace SimpleTracker.Api.Controllers
 {
     [Route("api/[controller]")]
     [Authorize]
     [ApiController]
-    public class EntryController(IEntryDal entryDal, ILogger logger) : ControllerBase
+    public class EntryController(IEntryDal entryDal, Serilog.ILogger logger) : ControllerBase
     {
         [Authorize]
         [HttpGet("{id}/{userId}")]
@@ -47,7 +48,7 @@ namespace SimpleTracker.Api.Controllers
         [HttpPost("Create")]
         public void Create([FromBody]Entry entry)
         {
-            logger.LogTrace("EntryController.Create: entry.Value {entryValue} entry.ActivityId {entryActivityId}", entry.Value, entry.ActivityId);
+            logger.Verbose("EntryController.Create: entry.Value {entryValue} entry.ActivityId {entryActivityId}", entry.Value, entry.ActivityId);
             entryDal.CreateNewEntry(entry);
         }
 
