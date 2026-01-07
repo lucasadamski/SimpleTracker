@@ -14,12 +14,12 @@ namespace SimpleTracker.Api
     {
         public static void Main(string[] args)
         {
-            var logger = ConfigureSerilog();
 
             var builder = WebApplication.CreateBuilder(args);
+            var logger = ConfigureSerilog(builder.Configuration);
             // Add services to the container.
-            builder.Services.AddControllers();
             builder.Host.UseSerilog(logger);
+            builder.Services.AddControllers();
 
             var connectionString = builder.Configuration.GetConnectionString("Test");
             ISqlDataAccess sqlDataAccess = new SqlDataAccess(connectionString, logger);
@@ -65,17 +65,10 @@ namespace SimpleTracker.Api
             app.Run();
         }
 
-        private static Logger ConfigureSerilog()
+        private static Logger ConfigureSerilog(IConfiguration configuration)
         {
            var result = new LoggerConfiguration()
-               .MinimumLevel.Verbose()
-               .MinimumLevel.Override("Microsoft", LogEventLevel.Verbose)
-               .MinimumLevel.Override("System", LogEventLevel.Verbose)
-               .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Verbose)
-               .WriteTo.Console(outputTemplate: "{Timestamp:dd-MM-yy HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}")
-               .WriteTo.File("logs/log.txt",
-                             rollingInterval: RollingInterval.Day,
-                             outputTemplate: "{Timestamp:dd-MM-yy HH:mm:ss.fff} [{Level}] {Message}{NewLine}{Exception}")
+               .ReadFrom.Configuration(configuration)
                .CreateLogger();
 
             return result;
