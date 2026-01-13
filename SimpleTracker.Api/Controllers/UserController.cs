@@ -100,10 +100,14 @@ namespace SimpleTracker.Api.Controllers
 
             var credentials = new SigningCredentials(new SymmetricSecurityKey(TokenKey.Key), SecurityAlgorithms.HmacSha256);
 
+            var currentTime = DateTime.UtcNow;
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = identity,
-                Expires = DateTime.Now.AddSeconds(10),
+                Expires = currentTime.AddHours(6),
+                NotBefore = currentTime,
+                IssuedAt = currentTime,
                 SigningCredentials = credentials
             };
             var token = jwtTokenHandler.CreateToken(tokenDescriptor);
