@@ -33,7 +33,7 @@ AS
 	from 
 		[dbo].[Activity] a
 			join [dbo].[Unit] u on a.[UnitId] = u.[Id]
-			join [dbo].[Entry] e on a.[Id] = e.[ActivityId]
+			left join [dbo].[Entry] e on a.[Id] = e.[ActivityId]
 	where 
 		a.[UserId] = @userId
 	group by 
