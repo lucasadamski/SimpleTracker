@@ -10,7 +10,8 @@ namespace SimpleTracker.DAL.Interfaces
         bool UpdateActivity(Activity activity);
         bool DeleteActivity(int id);
         IEnumerable<Activity> GetAllActivities(int userId);
-        public IEnumerable<ActivityQuickStats> GetAllActivitiesQuickStats(int userId);
+        IEnumerable<ActivityQuickStats> GetAllActivitiesQuickStats(int userId);
+        IEnumerable<ActivityQuickStatsCompareWithPreviousDays> GetQuickStatsCompareWithPreviousDaysForAll(int userId);
 
     }
 }

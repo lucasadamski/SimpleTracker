@@ -28,10 +28,18 @@ namespace SimpleTracker.Api.Controllers
 
         [Authorize]
         [HttpGet("GetQuickStatsForAll")]
-        public IEnumerable<ActivityQuickStats> GetQuickStatsForAll()
+        public IEnumerable<ActivityQuickStats> GetQuickStatsForAllCompareWithPreviousDays()
         {
             var userId = GetUserId();
             return activityDal.GetAllActivitiesQuickStats(userId);
+        }
+
+        [Authorize]
+        [HttpGet("GetQuickStatsForAllCompareWithPreviousDays")]
+        public IEnumerable<ActivityQuickStatsCompareWithPreviousDays> GetQuickStatsForAll()
+        {
+            var userId = GetUserId();
+            return activityDal.GetQuickStatsCompareWithPreviousDaysForAll(userId);
         }
 
         [Authorize]

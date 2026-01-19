@@ -77,4 +77,19 @@ public class ActivityDal : DalBase, IActivityDal
         }
         return result;
     }
+
+    public IEnumerable<ActivityQuickStatsCompareWithPreviousDays> GetQuickStatsCompareWithPreviousDaysForAll(int userId)
+    {
+        IEnumerable<ActivityQuickStatsCompareWithPreviousDays> result;
+        if (userId > 0)
+        {
+            result = _db.LoadData<ActivityQuickStatsCompareWithPreviousDays, dynamic>(storedProcedure: "[dbo].[spActivity_GetQuickStatsCompareWithPreviousDaysForAll]", parameters: new { userId });
+            _logger.Debug("[dbo].[spActivity_GetQuickStatsCompareWithPreviousDaysForAll] returned {ResultCount} items", result.Count());
+        }
+        else
+        {
+            result = new List<ActivityQuickStatsCompareWithPreviousDays>();
+        }
+        return result;
+    }
 }
